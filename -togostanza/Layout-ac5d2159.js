@@ -8574,10 +8574,38 @@ var version$1 = "0.0.1";
 var license = "MIT";
 var repository = "https://github.com/dbcls/togomedium-stanza";
 var dependencies = {
+	"@rollup/plugin-typescript": "^8.2.0",
+	d3: "^6.5.0",
 	togostanza: "github:togostanza/togostanza"
+};
+var scripts = {
+	test: "jest --runInBand",
+	"test watch": "jest --watch",
+	"stanza:server": "npx togostanza s",
+	"stanza:build": "npx togostanza build",
+	"stanza:generate": "npx togostanza g stanza",
+	tsc: "./node_modules/typescript/bin/tsc",
+	"tsc-watch": "npx tsc-watch",
+	start: "npm run tsc && concurrently \"npm:tsc-watch\" \"npm:stanza:server\"",
+	build: "npm run tsc && npx togostanza build"
 };
 var engines = {
 	node: ">=14"
+};
+var devDependencies = {
+	"@types/d3": "^6.3.0",
+	"@types/jest": "^26.0.20",
+	"@typescript-eslint/eslint-plugin": "^4.15.1",
+	"@typescript-eslint/parser": "^4.15.1",
+	concurrently: "^6.0.0",
+	eslint: "^7.20.0",
+	"eslint-config-prettier": "^7.2.0",
+	"eslint-plugin-prettier": "^3.3.1",
+	jest: "^26.6.3",
+	prettier: "^2.2.1",
+	"ts-jest": "^26.5.1",
+	"tsc-watch": "^4.2.9",
+	typescript: "^4.2.2"
 };
 var repositoryMetadata = {
 	name: name,
@@ -8585,8 +8613,10 @@ var repositoryMetadata = {
 	license: license,
 	repository: repository,
 	dependencies: dependencies,
+	scripts: scripts,
 	engines: engines,
-	"private": true
+	"private": true,
+	devDependencies: devDependencies
 };
 
 var script = defineComponent({
@@ -8725,4 +8755,4 @@ script.render = render;
 script.__file = "node_modules/togostanza/src/components/Layout.vue";
 
 export { Fragment as F, renderList as a, createVNode as b, createBlock as c, defineComponent as d, createCommentVNode as e, createApp as f, createTextVNode as g, ref as h, octicons as i, computed$1 as j, popScopeId as k, withScopeId as l, mergeProps as m, n, openBlock as o, pushScopeId as p, resolveComponent as r, script as s, toDisplayString as t, withCtx as w };
-//# sourceMappingURL=Layout-6086f315.js.map
+//# sourceMappingURL=Layout-ac5d2159.js.map
