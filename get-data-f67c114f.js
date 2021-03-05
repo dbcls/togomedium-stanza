@@ -33,6 +33,7 @@ const makeOptions = (params) => {
         body,
         headers: {
             Accept: "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
         },
     };
 };
@@ -40,4 +41,4 @@ const makeOptions = (params) => {
 });
 
 export { getData_1 as g };
-//# sourceMappingURL=get-data-b9dbb049.js.map
+//# sourceMappingURL=get-data-f67c114f.js.map

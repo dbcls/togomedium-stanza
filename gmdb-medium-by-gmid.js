@@ -1,5 +1,5 @@
 import { c as createCommonjsModule, d as defineStanzaElement } from './stanza-element-e185656b.js';
-import { g as getData_1 } from './get-data-b9dbb049.js';
+import { g as getData_1 } from './get-data-f67c114f.js';
 
 var variables = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -98,7 +98,7 @@ var metadata = {
 	"stanza:parameter": [
 	{
 		"stanza:key": "gm_id",
-		"stanza:example": "166393",
+		"stanza:example": "JCM_M13",
 		"stanza:description": "",
 		"stanza:required": true
 	}

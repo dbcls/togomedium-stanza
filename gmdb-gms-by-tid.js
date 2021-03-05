@@ -1,5 +1,5 @@
 import { c as createCommonjsModule, d as defineStanzaElement } from './stanza-element-e185656b.js';
-import { g as getData_1 } from './get-data-b9dbb049.js';
+import { g as getData_1 } from './get-data-f67c114f.js';
 import { d as d3 } from './index-b1dff03b.js';
 
 createCommonjsModule(function (module, exports) {

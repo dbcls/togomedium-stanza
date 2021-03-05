@@ -1,5 +1,5 @@
 import { c as createCommonjsModule, a as getDefaultExportFromCjs, d as defineStanzaElement } from './stanza-element-e185656b.js';
-import { g as getData_1 } from './get-data-b9dbb049.js';
+import { g as getData_1 } from './get-data-f67c114f.js';
 
 var gmdbMetaList = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
