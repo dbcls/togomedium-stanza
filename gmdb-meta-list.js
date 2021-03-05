@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.__TEST__ = void 0;
 
 async function metaList(stanza, stanzaParams) {
+    if (!stanzaParams.api_url) {
+        return;
+    }
     const offset = 0;
     const data = await fetchData(stanzaParams.api_url, offset, parseInt(stanzaParams.limit, 10));
     const templateParams = processData(data, offset, stanzaParams);
