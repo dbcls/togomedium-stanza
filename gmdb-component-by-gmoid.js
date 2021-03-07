@@ -26,7 +26,7 @@ const makeSuccessData = (body) => {
         alt_labels: body.alt_labels_en,
         properties: body.properties,
         roles: body.roles,
-        super_classes: body.sub_classes,
+        super_classes: body.super_classes,
         sub_classes: body.sub_classes,
         links: body.links
             .map((str) => ({
@@ -73,7 +73,7 @@ var metadata = {
 	"stanza:parameter": [
 	{
 		"stanza:key": "gmo_id",
-		"stanza:example": "GMO_001004",
+		"stanza:example": "GMO_001005",
 		"stanza:description": "",
 		"stanza:required": true
 	}
