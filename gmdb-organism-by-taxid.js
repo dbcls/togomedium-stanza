@@ -7,7 +7,7 @@ var string = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unescapeJsonString = void 0;
 const unescapeJsonString = (str) => {
-    return str.replace(/\\/g, "");
+    return str === null || str === void 0 ? void 0 : str.replace(/\\/g, "");
 };
 exports.unescapeJsonString = unescapeJsonString;
 
