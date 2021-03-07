@@ -25,9 +25,7 @@ async function gmdbOrganismByTaxid(stanza$1, params) {
     const result = await getData_1.getData(`${variables.API_DBCLS}${apiName}`, {
         tax_id: params.tax_id,
     });
-    console.log(JSON.parse(JSON.stringify(result)));
     const data = parseData(result);
-    console.log(data);
     stanza$1.render({
         template: "stanza.html.hbs",
         parameters: data,
