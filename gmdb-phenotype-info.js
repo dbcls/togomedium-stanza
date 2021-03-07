@@ -1,12 +1,12 @@
 import { d as defineStanzaElement } from './stanza-element-e185656b.js';
-import { s as stanza } from './stanza-f722959e.js';
+import { s as stanza } from './stanza-32f0aee1.js';
 
 async function gmdbPhenotypeInfo(stanza$1, params) {
     stanza$1.render({
         template: "stanza.html.hbs",
         parameters: null,
     });
-    stanza.importWebFontForGrowthMedium(stanza$1);
+    stanza.importWebFontForTogoMedium(stanza$1);
 }
 var _default = gmdbPhenotypeInfo;
 

@@ -1,7 +1,7 @@
 import { d as defineStanzaElement } from './stanza-element-e185656b.js';
 import { g as getData_1 } from './get-data-bf06c788.js';
 import { v as variables } from './variables-56399012.js';
-import { s as stanza } from './stanza-f722959e.js';
+import { s as stanza } from './stanza-32f0aee1.js';
 
 async function gmdbComponentByGmoid(stanza$1, params) {
     const apiName = "gmdb_component_by_gmoid";
@@ -13,7 +13,7 @@ async function gmdbComponentByGmoid(stanza$1, params) {
         template: "stanza.html.hbs",
         parameters: data,
     });
-    stanza.importWebFontForGrowthMedium(stanza$1);
+    stanza.importWebFontForTogoMedium(stanza$1);
 }
 var _default = gmdbComponentByGmoid;
 const parseData = (data) => {

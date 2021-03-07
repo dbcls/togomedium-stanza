@@ -1,17 +1,8 @@
 import { c as createCommonjsModule, a as getDefaultExportFromCjs, d as defineStanzaElement } from './stanza-element-e185656b.js';
 import { g as getData_1 } from './get-data-bf06c788.js';
 import { v as variables } from './variables-56399012.js';
-import { s as stanza } from './stanza-f722959e.js';
-
-var string = createCommonjsModule(function (module, exports) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.unescapeJsonString = void 0;
-const unescapeJsonString = (str) => {
-    return str === null || str === void 0 ? void 0 : str.replace(/\\/g, "");
-};
-exports.unescapeJsonString = unescapeJsonString;
-
-});
+import { s as stanza } from './stanza-32f0aee1.js';
+import { s as string } from './string-ca3486e9.js';
 
 var gmdbOrganismByTaxid_1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -30,7 +21,7 @@ async function gmdbOrganismByTaxid(stanza$1, params) {
         template: "stanza.html.hbs",
         parameters: data,
     });
-    stanza.importWebFontForGrowthMedium(stanza$1);
+    stanza.importWebFontForTogoMedium(stanza$1);
 }
 exports.default = gmdbOrganismByTaxid;
 const parseData = (data) => {
