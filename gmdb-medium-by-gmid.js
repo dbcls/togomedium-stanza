@@ -4,6 +4,9 @@ import { v as variables } from './variables-56399012.js';
 import { s as stanza } from './stanza-32f0aee1.js';
 
 async function gmdbMediumByGmid(stanza$1, params) {
+    if (!params.gm_id) {
+        return;
+    }
     const apiName = "gmdb_medium_by_gmid";
     const result = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}${apiName}`, {
         gm_id: params.gm_id,

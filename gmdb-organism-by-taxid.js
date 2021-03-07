@@ -12,6 +12,9 @@ exports.__TEST__ = void 0;
 
 
 async function gmdbOrganismByTaxid(stanza$1, params) {
+    if (!params.tax_id) {
+        return;
+    }
     const apiName = "gmdb_organism_by_taxid";
     const result = await getData_1.getData(`${variables.API_DBCLS}${apiName}`, {
         tax_id: params.tax_id,

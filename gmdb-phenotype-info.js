@@ -2,6 +2,9 @@ import { d as defineStanzaElement } from './stanza-element-e185656b.js';
 import { s as stanza } from './stanza-32f0aee1.js';
 
 async function gmdbPhenotypeInfo(stanza$1, params) {
+    if (!params.tax_id) {
+        return;
+    }
     stanza$1.render({
         template: "stanza.html.hbs",
         parameters: null,

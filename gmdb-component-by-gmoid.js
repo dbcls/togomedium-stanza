@@ -4,6 +4,9 @@ import { v as variables } from './variables-56399012.js';
 import { s as stanza } from './stanza-32f0aee1.js';
 
 async function gmdbComponentByGmoid(stanza$1, params) {
+    if (!params.gmo_id) {
+        return;
+    }
     const apiName = "gmdb_component_by_gmoid";
     const result = await getData_1.getData(`${variables.API_DBCLS}${apiName}`, {
         gmo_id: params.gmo_id,
