@@ -76,7 +76,19 @@ const addRankChildren = async (data) => {
         rank: nextRank,
     });
     const getId = (str) => str.split("/").pop();
-    const subClasses = response.body.map((item) => ({
+    const subClasses = response.body
+        .sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    })
+        .map((item) => ({
         label: item.name,
         link: makeLineageLink(getId(item.id), nextRank),
         rank: nextRank,
