@@ -2,8 +2,7 @@ import { c as createCommonjsModule } from './stanza-element-e185656b.js';
 
 var getData_1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.makeFormBody = exports.getData = exports.API_DBCLS = void 0;
-exports.API_DBCLS = "http://ep.dbcls.jp/sparqlist/api/";
+exports.makeFormBody = exports.getData = void 0;
 const getData = async (url, params) => {
     const response = await fetch(url, makeOptions(params));
     if (response.status !== 200) {
@@ -41,4 +40,4 @@ const makeOptions = (params) => {
 });
 
 export { getData_1 as g };
-//# sourceMappingURL=get-data-f67c114f.js.map
+//# sourceMappingURL=get-data-bf06c788.js.map

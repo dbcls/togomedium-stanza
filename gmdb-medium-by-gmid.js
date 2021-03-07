@@ -1,24 +1,19 @@
-import { c as createCommonjsModule, d as defineStanzaElement } from './stanza-element-e185656b.js';
-import { g as getData_1 } from './get-data-f67c114f.js';
+import { d as defineStanzaElement } from './stanza-element-e185656b.js';
+import { g as getData_1 } from './get-data-bf06c788.js';
+import { v as variables } from './variables-56399012.js';
+import { s as stanza } from './stanza-f722959e.js';
 
-var variables = createCommonjsModule(function (module, exports) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.API_BASE = void 0;
-exports.API_BASE = "http://growthmedium.org/sparqlist/api/";
-
-});
-
-async function gmdbMediumByGmid(stanza, params) {
+async function gmdbMediumByGmid(stanza$1, params) {
     const apiName = "gmdb_medium_by_gmid";
-    const result = await getData_1.getData(`${variables.API_BASE}${apiName}`, {
+    const result = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}${apiName}`, {
         gm_id: params.gm_id,
     });
     const data = parseData(result);
-    stanza.render({
+    stanza$1.render({
         template: "stanza.html.hbs",
         parameters: data,
     });
-    stanza.importWebFontCSS("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400&display=swap");
+    stanza.importWebFontForGrowthMedium(stanza$1);
 }
 var _default = gmdbMediumByGmid;
 const parseData = (data) => {
