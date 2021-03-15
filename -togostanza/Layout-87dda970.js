@@ -8576,6 +8576,7 @@ var repository = "https://github.com/dbcls/togomedium-stanza";
 var dependencies = {
 	"@rollup/plugin-typescript": "^8.2.0",
 	d3: "^6.5.0",
+	pluralize: "^8.0.0",
 	togostanza: "github:togostanza/togostanza"
 };
 var scripts = {
@@ -8595,6 +8596,7 @@ var engines = {
 var devDependencies = {
 	"@types/d3": "^6.3.0",
 	"@types/jest": "^26.0.20",
+	"@types/pluralize": "0.0.29",
 	"@typescript-eslint/eslint-plugin": "^4.15.1",
 	"@typescript-eslint/parser": "^4.15.1",
 	concurrently: "^6.0.0",
@@ -8755,4 +8757,4 @@ script.render = render;
 script.__file = "node_modules/togostanza/src/components/Layout.vue";
 
 export { Fragment as F, renderList as a, createVNode as b, createBlock as c, defineComponent as d, createCommentVNode as e, createApp as f, createTextVNode as g, ref as h, octicons as i, computed$1 as j, popScopeId as k, withScopeId as l, mergeProps as m, n, openBlock as o, pushScopeId as p, resolveComponent as r, script as s, toDisplayString as t, withCtx as w };
-//# sourceMappingURL=Layout-ac5d2159.js.map
+//# sourceMappingURL=Layout-87dda970.js.map

@@ -1,4 +1,4 @@
-import { c as createCommonjsModule } from './stanza-element-e185656b.js';
+import { c as createCommonjsModule } from './stanza-element-30b71100.js';
 
 var variables = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -8,4 +8,4 @@ exports.API_GROWTH_MEDIUM = "http://growthmedium.org/sparqlist/api/";
 });
 
 export { variables as v };
-//# sourceMappingURL=variables-f1b7e272.js.map
+//# sourceMappingURL=variables-9f76df9f.js.map

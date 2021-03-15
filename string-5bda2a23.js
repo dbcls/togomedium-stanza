@@ -1,4 +1,4 @@
-import { c as createCommonjsModule } from './stanza-element-e185656b.js';
+import { c as createCommonjsModule } from './stanza-element-30b71100.js';
 
 var string = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -33,4 +33,4 @@ exports.makeNcbiOrganismLink = makeNcbiOrganismLink;
 });
 
 export { string as s };
-//# sourceMappingURL=string-ca3486e9.js.map
+//# sourceMappingURL=string-5bda2a23.js.map

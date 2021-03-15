@@ -1,5 +1,5 @@
-import { d as defineStanzaElement } from './stanza-element-e185656b.js';
-import { s as stanza } from './stanza-32f0aee1.js';
+import { d as defineStanzaElement } from './stanza-element-30b71100.js';
+import { s as stanza } from './stanza-4c985ad3.js';
 
 async function gmdbPhenotypeInfo(stanza$1, params) {
     if (!params.tax_id) {

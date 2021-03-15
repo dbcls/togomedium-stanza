@@ -1,4 +1,4 @@
-import { c as createCommonjsModule } from './stanza-element-e185656b.js';
+import { c as createCommonjsModule } from './stanza-element-30b71100.js';
 
 var getData_1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -40,4 +40,4 @@ const makeOptions = (params) => {
 });
 
 export { getData_1 as g };
-//# sourceMappingURL=get-data-bf06c788.js.map
+//# sourceMappingURL=get-data-0bfc4761.js.map

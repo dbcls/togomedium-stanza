@@ -1,4 +1,4 @@
-import { c as createCommonjsModule } from './stanza-element-e185656b.js';
+import { c as createCommonjsModule } from './stanza-element-30b71100.js';
 
 var stanza = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -11,4 +11,4 @@ exports.importWebFontForTogoMedium = importWebFontForTogoMedium;
 });
 
 export { stanza as s };
-//# sourceMappingURL=stanza-32f0aee1.js.map
+//# sourceMappingURL=stanza-4c985ad3.js.map

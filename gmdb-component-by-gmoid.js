@@ -1,7 +1,7 @@
-import { d as defineStanzaElement } from './stanza-element-e185656b.js';
-import { g as getData_1 } from './get-data-bf06c788.js';
-import { v as variables } from './variables-f1b7e272.js';
-import { s as stanza } from './stanza-32f0aee1.js';
+import { d as defineStanzaElement } from './stanza-element-30b71100.js';
+import { g as getData_1 } from './get-data-0bfc4761.js';
+import { v as variables } from './variables-9f76df9f.js';
+import { s as stanza } from './stanza-4c985ad3.js';
 
 async function gmdbComponentByGmoid(stanza$1, params) {
     if (!params.gmo_id) {

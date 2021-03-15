@@ -24,6 +24,10 @@ function createCommonjsModule(fn) {
 	return fn(module, module.exports), module.exports;
 }
 
+function commonjsRequire (target) {
+	throw new Error('Could not dynamically require "' + target + '". Please configure the dynamicRequireTargets option of @rollup/plugin-commonjs appropriately for this require call to behave properly.');
+}
+
 /**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -8114,5 +8118,5 @@ function ensureAboutLinkElementDefined() {
   }
 }
 
-export { getDefaultExportFromCjs as a, createCommonjsModule as c, defineStanzaElement as d, getAugmentedNamespace as g };
-//# sourceMappingURL=stanza-element-e185656b.js.map
+export { getDefaultExportFromCjs as a, commonjsRequire as b, createCommonjsModule as c, defineStanzaElement as d, commonjsGlobal as e, getAugmentedNamespace as g };
+//# sourceMappingURL=stanza-element-30b71100.js.map
