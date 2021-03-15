@@ -1,6 +1,6 @@
 import { c as createCommonjsModule, d as defineStanzaElement } from './stanza-element-e185656b.js';
 import { g as getData_1 } from './get-data-bf06c788.js';
-import { v as variables } from './variables-56399012.js';
+import { v as variables } from './variables-f1b7e272.js';
 import { s as stanza } from './stanza-32f0aee1.js';
 import { s as string } from './string-ca3486e9.js';
 

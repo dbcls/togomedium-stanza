@@ -1,7 +1,8 @@
 import { d as defineStanzaElement } from './stanza-element-e185656b.js';
 import { d as d3 } from './index-b1dff03b.js';
+import { v as variables } from './variables-f1b7e272.js';
 
-const TID_API = "http://ep.dbcls.jp/sparqlist/api/gms_kegg_code_tid";
+const TID_API = `${variables.API_GROWTH_MEDIUM}gms_kegg_code_tid`;
 async function gmdbRoundtree(stanza, params) {
     const [newicText, codeList] = await downloadData(params.newick, TID_API);
     const newicTree = parseNewic(newicText);

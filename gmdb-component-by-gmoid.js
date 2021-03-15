@@ -1,6 +1,6 @@
 import { d as defineStanzaElement } from './stanza-element-e185656b.js';
 import { g as getData_1 } from './get-data-bf06c788.js';
-import { v as variables } from './variables-56399012.js';
+import { v as variables } from './variables-f1b7e272.js';
 import { s as stanza } from './stanza-32f0aee1.js';
 
 async function gmdbComponentByGmoid(stanza$1, params) {
@@ -8,7 +8,7 @@ async function gmdbComponentByGmoid(stanza$1, params) {
         return;
     }
     const apiName = "gmdb_component_by_gmoid";
-    const result = await getData_1.getData(`${variables.API_DBCLS}${apiName}`, {
+    const result = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}${apiName}`, {
         gmo_id: params.gmo_id,
     });
     const data = parseData(result);

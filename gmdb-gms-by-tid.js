@@ -1,7 +1,7 @@
 import { c as createCommonjsModule, d as defineStanzaElement } from './stanza-element-e185656b.js';
 import { g as getData_1 } from './get-data-bf06c788.js';
 import { d as d3 } from './index-b1dff03b.js';
-import { v as variables } from './variables-56399012.js';
+import { v as variables } from './variables-f1b7e272.js';
 
 createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -40,7 +40,7 @@ document.body.addEventListener("mousemove", function (e) {
 });
 async function gmdbGmsByTid(stanza, params) {
     const apiName = "gms_by_kegg_tids_3";
-    const result = await getData_1.getData(`${variables.API_DBCLS}${apiName}`, {
+    const result = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}${apiName}`, {
         t_id: params.t_id,
     });
     const { sorted_groups } = processData(result.body);
