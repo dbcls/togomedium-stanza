@@ -1,9 +1,11 @@
 import { c as createCommonjsModule, a as getDefaultExportFromCjs, d as defineStanzaElement } from './stanza-element-30b71100.js';
 import { g as getData_1 } from './get-data-0bfc4761.js';
+import { s as stanza } from './stanza-2f6b2733.js';
 
 var gmdbMetaList = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__TEST__ = void 0;
+
 
 async function metaList(stanza, stanzaParams) {
     if (!stanzaParams.api_url) {
@@ -15,19 +17,19 @@ async function metaList(stanza, stanzaParams) {
     render(stanza, templateParams, stanzaParams);
 }
 exports.default = metaList;
-const render = (stanza, parameters, stanzaParams) => {
+const render = (stanza$1, parameters, stanzaParams) => {
     var _a, _b;
     const limit = parseInt(stanzaParams.limit, 10);
-    stanza.render({
+    stanza$1.render({
         template: "stanza.html.hbs",
         parameters,
     });
-    stanza.importWebFontCSS("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400&display=swap");
-    (_a = stanza.root.querySelector("#btnPrev")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", async () => {
-        await movePage(stanza, parameters, stanzaParams, limit, DIRECTION.PREV);
+    stanza.importWebFontForTogoMedium(stanza$1, stanzaParams.web_font);
+    (_a = stanza$1.root.querySelector("#btnPrev")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", async () => {
+        await movePage(stanza$1, parameters, stanzaParams, limit, DIRECTION.PREV);
     });
-    (_b = stanza.root.querySelector("#btnNext")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", async () => {
-        await movePage(stanza, parameters, stanzaParams, limit, DIRECTION.NEXT);
+    (_b = stanza$1.root.querySelector("#btnNext")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", async () => {
+        await movePage(stanza$1, parameters, stanzaParams, limit, DIRECTION.NEXT);
     });
 };
 const movePage = async (stanza, templateParams, stanzaParams, limit, direction) => {
@@ -224,7 +226,7 @@ var metadata = {
 	"stanza:parameter": [
 	{
 		"stanza:key": "api_url",
-		"stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_organisms_by_gmid?gm_id=HM_D00756b",
+		"stanza:example": "http://growthmedium.org/sparqlist/api/gmdb_list_media_by_keyword?keyword=MEDIUM",
 		"stanza:description": "URL of the SPARQList API with queries",
 		"stanza:required": true
 	},
@@ -236,7 +238,7 @@ var metadata = {
 	},
 	{
 		"stanza:key": "title",
-		"stanza:example": "Similar Growth Media of JCM M25",
+		"stanza:example": "Media of Glucose",
 		"stanza:description": "title",
 		"stanza:required": false
 	},
@@ -245,6 +247,12 @@ var metadata = {
 		"stanza:example": "true",
 		"stanza:description": "whether display column names",
 		"stanza:required": true
+	},
+	{
+		"stanza:key": "web_font",
+		"stanza:example": "Fira Sans Condensed",
+		"stanza:description": "google font name",
+		"stanza:required": false
 	}
 ],
 	"stanza:about-link-placement": "bottom-right",
@@ -254,6 +262,12 @@ var metadata = {
 		"stanza:type": "color",
 		"stanza:default": "#6FA80C",
 		"stanza:description": "text color of greeting"
+	},
+	{
+		"stanza:key": "--web-font",
+		"stanza:type": "string",
+		"stanza:default": "Fira Sans Condensed",
+		"stanza:description": "google font name"
 	}
 ]
 };
@@ -411,7 +425,7 @@ var templates = [
 },"useData":true}]
 ];
 
-var css = "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\nbody {\n  line-height: 1;\n}\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\n\nul {\n  list-style: none;\n}\n\nblockquote, q {\n  quotes: none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\";\n  content: none;\n}\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none;\n}\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold;\n}\n\ndel {\n  text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0;\n}\n\ninput, select {\n  vertical-align: middle;\n}\n\n.wrapper {\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  padding: 16px;\n  background-color: #ffffff;\n  border-radius: 5px;\n  font-weight: 300;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #333;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n  position: relative;\n}\n\n.wrapper[data-is-loading]:after {\n  content: \"loading...\";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.8);\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-radius: 5px;\n}\n\ntable {\n  border: 1px solid #CCC;\n  border-radius: 5px;\n  width: 100%;\n  font-size: 16px;\n  border-collapse: collapse;\n}\n\ntd, th {\n  padding: 6px 8px;\n  border-bottom: 1px solid #CCC;\n  text-align: left;\n  line-height: 1.2;\n}\n\n.no-wrap {\n  white-space: nowrap;\n}\n\ntable tr:nth-child(2n) {\n  background-color: #f6f6f6;\n}\n\na {\n  color: var(--link-color);\n}\n\nheader h2 {\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  font-size: 24px;\n  font-weight: 400;\n  margin-bottom: 8px;\n  padding-left: 8px;\n}\n\nfooter {\n  display: flex;\n  justify-content: space-between;\n  margin-top: 12px;\n}\n\nfooter .info {\n  font-size: 14px;\n  padding-right: 8px;\n}\n\n.error {\n  background-color: #FFFFFF;\n  padding: 16px;\n  border-radius: 5px;\n  color: #990000;\n}";
+var css = "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\nbody {\n  line-height: 1;\n}\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\n\nul {\n  list-style: none;\n}\n\nblockquote, q {\n  quotes: none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\";\n  content: none;\n}\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none;\n}\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold;\n}\n\ndel {\n  text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0;\n}\n\ninput, select {\n  vertical-align: middle;\n}\n\n.wrapper {\n  font-size: 16px;\n  font-family: var(--web-font), sans-serif;\n  padding: 16px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  font-weight: 300;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #333333;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n}\n\nheader h2 {\n  font-family: var(--web-font), sans-serif;\n  -webkit-font-smoothing: antialiased;\n  font-size: 24px;\n  font-weight: 600;\n  margin-bottom: 8px;\n  padding-left: 8px;\n}\n\na {\n  color: var(--link-color);\n  text-decoration: underline;\n}\n\na:hover {\n  text-decoration: none;\n}\n\n.error {\n  color: #990000;\n}\n\n.wrapper[data-is-loading]:after {\n  content: \"loading...\";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.8);\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-radius: 5px;\n}\n\ntable {\n  border: 1px solid #ccc;\n  width: 100%;\n  font-size: 16px;\n  border-collapse: collapse;\n}\ntable td, table th {\n  padding: 6px 8px;\n  border-bottom: 1px solid #ccc;\n  text-align: left;\n  line-height: 1.2;\n}\ntable .no-wrap {\n  white-space: nowrap;\n}\ntable tr:nth-child(2n) {\n  background-color: #f6f6f6;\n}\n\nfooter {\n  display: flex;\n  justify-content: space-between;\n  margin-top: 12px;\n}\n\nfooter .info {\n  font-size: 14px;\n  padding-right: 8px;\n}\n\n.error {\n  background-color: #FFFFFF;\n  padding: 16px;\n  border-radius: 5px;\n  color: #990000;\n}";
 
 defineStanzaElement(main, {metadata, templates, css, url: import.meta.url});
 //# sourceMappingURL=gmdb-meta-list.js.map
