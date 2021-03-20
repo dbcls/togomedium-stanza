@@ -48,12 +48,14 @@ const processData = (response, offset, stanzaParams) => {
     }
 };
 const makeSuccessData = (response, offset, stanzaParams) => {
+    var _a;
     if (response.body.contents.length === 0) {
         return makeNotFoundParams(stanzaParams);
     }
-    const columns = response.body.columns.map((item) => ({
+    const column_sizes = (_a = stanzaParams.column_sizes) === null || _a === void 0 ? void 0 : _a.split(",").map((str) => parseInt(str));
+    const columns = response.body.columns.map((item, i) => ({
         label: item.label,
-        size: item.size,
+        size: column_sizes ? column_sizes[i] : null,
     }));
     const keys = response.body.columns.map((item) => item.key);
     const noWraps = {};
@@ -254,6 +256,12 @@ var metadata = {
 		"stanza:example": "true",
 		"stanza:description": "whether display column names",
 		"stanza:required": true
+	},
+	{
+		"stanza:key": "column_sizes",
+		"stanza:example": "30,70",
+		"stanza:description": "column sizes from left. should be separated with comma",
+		"stanza:required": false
 	},
 	{
 		"stanza:key": "web_font",
