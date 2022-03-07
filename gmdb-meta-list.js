@@ -1,44 +1,44 @@
-import { c as createCommonjsModule, a as getDefaultExportFromCjs, d as defineStanzaElement } from './stanza-element-30b71100.js';
-import { g as getData_1 } from './get-data-0bfc4761.js';
-import { s as stanza } from './stanza-2f6b2733.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
+import { m as makeFormBody } from './getData-d291c717.js';
+import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
+import './index-6aec0cc7.js';
 
-var gmdbMetaList = createCommonjsModule(function (module, exports) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.__TEST__ = void 0;
-
-
-async function metaList(stanza, stanzaParams) {
-    if (!stanzaParams.api_url) {
-        return;
+class GmdbMetaList extends Stanza {
+    render() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = this.params;
+            if (!params.api_url) {
+                return;
+            }
+            const offset = 0;
+            const data = yield fetchData(params.api_url, offset, parseInt(params.limit, 10));
+            const templateParams = processData(data, offset, params);
+            render(this, templateParams, params);
+        });
     }
-    const offset = 0;
-    const data = await fetchData(stanzaParams.api_url, offset, parseInt(stanzaParams.limit, 10));
-    const templateParams = processData(data, offset, stanzaParams);
-    render(stanza, templateParams, stanzaParams);
 }
-exports.default = metaList;
-const render = (stanza$1, parameters, stanzaParams) => {
+const render = (stanza, parameters, stanzaParams) => {
     var _a, _b;
     const limit = parseInt(stanzaParams.limit, 10);
-    stanza$1.render({
+    stanza.renderTemplate({
         template: "stanza.html.hbs",
         parameters,
     });
-    stanza.importWebFontForTogoMedium(stanza$1, stanzaParams.web_font);
-    (_a = stanza$1.root.querySelector("#btnPrev")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", async () => {
-        await movePage(stanza$1, parameters, stanzaParams, limit, DIRECTION.PREV);
-    });
-    (_b = stanza$1.root.querySelector("#btnNext")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", async () => {
-        await movePage(stanza$1, parameters, stanzaParams, limit, DIRECTION.NEXT);
-    });
+    importWebFontForTogoMedium(stanza, stanzaParams.web_font);
+    (_a = stanza.root.querySelector("#btnPrev")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
+        yield movePage(stanza, parameters, stanzaParams, limit, DIRECTION.PREV);
+    }));
+    (_b = stanza.root.querySelector("#btnNext")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
+        yield movePage(stanza, parameters, stanzaParams, limit, DIRECTION.NEXT);
+    }));
 };
-const movePage = async (stanza, templateParams, stanzaParams, limit, direction) => {
-    render(stanza, { ...templateParams, isLoading: true }, stanzaParams);
+const movePage = (stanza, templateParams, stanzaParams, limit, direction) => __awaiter(void 0, void 0, void 0, function* () {
+    render(stanza, Object.assign(Object.assign({}, templateParams), { isLoading: true }), stanzaParams);
     const offset = templateParams.offset + limit * direction;
-    const data = await fetchData(stanzaParams.api_url, offset, limit);
+    const data = yield fetchData(stanzaParams.api_url, offset, limit);
     const params = processData(data, offset, stanzaParams);
     render(stanza, params, stanzaParams);
-};
+});
 const processData = (response, offset, stanzaParams) => {
     switch (response.status) {
         case 200:
@@ -55,7 +55,7 @@ const makeSuccessData = (response, offset, stanzaParams) => {
     const column_sizes = (_a = stanzaParams.column_sizes) === null || _a === void 0 ? void 0 : _a.split(",").map((str) => parseInt(str));
     const columns = response.body.columns.map((item, i) => ({
         label: item.label,
-        size: column_sizes ? column_sizes[i] : null,
+        size: column_sizes ? column_sizes[i] : undefined,
     }));
     const keys = response.body.columns.map((item) => item.key);
     const noWraps = {};
@@ -87,9 +87,7 @@ const makeSuccessData = (response, offset, stanzaParams) => {
         ? `showing ${offset + 1} to ${end} of total ${total} items`
         : `total ${total} items`;
     const _columns = stanzaParams.column_names;
-    const showColumnNames = _columns.toLocaleLowerCase() === "false"
-        ? false
-        : Boolean(stanzaParams.column_names);
+    const showColumnNames = _columns.toLocaleLowerCase() === "false" ? false : Boolean(stanzaParams.column_names);
     const isFixedTable = !!columns.find((item) => !!item.size);
     return {
         title,
@@ -109,14 +107,14 @@ const makeNotFoundParams = (stanzaParams) => {
     return {
         title: stanzaParams.title,
         offset: 0,
-        columns: null,
-        data: null,
+        columns: undefined,
+        data: undefined,
         hasNext: false,
         hasPrev: false,
-        info: null,
+        info: undefined,
         showColumnNames: false,
         isFixedTable: false,
-        status: null,
+        status: undefined,
         statusText: "NO RESULT FOUND",
     };
 };
@@ -124,38 +122,38 @@ const makeFailParams = (response, stanzaParams) => {
     return {
         title: stanzaParams.title,
         offset: 0,
-        columns: null,
-        data: null,
+        columns: undefined,
+        data: undefined,
         hasNext: false,
         hasPrev: false,
-        info: null,
+        info: undefined,
         showColumnNames: false,
         isFixedTable: false,
         status: response.status,
         statusText: response.status ? response.message : "UNKNOWN ERROR",
     };
 };
-const fetchData = async (url, offset, limit) => {
+const fetchData = (url, offset, limit) => __awaiter(void 0, void 0, void 0, function* () {
     return fetchLive(url, offset, limit);
-};
-const fetchLive = async (url, offset, limit) => {
+});
+const fetchLive = (url, offset, limit) => __awaiter(void 0, void 0, void 0, function* () {
     const [uri, query] = separateURL(url);
-    const response = await fetch(uri, makeOptions({ offset, limit }, query));
+    const response = yield fetch(uri, makeOptions({ offset, limit }, query));
     if (response.status !== 200) {
         return {
             status: response.status,
             message: response.statusText,
-            body: null,
+            body: undefined,
         };
     }
-    const body = await response.json();
+    const body = yield response.json();
     return {
         status: 200,
         body,
     };
-};
+});
 const makeOptions = (params, query) => {
-    const body = `${filterQuery(query)}&${getData_1.makeFormBody(params)}`;
+    const body = `${filterQuery(query)}&${makeFormBody(params)}`;
     return {
         method: "POST",
         mode: "cors",
@@ -204,16 +202,18 @@ const separateURL = (url) => {
     }
     return [uri, query];
 };
-exports.__TEST__ = { separateURL, filterQuery, makeFormBody: getData_1.makeFormBody };
+const __TEST__ = { separateURL, filterQuery, makeFormBody };
 var DIRECTION;
 (function (DIRECTION) {
     DIRECTION[DIRECTION["NEXT"] = 1] = "NEXT";
     DIRECTION[DIRECTION["PREV"] = -1] = "PREV";
 })(DIRECTION || (DIRECTION = {}));
 
+var stanzaModule = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': GmdbMetaList,
+  __TEST__: __TEST__
 });
-
-var main = /*@__PURE__*/getDefaultExportFromCjs(gmdbMetaList);
 
 var metadata = {
 	"@context": {
@@ -464,7 +464,7 @@ var templates = [
 },"useData":true}]
 ];
 
-var css = "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  line-height: 1;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\nbody {\n  line-height: 1;\n}\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\n\nsub {\n  vertical-align: sub;\n  font-size: smaller;\n}\n\nsup {\n  vertical-align: super;\n  font-size: smaller;\n}\n\nul {\n  list-style: none;\n}\n\nblockquote, q {\n  quotes: none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\";\n  content: none;\n}\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none;\n}\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold;\n}\n\ndel {\n  text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0;\n}\n\ninput, select {\n  vertical-align: middle;\n}\n\n.wrapper {\n  position: relative;\n  font-size: 16px;\n  font-family: var(--web-font), sans-serif;\n  padding: 16px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  font-weight: 300;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #333333;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n}\n\nheader h2 {\n  font-family: var(--web-font), sans-serif;\n  -webkit-font-smoothing: antialiased;\n  font-size: 24px;\n  font-weight: 600;\n  margin-bottom: 8px;\n  padding-left: 8px;\n}\n\na {\n  color: var(--link-color);\n  text-decoration: underline;\n}\n\na:hover {\n  text-decoration: none;\n}\n\n.error {\n  color: #990000;\n}\n\n.wrapper[data-is-loading]:after {\n  content: \"loading...\";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.8);\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border-radius: 5px;\n}\n\ntable {\n  border: 1px solid #ccc;\n  width: 100%;\n  font-size: 16px;\n  border-collapse: collapse;\n}\ntable td, table th {\n  padding: 6px 8px;\n  border-bottom: 1px solid #ccc;\n  text-align: left;\n  line-height: 1.2;\n}\ntable .no-wrap {\n  white-space: nowrap;\n}\ntable tr:nth-child(2n) {\n  background-color: #f6f6f6;\n}\n\nfooter {\n  display: flex;\n  justify-content: space-between;\n  margin-top: 12px;\n}\n\nfooter .info {\n  font-size: 14px;\n  padding-right: 8px;\n}\n\n.error {\n  background-color: #FFFFFF;\n  padding: 16px;\n  border-radius: 5px;\n  color: #990000;\n}";
+const url = import.meta.url.replace(/\?.*$/, '');
 
-defineStanzaElement(main, {metadata, templates, css, url: import.meta.url});
+defineStanzaElement({stanzaModule, metadata, templates, url});
 //# sourceMappingURL=gmdb-meta-list.js.map

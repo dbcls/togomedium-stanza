@@ -1,54 +1,15 @@
-import { c as createCommonjsModule, b as commonjsRequire, e as commonjsGlobal, d as defineStanzaElement } from './stanza-element-30b71100.js';
-import { g as getData_1 } from './get-data-0bfc4761.js';
-import { v as variables } from './variables-9f76df9f.js';
-import { s as stanza } from './stanza-2f6b2733.js';
-import { s as string } from './string-5bda2a23.js';
+import { e as commonjsRequire, c as commonjsGlobal, S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
+import { g as getData } from './getData-d291c717.js';
+import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
+import { m as makeTogoGenomeOrganismLink, a as makeNcbiOrganismLink, u as unescapeJsonString, c as capitalizeFirstLetter } from './string-ad764b4c.js';
+import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
+import './index-6aec0cc7.js';
 
-var taxon = createCommonjsModule(function (module, exports) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getNextTaxon = exports.getRankLevel = exports.availableRanks = exports.TAXON_RANK = void 0;
-var TAXON_RANK;
-(function (TAXON_RANK) {
-    TAXON_RANK["_0_KINGDOM"] = "Kingdom";
-    TAXON_RANK["_1_PHYLUM"] = "Phylum";
-    TAXON_RANK["_2_CLASS"] = "Class";
-    TAXON_RANK["_3_ORDER"] = "Order";
-    TAXON_RANK["_4_FAMILY"] = "Family";
-    TAXON_RANK["_5_TRIBE"] = "Tribe";
-    TAXON_RANK["_6_GENUS"] = "Genus";
-    TAXON_RANK["_7_SECTION"] = "Section";
-    TAXON_RANK["_8_SERIES"] = "Series";
-    TAXON_RANK["_9_SPECIES"] = "Species";
-    TAXON_RANK["_10_VARIETY"] = "Variety";
-    TAXON_RANK["_11_FORM"] = "Form";
-})(TAXON_RANK = exports.TAXON_RANK || (exports.TAXON_RANK = {}));
-exports.availableRanks = [
-    TAXON_RANK._0_KINGDOM,
-    TAXON_RANK._1_PHYLUM,
-    TAXON_RANK._2_CLASS,
-    TAXON_RANK._3_ORDER,
-    TAXON_RANK._4_FAMILY,
-    TAXON_RANK._6_GENUS,
-    TAXON_RANK._9_SPECIES,
-];
-const getRankLevel = (rank) => {
-    return exports.availableRanks.indexOf(rank);
-};
-exports.getRankLevel = getRankLevel;
-const getNextTaxon = (rank) => {
-    const rankLevel = exports.getRankLevel(rank);
-    if (rankLevel === -1) {
-        return undefined;
-    }
-    return exports.availableRanks[rankLevel + 1];
-};
-exports.getNextTaxon = getNextTaxon;
-
-});
+var pluralize$1 = {exports: {}};
 
 /* global define */
 
-var pluralize = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 (function (root, pluralize) {
   /* istanbul ignore else */
   if (typeof commonjsRequire === 'function' && 'object' === 'object' && 'object' === 'object') {
@@ -545,40 +506,77 @@ var pluralize = createCommonjsModule(function (module, exports) {
 
   return pluralize;
 });
-});
+}(pluralize$1));
 
-async function gmdbTaxonByTaxid(stanza$1, params) {
-    if (!params.tax_id) {
-        return;
+var pluralize = pluralize$1.exports;
+
+var TAXON_RANK;
+(function (TAXON_RANK) {
+    TAXON_RANK["_0_KINGDOM"] = "Kingdom";
+    TAXON_RANK["_1_PHYLUM"] = "Phylum";
+    TAXON_RANK["_2_CLASS"] = "Class";
+    TAXON_RANK["_3_ORDER"] = "Order";
+    TAXON_RANK["_4_FAMILY"] = "Family";
+    TAXON_RANK["_5_TRIBE"] = "Tribe";
+    TAXON_RANK["_6_GENUS"] = "Genus";
+    TAXON_RANK["_7_SECTION"] = "Section";
+    TAXON_RANK["_8_SERIES"] = "Series";
+    TAXON_RANK["_9_SPECIES"] = "Species";
+    TAXON_RANK["_10_VARIETY"] = "Variety";
+    TAXON_RANK["_11_FORM"] = "Form";
+})(TAXON_RANK || (TAXON_RANK = {}));
+const availableRanks = [
+    TAXON_RANK._0_KINGDOM,
+    TAXON_RANK._1_PHYLUM,
+    TAXON_RANK._2_CLASS,
+    TAXON_RANK._3_ORDER,
+    TAXON_RANK._4_FAMILY,
+    TAXON_RANK._6_GENUS,
+    TAXON_RANK._9_SPECIES,
+];
+const getRankLevel = (rank) => {
+    return availableRanks.indexOf(rank);
+};
+const getNextTaxon = (rank) => {
+    const rankLevel = getRankLevel(rank);
+    if (rankLevel === -1) {
+        return undefined;
     }
-    const apiName = "gmdb_taxonomic_rank_by_taxid";
-    const result = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}${apiName}`, {
-        tax_id: params.tax_id,
-    });
-    const data = parseData(result);
-    const dataWithRankChildren = await addRankChildren(data);
-    stanza$1.render({
-        template: "stanza.html.hbs",
-        parameters: dataWithRankChildren,
-    });
-    stanza.importWebFontForTogoMedium(stanza$1);
+    return availableRanks[rankLevel + 1];
+};
+
+class gmdbTaxonByTaxid extends Stanza {
+    render() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = this.params;
+            if (!params.tax_id) {
+                return;
+            }
+            const apiName = "gmdb_taxonomic_rank_by_taxid";
+            const result = yield getData(`${API_GROWTH_MEDIUM}${apiName}`, {
+                tax_id: params.tax_id,
+            });
+            const data = parseData(result);
+            const parameters = yield addRankChildren(data);
+            const template = "stanza.html.hbs";
+            this.renderTemplate({ template, parameters });
+            importWebFontForTogoMedium(this);
+        });
+    }
 }
-var _default = gmdbTaxonByTaxid;
-const addRankChildren = async (data) => {
+const addRankChildren = (data) => __awaiter(void 0, void 0, void 0, function* () {
     if (!data.rank) {
         return data;
     }
-    const rank = data.rank === "Superkingdom"
-        ? taxon.TAXON_RANK._0_KINGDOM
-        : data.rank;
-    const nextRank = taxon.getNextTaxon(rank);
-    const response = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}list_taxons_by_rank`, {
+    const rank = data.rank === "Superkingdom" ? TAXON_RANK._0_KINGDOM : data.rank;
+    const nextRank = getNextTaxon(rank);
+    const response = yield getData(`${API_GROWTH_MEDIUM}list_taxons_by_rank`, {
         tax_id: data.taxid,
         rank: nextRank,
     });
     const getId = (str) => str.split("/").pop();
-    const subClasses = response.body
-        .sort((a, b) => {
+    const subClasses = response
+        .body.sort((a, b) => {
         const nameA = a.name.toLowerCase();
         const nameB = b.name.toLowerCase();
         if (nameA < nameB) {
@@ -594,38 +592,35 @@ const addRankChildren = async (data) => {
         link: makeLineageLink(getId(item.id), nextRank),
         rank: nextRank,
     }));
-    return {
-        ...data,
-        subClass: {
+    return Object.assign(Object.assign({}, data), { subClass: {
             label: pluralize(nextRank),
             items: subClasses.map((item) => ({
                 label: item.label,
                 link: item.link,
             })),
-        },
-    };
-};
+        } });
+});
 const parseData = (data) => {
     return makeSuccessData(data.body);
 };
 const makeSuccessData = (body) => {
     return {
-        subClass: null,
+        subClass: undefined,
         scientific_name: body.scientific_name,
         taxid: body.taxid,
-        togoGenomeUrl: string.makeTogoGenomeOrganismLink(body.taxid),
-        ncbiUrl: string.makeNcbiOrganismLink(body.taxid),
+        togoGenomeUrl: makeTogoGenomeOrganismLink(body.taxid),
+        ncbiUrl: makeNcbiOrganismLink(body.taxid),
         rank: parseRank(body.rank),
-        authority_name: string.unescapeJsonString(body.authority_name),
+        authority_name: unescapeJsonString(body.authority_name),
         lineage: [
             ...body.lineage
                 .filter((item) => item.taxid !== "NA")
                 .map((item) => ({
                 link: makeLineageLink(item.taxid, item.rank),
-                rank: string.capitalizeFirstLetter(item.rank),
+                rank: capitalizeFirstLetter(item.rank),
                 label: item.label,
-                togoGenomeUrl: string.makeTogoGenomeOrganismLink(item.taxid),
-                ncbiUrl: string.makeNcbiOrganismLink(item.taxid),
+                togoGenomeUrl: makeTogoGenomeOrganismLink(item.taxid),
+                ncbiUrl: makeNcbiOrganismLink(item.taxid),
             })),
             {
                 link: makeLineageLink(body.taxid, body.rank),
@@ -636,8 +631,13 @@ const makeSuccessData = (body) => {
         ],
     };
 };
-const parseRank = (str) => str === null || str === void 0 ? void 0 : str.split("/").pop();
-const makeLineageLink = (id, rank) => rank === taxon.TAXON_RANK._9_SPECIES ? `/organism/${id}` : `/taxon/${id}`;
+const parseRank = (str) => str.split("/").pop();
+const makeLineageLink = (id, rank) => rank === TAXON_RANK._9_SPECIES ? `/organism/${id}` : `/taxon/${id}`;
+
+var stanzaModule = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': gmdbTaxonByTaxid
+});
 
 var metadata = {
 	"@context": {
@@ -782,7 +782,7 @@ var templates = [
 },"useData":true}]
 ];
 
-var css = "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  line-height: 1;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\nbody {\n  line-height: 1;\n}\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\n\nsub {\n  vertical-align: sub;\n  font-size: smaller;\n}\n\nsup {\n  vertical-align: super;\n  font-size: smaller;\n}\n\nul {\n  list-style: none;\n}\n\nblockquote, q {\n  quotes: none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\";\n  content: none;\n}\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none;\n}\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold;\n}\n\ndel {\n  text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0;\n}\n\ninput, select {\n  vertical-align: middle;\n}\n\n.wrapper {\n  position: relative;\n  font-size: 16px;\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  padding: 16px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  font-weight: 300;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #333333;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n}\n\nheader h2 {\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  -webkit-font-smoothing: antialiased;\n  font-size: 24px;\n  font-weight: 600;\n  margin-bottom: 8px;\n  padding-left: 8px;\n}\n\na {\n  color: #6FA80C;\n  text-decoration: underline;\n}\n\na:hover {\n  text-decoration: none;\n}\n\n.error {\n  color: #990000;\n}\n\n.tax-id .value {\n  margin: 0 16px 0 4px;\n  line-height: 1.5;\n}\n.tax-id .links {\n  position: relative;\n  margin-top: 4px;\n  white-space: nowrap;\n}\n.tax-id .links a {\n  background-color: #8FC31F;\n  color: #FFFFFF;\n  padding: 4px 8px 2px;\n  border-radius: 3px;\n  text-decoration: none;\n  font-size: 14px;\n  font-weight: 600;\n  display: inline-block;\n  line-height: 1;\n}\n\n.name {\n  font-size: 40px;\n  margin: 24px 0 16px;\n}\n\n.name + .rank {\n  margin-top: -8px;\n}\n\n.authority-name {\n  margin-top: 8px;\n}\n\nh3 {\n  font-weight: 600;\n  margin-top: 24px;\n  margin-bottom: 8px;\n  font-size: 20px;\n}\n\n.lineage-list {\n  display: flex;\n  margin-top: 8px;\n  flex-wrap: wrap;\n  margin-bottom: -8px;\n}\n.lineage-list li {\n  display: flex;\n  flex-direction: column;\n  text-align: center;\n  margin-right: 16px;\n  margin-bottom: 8px;\n  border: 1px solid #ccc;\n  border-radius: 5px;\n}\n.lineage-list li.current {\n  background-color: #f6f6f6;\n  font-weight: 600;\n}\n.lineage-list li.current .rank {\n  font-weight: 600;\n}\n.lineage-list .rank {\n  border-bottom: 1px solid #ccc;\n  padding: 4px 8px;\n  font-weight: 400;\n}\n.lineage-list .label {\n  padding: 4px 8px;\n}\n\n.sub-classes {\n  line-height: 1.5;\n}\n.sub-classes a {\n  display: inline-block;\n  margin-right: 0.3em;\n}";
+const url = import.meta.url.replace(/\?.*$/, '');
 
-defineStanzaElement(_default, {metadata, templates, css, url: import.meta.url});
+defineStanzaElement({stanzaModule, metadata, templates, url});
 //# sourceMappingURL=gmdb-taxon-by-taxid.js.map

@@ -1,48 +1,41 @@
-import { c as createCommonjsModule, a as getDefaultExportFromCjs, d as defineStanzaElement } from './stanza-element-30b71100.js';
-import { g as getData_1 } from './get-data-0bfc4761.js';
-import { v as variables } from './variables-9f76df9f.js';
-import { s as stanza } from './stanza-2f6b2733.js';
-import { s as string } from './string-5bda2a23.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
+import { g as getData } from './getData-d291c717.js';
+import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
+import { u as unescapeJsonString, c as capitalizeFirstLetter } from './string-ad764b4c.js';
+import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
+import './index-6aec0cc7.js';
 
-var gmdbOrganismByTaxid_1 = createCommonjsModule(function (module, exports) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.__TEST__ = void 0;
-
-
-
-
-async function gmdbOrganismByTaxid(stanza$1, params) {
-    if (!params.tax_id) {
-        return;
+class GmdbOrganismByTaxid extends Stanza {
+    render() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = this.params;
+            if (!params.tax_id) {
+                return;
+            }
+            const apiName = "gmdb_organism_by_taxid";
+            const result = yield getData(`${API_GROWTH_MEDIUM}${apiName}`, {
+                tax_id: params.tax_id,
+            });
+            const parameters = parseData(result);
+            const template = "stanza.html.hbs";
+            this.renderTemplate({ template, parameters });
+            importWebFontForTogoMedium(this);
+        });
     }
-    const apiName = "gmdb_organism_by_taxid";
-    const result = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}${apiName}`, {
-        tax_id: params.tax_id,
-    });
-    const data = parseData(result);
-    stanza$1.render({
-        template: "stanza.html.hbs",
-        parameters: data,
-    });
-    stanza.importWebFontForTogoMedium(stanza$1);
 }
-exports.default = gmdbOrganismByTaxid;
 const parseData = (data) => {
     return makeSuccessData(data.body);
 };
 const makeSuccessData = (body) => ({
     taxid: body.taxid,
     scientific_name: body.scientific_name,
-    authority_name: string.unescapeJsonString(body.authority_name),
+    authority_name: unescapeJsonString(body.authority_name),
     lineage: parseLineage(body.lineage),
     type_material: body.type_material,
     other_type_material: parseOtherTypeMaterial(body.other_type_material),
 });
 const parseLineage = (lineages) => {
-    return lineages.map((item) => ({
-        ...item,
-        rank: string.capitalizeFirstLetter(item.rank),
-    }));
+    return lineages.map((item) => (Object.assign(Object.assign({}, item), { rank: capitalizeFirstLetter(item.rank) })));
 };
 const parseOtherTypeMaterial = (data) => {
     return data
@@ -58,11 +51,13 @@ const parseOtherTypeMaterial = (data) => {
         labels: data.filter((item) => item.name === key).map((elm) => elm.label),
     }));
 };
-exports.__TEST__ = { parseOtherTypeMaterial };
+const __TEST__ = { parseOtherTypeMaterial };
 
+var stanzaModule = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': GmdbOrganismByTaxid,
+  __TEST__: __TEST__
 });
-
-var main = /*@__PURE__*/getDefaultExportFromCjs(gmdbOrganismByTaxid_1);
 
 var metadata = {
 	"@context": {
@@ -238,7 +233,7 @@ var templates = [
 },"useData":true}]
 ];
 
-var css = "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  line-height: 1;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\nbody {\n  line-height: 1;\n}\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\n\nsub {\n  vertical-align: sub;\n  font-size: smaller;\n}\n\nsup {\n  vertical-align: super;\n  font-size: smaller;\n}\n\nul {\n  list-style: none;\n}\n\nblockquote, q {\n  quotes: none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\";\n  content: none;\n}\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none;\n}\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold;\n}\n\ndel {\n  text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0;\n}\n\ninput, select {\n  vertical-align: middle;\n}\n\n.wrapper {\n  position: relative;\n  font-size: 16px;\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  padding: 16px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  font-weight: 300;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #333333;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n}\n\nheader h2 {\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  -webkit-font-smoothing: antialiased;\n  font-size: 24px;\n  font-weight: 600;\n  margin-bottom: 8px;\n  padding-left: 8px;\n}\n\na {\n  color: #6FA80C;\n  text-decoration: underline;\n}\n\na:hover {\n  text-decoration: none;\n}\n\n.error {\n  color: #990000;\n}\n\n.tax-id .value {\n  margin: 0 16px 0 4px;\n  line-height: 1.5;\n}\n.tax-id .links {\n  position: relative;\n  margin-top: 4px;\n  white-space: nowrap;\n}\n.tax-id .links a {\n  background-color: #8FC31F;\n  color: #FFFFFF;\n  padding: 4px 8px 2px;\n  border-radius: 3px;\n  text-decoration: none;\n  font-size: 14px;\n  font-weight: 600;\n  display: inline-block;\n  line-height: 1;\n}\n\n.name {\n  font-size: 40px;\n  margin: 24px 0 16px;\n}\n\n.authority-name {\n  margin-top: -8px;\n}\n\nh3 {\n  font-weight: 600;\n  margin-top: 24px;\n  margin-bottom: 8px;\n  font-size: 20px;\n}\n\n.lineage-list {\n  display: flex;\n  margin-top: 8px;\n  flex-wrap: wrap;\n  margin-bottom: -8px;\n}\n.lineage-list li {\n  display: flex;\n  flex-direction: column;\n  text-align: center;\n  margin-right: 16px;\n  margin-bottom: 8px;\n  border: 1px solid #ccc;\n  border-radius: 5px;\n}\n.lineage-list li.current {\n  background-color: #f6f6f6;\n  font-weight: 600;\n}\n.lineage-list li.current .rank {\n  font-weight: 600;\n}\n.lineage-list .rank {\n  border-bottom: 1px solid #ccc;\n  padding: 4px 8px;\n  font-weight: 400;\n}\n.lineage-list .label {\n  padding: 4px 8px;\n}\n\n.capsule-list {\n  margin-top: 8px;\n  margin-bottom: -8px;\n  display: flex;\n  flex-wrap: wrap;\n}\n.capsule-list li {\n  border: 1px solid #6FA80C;\n  padding: 5px 10px;\n  border-radius: 20px;\n  margin-right: 8px;\n  margin-bottom: 8px;\n}\n\n.synonyms {\n  margin-left: 20px;\n  margin-top: 8px;\n}";
+const url = import.meta.url.replace(/\?.*$/, '');
 
-defineStanzaElement(main, {metadata, templates, css, url: import.meta.url});
+defineStanzaElement({stanzaModule, metadata, templates, url});
 //# sourceMappingURL=gmdb-organism-by-taxid.js.map

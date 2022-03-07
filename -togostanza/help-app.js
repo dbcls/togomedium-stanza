@@ -1,115 +1,32 @@
-import { d as defineComponent, o as openBlock, c as createBlock, b as createVNode, e as createCommentVNode, g as createTextVNode, t as toDisplayString, F as Fragment, a as renderList, h as ref, i as octicons, m as mergeProps, j as computed, r as resolveComponent, s as script$4, p as pushScopeId, k as popScopeId, l as withScopeId, n, f as createApp } from './Layout-87dda970.js';
+import { d as defineComponent, h as computed, a as createElementBlock, e as createBaseVNode, f as createCommentVNode, i as createTextVNode, t as toDisplayString, F as Fragment, b as renderList, n as normalizeClass, o as openBlock, j as ref, k as octicons, m as mergeProps, l as watch, p as createVNode, c as createBlock, q as normalizeProps, u as guardReactiveProps, v as resolveDynamicComponent, r as resolveComponent, s as script$4, w as withCtx, x as pushScopeId, y as popScopeId, z as n, g as createApp } from './Layout-a2447a7f.js';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-function createCommonjsModule(fn) {
-  var module = { exports: {} };
-	return fn(module, module.exports), module.exports;
-}
+var tab = {exports: {}};
+
+var eventHandler = {exports: {}};
 
 /*!
-  * Bootstrap data.js v5.0.0-beta2 (https://getbootstrap.com/)
+  * Bootstrap event-handler.js v5.1.3 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
-var data = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 (function (global, factory) {
   module.exports = factory() ;
-}(commonjsGlobal, (function () {
+})(commonjsGlobal, (function () {
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta2): dom/data.js
+   * Bootstrap (v5.1.3): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
 
-  /**
-   * ------------------------------------------------------------------------
-   * Constants
-   * ------------------------------------------------------------------------
-   */
-  var mapData = function () {
-    var storeData = {};
-    var id = 1;
-    return {
-      set: function set(element, key, data) {
-        if (typeof element.bsKey === 'undefined') {
-          element.bsKey = {
-            key: key,
-            id: id
-          };
-          id++;
-        }
-
-        storeData[element.bsKey.id] = data;
-      },
-      get: function get(element, key) {
-        if (!element || typeof element.bsKey === 'undefined') {
-          return null;
-        }
-
-        var keyProperties = element.bsKey;
-
-        if (keyProperties.key === key) {
-          return storeData[keyProperties.id];
-        }
-
-        return null;
-      },
-      delete: function _delete(element, key) {
-        if (typeof element.bsKey === 'undefined') {
-          return;
-        }
-
-        var keyProperties = element.bsKey;
-
-        if (keyProperties.key === key) {
-          delete storeData[keyProperties.id];
-          delete element.bsKey;
-        }
-      }
-    };
-  }();
-
-  var Data = {
-    setData: function setData(instance, key, data) {
-      mapData.set(instance, key, data);
-    },
-    getData: function getData(instance, key) {
-      return mapData.get(instance, key);
-    },
-    removeData: function removeData(instance, key) {
-      mapData.delete(instance, key);
-    }
-  };
-
-  return Data;
-
-})));
-
-});
-
-/*!
-  * Bootstrap event-handler.js v5.0.0-beta2 (https://getbootstrap.com/)
-  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
-
-var eventHandler = createCommonjsModule(function (module, exports) {
-(function (global, factory) {
-  module.exports = factory() ;
-}(commonjsGlobal, (function () {
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta2): util/index.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  var getjQuery = function getjQuery() {
-    var _window = window,
-        jQuery = _window.jQuery;
+  const getjQuery = () => {
+    const {
+      jQuery
+    } = window;
 
     if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
       return jQuery;
@@ -118,11 +35,9 @@ var eventHandler = createCommonjsModule(function (module, exports) {
     return null;
   };
 
-  document.documentElement.dir === 'rtl';
-
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta2): dom/event-handler.js
+   * Bootstrap (v5.1.3): dom/event-handler.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -132,17 +47,18 @@ var eventHandler = createCommonjsModule(function (module, exports) {
    * ------------------------------------------------------------------------
    */
 
-  var namespaceRegex = /[^.]*(?=\..*)\.|.*/;
-  var stripNameRegex = /\..*/;
-  var stripUidRegex = /::\d+$/;
-  var eventRegistry = {}; // Events storage
+  const namespaceRegex = /[^.]*(?=\..*)\.|.*/;
+  const stripNameRegex = /\..*/;
+  const stripUidRegex = /::\d+$/;
+  const eventRegistry = {}; // Events storage
 
-  var uidEvent = 1;
-  var customEvents = {
+  let uidEvent = 1;
+  const customEvents = {
     mouseenter: 'mouseover',
     mouseleave: 'mouseout'
   };
-  var nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
+  const customEventsRegex = /^(mouseenter|mouseleave)/i;
+  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
   /**
    * ------------------------------------------------------------------------
    * Private methods
@@ -150,11 +66,11 @@ var eventHandler = createCommonjsModule(function (module, exports) {
    */
 
   function getUidEvent(element, uid) {
-    return uid && uid + "::" + uidEvent++ || element.uidEvent || uidEvent++;
+    return uid && `${uid}::${uidEvent++}` || element.uidEvent || uidEvent++;
   }
 
   function getEvent(element) {
-    var uid = getUidEvent(element);
+    const uid = getUidEvent(element);
     element.uidEvent = uid;
     eventRegistry[uid] = eventRegistry[uid] || {};
     return eventRegistry[uid];
@@ -174,16 +90,17 @@ var eventHandler = createCommonjsModule(function (module, exports) {
 
   function bootstrapDelegationHandler(element, selector, fn) {
     return function handler(event) {
-      var domElements = element.querySelectorAll(selector);
+      const domElements = element.querySelectorAll(selector);
 
-      for (var target = event.target; target && target !== this; target = target.parentNode) {
-        for (var i = domElements.length; i--;) {
+      for (let {
+        target
+      } = event; target && target !== this; target = target.parentNode) {
+        for (let i = domElements.length; i--;) {
           if (domElements[i] === target) {
             event.delegateTarget = target;
 
             if (handler.oneOff) {
-              // eslint-disable-next-line unicorn/consistent-destructuring
-              EventHandler.off(element, event.type, fn);
+              EventHandler.off(element, event.type, selector, fn);
             }
 
             return fn.apply(target, [event]);
@@ -196,15 +113,11 @@ var eventHandler = createCommonjsModule(function (module, exports) {
     };
   }
 
-  function findHandler(events, handler, delegationSelector) {
-    if (delegationSelector === void 0) {
-      delegationSelector = null;
-    }
+  function findHandler(events, handler, delegationSelector = null) {
+    const uidEventList = Object.keys(events);
 
-    var uidEventList = Object.keys(events);
-
-    for (var i = 0, len = uidEventList.length; i < len; i++) {
-      var event = events[uidEventList[i]];
+    for (let i = 0, len = uidEventList.length; i < len; i++) {
+      const event = events[uidEventList[i]];
 
       if (event.originalHandler === handler && event.delegationSelector === delegationSelector) {
         return event;
@@ -215,17 +128,10 @@ var eventHandler = createCommonjsModule(function (module, exports) {
   }
 
   function normalizeParams(originalTypeEvent, handler, delegationFn) {
-    var delegation = typeof handler === 'string';
-    var originalHandler = delegation ? delegationFn : handler; // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
-
-    var typeEvent = originalTypeEvent.replace(stripNameRegex, '');
-    var custom = customEvents[typeEvent];
-
-    if (custom) {
-      typeEvent = custom;
-    }
-
-    var isNative = nativeEvents.has(typeEvent);
+    const delegation = typeof handler === 'string';
+    const originalHandler = delegation ? delegationFn : handler;
+    let typeEvent = getTypeEvent(originalTypeEvent);
+    const isNative = nativeEvents.has(typeEvent);
 
     if (!isNative) {
       typeEvent = originalTypeEvent;
@@ -242,24 +148,38 @@ var eventHandler = createCommonjsModule(function (module, exports) {
     if (!handler) {
       handler = delegationFn;
       delegationFn = null;
+    } // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
+    // this prevents the handler from being dispatched the same way as mouseover or mouseout does
+
+
+    if (customEventsRegex.test(originalTypeEvent)) {
+      const wrapFn = fn => {
+        return function (event) {
+          if (!event.relatedTarget || event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget)) {
+            return fn.call(this, event);
+          }
+        };
+      };
+
+      if (delegationFn) {
+        delegationFn = wrapFn(delegationFn);
+      } else {
+        handler = wrapFn(handler);
+      }
     }
 
-    var _normalizeParams = normalizeParams(originalTypeEvent, handler, delegationFn),
-        delegation = _normalizeParams[0],
-        originalHandler = _normalizeParams[1],
-        typeEvent = _normalizeParams[2];
-
-    var events = getEvent(element);
-    var handlers = events[typeEvent] || (events[typeEvent] = {});
-    var previousFn = findHandler(handlers, originalHandler, delegation ? handler : null);
+    const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
+    const events = getEvent(element);
+    const handlers = events[typeEvent] || (events[typeEvent] = {});
+    const previousFn = findHandler(handlers, originalHandler, delegation ? handler : null);
 
     if (previousFn) {
       previousFn.oneOff = previousFn.oneOff && oneOff;
       return;
     }
 
-    var uid = getUidEvent(originalHandler, originalTypeEvent.replace(namespaceRegex, ''));
-    var fn = delegation ? bootstrapDelegationHandler(element, handler, delegationFn) : bootstrapHandler(element, handler);
+    const uid = getUidEvent(originalHandler, originalTypeEvent.replace(namespaceRegex, ''));
+    const fn = delegation ? bootstrapDelegationHandler(element, handler, delegationFn) : bootstrapHandler(element, handler);
     fn.delegationSelector = delegation ? handler : null;
     fn.originalHandler = originalHandler;
     fn.oneOff = oneOff;
@@ -269,7 +189,7 @@ var eventHandler = createCommonjsModule(function (module, exports) {
   }
 
   function removeHandler(element, events, typeEvent, handler, delegationSelector) {
-    var fn = findHandler(events[typeEvent], handler, delegationSelector);
+    const fn = findHandler(events[typeEvent], handler, delegationSelector);
 
     if (!fn) {
       return;
@@ -280,35 +200,39 @@ var eventHandler = createCommonjsModule(function (module, exports) {
   }
 
   function removeNamespacedHandlers(element, events, typeEvent, namespace) {
-    var storeElementEvent = events[typeEvent] || {};
-    Object.keys(storeElementEvent).forEach(function (handlerKey) {
+    const storeElementEvent = events[typeEvent] || {};
+    Object.keys(storeElementEvent).forEach(handlerKey => {
       if (handlerKey.includes(namespace)) {
-        var event = storeElementEvent[handlerKey];
+        const event = storeElementEvent[handlerKey];
         removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
       }
     });
   }
 
-  var EventHandler = {
-    on: function on(element, event, handler, delegationFn) {
+  function getTypeEvent(event) {
+    // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
+    event = event.replace(stripNameRegex, '');
+    return customEvents[event] || event;
+  }
+
+  const EventHandler = {
+    on(element, event, handler, delegationFn) {
       addHandler(element, event, handler, delegationFn, false);
     },
-    one: function one(element, event, handler, delegationFn) {
+
+    one(element, event, handler, delegationFn) {
       addHandler(element, event, handler, delegationFn, true);
     },
-    off: function off(element, originalTypeEvent, handler, delegationFn) {
+
+    off(element, originalTypeEvent, handler, delegationFn) {
       if (typeof originalTypeEvent !== 'string' || !element) {
         return;
       }
 
-      var _normalizeParams2 = normalizeParams(originalTypeEvent, handler, delegationFn),
-          delegation = _normalizeParams2[0],
-          originalHandler = _normalizeParams2[1],
-          typeEvent = _normalizeParams2[2];
-
-      var inNamespace = typeEvent !== originalTypeEvent;
-      var events = getEvent(element);
-      var isNamespace = originalTypeEvent.startsWith('.');
+      const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
+      const inNamespace = typeEvent !== originalTypeEvent;
+      const events = getEvent(element);
+      const isNamespace = originalTypeEvent.startsWith('.');
 
       if (typeof originalHandler !== 'undefined') {
         // Simplest case: handler is passed, remove that listener ONLY.
@@ -321,35 +245,36 @@ var eventHandler = createCommonjsModule(function (module, exports) {
       }
 
       if (isNamespace) {
-        Object.keys(events).forEach(function (elementEvent) {
+        Object.keys(events).forEach(elementEvent => {
           removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
         });
       }
 
-      var storeElementEvent = events[typeEvent] || {};
-      Object.keys(storeElementEvent).forEach(function (keyHandlers) {
-        var handlerKey = keyHandlers.replace(stripUidRegex, '');
+      const storeElementEvent = events[typeEvent] || {};
+      Object.keys(storeElementEvent).forEach(keyHandlers => {
+        const handlerKey = keyHandlers.replace(stripUidRegex, '');
 
         if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
-          var event = storeElementEvent[keyHandlers];
+          const event = storeElementEvent[keyHandlers];
           removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
         }
       });
     },
-    trigger: function trigger(element, event, args) {
+
+    trigger(element, event, args) {
       if (typeof event !== 'string' || !element) {
         return null;
       }
 
-      var $ = getjQuery();
-      var typeEvent = event.replace(stripNameRegex, '');
-      var inNamespace = event !== typeEvent;
-      var isNative = nativeEvents.has(typeEvent);
-      var jQueryEvent;
-      var bubbles = true;
-      var nativeDispatch = true;
-      var defaultPrevented = false;
-      var evt = null;
+      const $ = getjQuery();
+      const typeEvent = getTypeEvent(event);
+      const inNamespace = event !== typeEvent;
+      const isNative = nativeEvents.has(typeEvent);
+      let jQueryEvent;
+      let bubbles = true;
+      let nativeDispatch = true;
+      let defaultPrevented = false;
+      let evt = null;
 
       if (inNamespace && $) {
         jQueryEvent = $.Event(event, args);
@@ -364,18 +289,19 @@ var eventHandler = createCommonjsModule(function (module, exports) {
         evt.initEvent(typeEvent, bubbles, true);
       } else {
         evt = new CustomEvent(event, {
-          bubbles: bubbles,
+          bubbles,
           cancelable: true
         });
       } // merge custom information in our event
 
 
       if (typeof args !== 'undefined') {
-        Object.keys(args).forEach(function (key) {
+        Object.keys(args).forEach(key => {
           Object.defineProperty(evt, key, {
-            get: function get() {
+            get() {
               return args[key];
             }
+
           });
         });
       }
@@ -394,64 +320,93 @@ var eventHandler = createCommonjsModule(function (module, exports) {
 
       return evt;
     }
+
   };
 
   return EventHandler;
 
-})));
+}));
 
-});
+}(eventHandler));
+
+var selectorEngine = {exports: {}};
 
 /*!
-  * Bootstrap selector-engine.js v5.0.0-beta2 (https://getbootstrap.com/)
+  * Bootstrap selector-engine.js v5.1.3 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
-var selectorEngine = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 (function (global, factory) {
   module.exports = factory() ;
-}(commonjsGlobal, (function () {
+})(commonjsGlobal, (function () {
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta2): dom/selector-engine.js
+   * Bootstrap (v5.1.3): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
 
+  const isElement = obj => {
+    if (!obj || typeof obj !== 'object') {
+      return false;
+    }
+
+    if (typeof obj.jquery !== 'undefined') {
+      obj = obj[0];
+    }
+
+    return typeof obj.nodeType !== 'undefined';
+  };
+
+  const isVisible = element => {
+    if (!isElement(element) || element.getClientRects().length === 0) {
+      return false;
+    }
+
+    return getComputedStyle(element).getPropertyValue('visibility') === 'visible';
+  };
+
+  const isDisabled = element => {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      return true;
+    }
+
+    if (element.classList.contains('disabled')) {
+      return true;
+    }
+
+    if (typeof element.disabled !== 'undefined') {
+      return element.disabled;
+    }
+
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+  };
+
   /**
-   * ------------------------------------------------------------------------
-   * Constants
-   * ------------------------------------------------------------------------
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): dom/selector-engine.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
    */
-  var NODE_TEXT = 3;
-  var SelectorEngine = {
-    find: function find(selector, element) {
-      var _ref;
-
-      if (element === void 0) {
-        element = document.documentElement;
-      }
-
-      return (_ref = []).concat.apply(_ref, Element.prototype.querySelectorAll.call(element, selector));
+  const NODE_TEXT = 3;
+  const SelectorEngine = {
+    find(selector, element = document.documentElement) {
+      return [].concat(...Element.prototype.querySelectorAll.call(element, selector));
     },
-    findOne: function findOne(selector, element) {
-      if (element === void 0) {
-        element = document.documentElement;
-      }
 
+    findOne(selector, element = document.documentElement) {
       return Element.prototype.querySelector.call(element, selector);
     },
-    children: function children(element, selector) {
-      var _ref2;
 
-      return (_ref2 = []).concat.apply(_ref2, element.children).filter(function (child) {
-        return child.matches(selector);
-      });
+    children(element, selector) {
+      return [].concat(...element.children).filter(child => child.matches(selector));
     },
-    parents: function parents(element, selector) {
-      var parents = [];
-      var ancestor = element.parentNode;
+
+    parents(element, selector) {
+      const parents = [];
+      let ancestor = element.parentNode;
 
       while (ancestor && ancestor.nodeType === Node.ELEMENT_NODE && ancestor.nodeType !== NODE_TEXT) {
         if (ancestor.matches(selector)) {
@@ -463,8 +418,9 @@ var selectorEngine = createCommonjsModule(function (module, exports) {
 
       return parents;
     },
-    prev: function prev(element, selector) {
-      var previous = element.previousElementSibling;
+
+    prev(element, selector) {
+      let previous = element.previousElementSibling;
 
       while (previous) {
         if (previous.matches(selector)) {
@@ -476,8 +432,9 @@ var selectorEngine = createCommonjsModule(function (module, exports) {
 
       return [];
     },
-    next: function next(element, selector) {
-      var next = element.nextElementSibling;
+
+    next(element, selector) {
+      let next = element.nextElementSibling;
 
       while (next) {
         if (next.matches(selector)) {
@@ -488,191 +445,131 @@ var selectorEngine = createCommonjsModule(function (module, exports) {
       }
 
       return [];
+    },
+
+    focusableChildren(element) {
+      const focusables = ['a', 'button', 'input', 'textarea', 'select', 'details', '[tabindex]', '[contenteditable="true"]'].map(selector => `${selector}:not([tabindex^="-"])`).join(', ');
+      return this.find(focusables, element).filter(el => !isDisabled(el) && isVisible(el));
     }
+
   };
 
   return SelectorEngine;
 
-})));
+}));
 
-});
+}(selectorEngine));
+
+var baseComponent = {exports: {}};
+
+var data = {exports: {}};
 
 /*!
-  * Bootstrap base-component.js v5.0.0-beta2 (https://getbootstrap.com/)
+  * Bootstrap data.js v5.1.3 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
-var baseComponent = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 (function (global, factory) {
-  module.exports = factory(data) ;
-}(commonjsGlobal, (function (Data) {
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-  var Data__default = /*#__PURE__*/_interopDefaultLegacy(Data);
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
+  module.exports = factory() ;
+})(commonjsGlobal, (function () {
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): dom/data.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
 
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
+  const elementMap = new Map();
+  const data = {
+    set(element, key, instance) {
+      if (!elementMap.has(element)) {
+        elementMap.set(element, new Map());
+      }
 
-  var VERSION = '5.0.0-beta2';
+      const instanceMap = elementMap.get(element); // make it clear we only want one instance per element
+      // can be removed later when multiple key/instances are fine to be used
 
-  var BaseComponent = /*#__PURE__*/function () {
-    function BaseComponent(element) {
-      if (!element) {
+      if (!instanceMap.has(key) && instanceMap.size !== 0) {
+        // eslint-disable-next-line no-console
+        console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
         return;
       }
 
-      this._element = element;
-      Data__default['default'].setData(element, this.constructor.DATA_KEY, this);
-    }
+      instanceMap.set(key, instance);
+    },
 
-    var _proto = BaseComponent.prototype;
-
-    _proto.dispose = function dispose() {
-      Data__default['default'].removeData(this._element, this.constructor.DATA_KEY);
-      this._element = null;
-    }
-    /** Static */
-    ;
-
-    BaseComponent.getInstance = function getInstance(element) {
-      return Data__default['default'].getData(element, this.DATA_KEY);
-    };
-
-    _createClass(BaseComponent, null, [{
-      key: "VERSION",
-      get: function get() {
-        return VERSION;
+    get(element, key) {
+      if (elementMap.has(element)) {
+        return elementMap.get(element).get(key) || null;
       }
-    }]);
 
-    return BaseComponent;
-  }();
+      return null;
+    },
 
-  return BaseComponent;
+    remove(element, key) {
+      if (!elementMap.has(element)) {
+        return;
+      }
 
-})));
+      const instanceMap = elementMap.get(element);
+      instanceMap.delete(key); // free up element references if there are no instances left for an element
 
-});
+      if (instanceMap.size === 0) {
+        elementMap.delete(element);
+      }
+    }
+
+  };
+
+  return data;
+
+}));
+
+}(data));
 
 /*!
-  * Bootstrap tab.js v5.0.0-beta2 (https://getbootstrap.com/)
+  * Bootstrap base-component.js v5.1.3 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
-createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 (function (global, factory) {
-  module.exports = factory(data, eventHandler, selectorEngine, baseComponent) ;
-}(commonjsGlobal, (function (Data, EventHandler, SelectorEngine, BaseComponent) {
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+  module.exports = factory(data.exports, eventHandler.exports) ;
+})(commonjsGlobal, (function (Data, EventHandler) {
+  const _interopDefaultLegacy = e => e && typeof e === 'object' && 'default' in e ? e : { default: e };
 
-  var Data__default = /*#__PURE__*/_interopDefaultLegacy(Data);
-  var EventHandler__default = /*#__PURE__*/_interopDefaultLegacy(EventHandler);
-  var SelectorEngine__default = /*#__PURE__*/_interopDefaultLegacy(SelectorEngine);
-  var BaseComponent__default = /*#__PURE__*/_interopDefaultLegacy(BaseComponent);
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
-
-  function _inheritsLoose(subClass, superClass) {
-    subClass.prototype = Object.create(superClass.prototype);
-    subClass.prototype.constructor = subClass;
-
-    _setPrototypeOf(subClass, superClass);
-  }
-
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-
-    return _setPrototypeOf(o, p);
-  }
+  const Data__default = /*#__PURE__*/_interopDefaultLegacy(Data);
+  const EventHandler__default = /*#__PURE__*/_interopDefaultLegacy(EventHandler);
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-beta2): util/index.js
+   * Bootstrap (v5.1.3): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
-  var MILLISECONDS_MULTIPLIER = 1000;
-  var TRANSITION_END = 'transitionend'; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+  const MILLISECONDS_MULTIPLIER = 1000;
+  const TRANSITION_END = 'transitionend'; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
 
-  var getSelector = function getSelector(element) {
-    var selector = element.getAttribute('data-bs-target');
-
-    if (!selector || selector === '#') {
-      var hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
-      // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
-      // `document.querySelector` will rightfully complain it is invalid.
-      // See https://github.com/twbs/bootstrap/issues/32273
-
-      if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
-        return null;
-      } // Just in case some CMS puts out a full URL with the anchor appended
-
-
-      if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
-        hrefAttr = '#' + hrefAttr.split('#')[1];
-      }
-
-      selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
-    }
-
-    return selector;
-  };
-
-  var getElementFromSelector = function getElementFromSelector(element) {
-    var selector = getSelector(element);
-    return selector ? document.querySelector(selector) : null;
-  };
-
-  var getTransitionDurationFromElement = function getTransitionDurationFromElement(element) {
+  const getTransitionDurationFromElement = element => {
     if (!element) {
       return 0;
     } // Get transition-duration of the element
 
 
-    var _window$getComputedSt = window.getComputedStyle(element),
-        transitionDuration = _window$getComputedSt.transitionDuration,
-        transitionDelay = _window$getComputedSt.transitionDelay;
-
-    var floatTransitionDuration = Number.parseFloat(transitionDuration);
-    var floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+    let {
+      transitionDuration,
+      transitionDelay
+    } = window.getComputedStyle(element);
+    const floatTransitionDuration = Number.parseFloat(transitionDuration);
+    const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
 
     if (!floatTransitionDuration && !floatTransitionDelay) {
       return 0;
@@ -684,35 +581,229 @@ createCommonjsModule(function (module, exports) {
     return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
   };
 
-  var triggerTransitionEnd = function triggerTransitionEnd(element) {
+  const triggerTransitionEnd = element => {
     element.dispatchEvent(new Event(TRANSITION_END));
   };
 
-  var emulateTransitionEnd = function emulateTransitionEnd(element, duration) {
-    var called = false;
-    var durationPadding = 5;
-    var emulatedDuration = duration + durationPadding;
-
-    function listener() {
-      called = true;
-      element.removeEventListener(TRANSITION_END, listener);
+  const isElement = obj => {
+    if (!obj || typeof obj !== 'object') {
+      return false;
     }
 
-    element.addEventListener(TRANSITION_END, listener);
-    setTimeout(function () {
+    if (typeof obj.jquery !== 'undefined') {
+      obj = obj[0];
+    }
+
+    return typeof obj.nodeType !== 'undefined';
+  };
+
+  const getElement = obj => {
+    if (isElement(obj)) {
+      // it's a jQuery object or a node element
+      return obj.jquery ? obj[0] : obj;
+    }
+
+    if (typeof obj === 'string' && obj.length > 0) {
+      return document.querySelector(obj);
+    }
+
+    return null;
+  };
+
+  const execute = callback => {
+    if (typeof callback === 'function') {
+      callback();
+    }
+  };
+
+  const executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
+    if (!waitForTransition) {
+      execute(callback);
+      return;
+    }
+
+    const durationPadding = 5;
+    const emulatedDuration = getTransitionDurationFromElement(transitionElement) + durationPadding;
+    let called = false;
+
+    const handler = ({
+      target
+    }) => {
+      if (target !== transitionElement) {
+        return;
+      }
+
+      called = true;
+      transitionElement.removeEventListener(TRANSITION_END, handler);
+      execute(callback);
+    };
+
+    transitionElement.addEventListener(TRANSITION_END, handler);
+    setTimeout(() => {
       if (!called) {
-        triggerTransitionEnd(element);
+        triggerTransitionEnd(transitionElement);
       }
     }, emulatedDuration);
   };
 
-  var reflow = function reflow(element) {
-    return element.offsetHeight;
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): base-component.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  const VERSION = '5.1.3';
+
+  class BaseComponent {
+    constructor(element) {
+      element = getElement(element);
+
+      if (!element) {
+        return;
+      }
+
+      this._element = element;
+      Data__default.default.set(this._element, this.constructor.DATA_KEY, this);
+    }
+
+    dispose() {
+      Data__default.default.remove(this._element, this.constructor.DATA_KEY);
+      EventHandler__default.default.off(this._element, this.constructor.EVENT_KEY);
+      Object.getOwnPropertyNames(this).forEach(propertyName => {
+        this[propertyName] = null;
+      });
+    }
+
+    _queueCallback(callback, element, isAnimated = true) {
+      executeAfterTransition(callback, element, isAnimated);
+    }
+    /** Static */
+
+
+    static getInstance(element) {
+      return Data__default.default.get(getElement(element), this.DATA_KEY);
+    }
+
+    static getOrCreateInstance(element, config = {}) {
+      return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
+    }
+
+    static get VERSION() {
+      return VERSION;
+    }
+
+    static get NAME() {
+      throw new Error('You have to implement the static method "NAME", for each component!');
+    }
+
+    static get DATA_KEY() {
+      return `bs.${this.NAME}`;
+    }
+
+    static get EVENT_KEY() {
+      return `.${this.DATA_KEY}`;
+    }
+
+  }
+
+  return BaseComponent;
+
+}));
+
+}(baseComponent));
+
+/*!
+  * Bootstrap tab.js v5.1.3 (https://getbootstrap.com/)
+  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+(function (module, exports) {
+(function (global, factory) {
+  module.exports = factory(eventHandler.exports, selectorEngine.exports, baseComponent.exports) ;
+})(commonjsGlobal, (function (EventHandler, SelectorEngine, BaseComponent) {
+  const _interopDefaultLegacy = e => e && typeof e === 'object' && 'default' in e ? e : { default: e };
+
+  const EventHandler__default = /*#__PURE__*/_interopDefaultLegacy(EventHandler);
+  const SelectorEngine__default = /*#__PURE__*/_interopDefaultLegacy(SelectorEngine);
+  const BaseComponent__default = /*#__PURE__*/_interopDefaultLegacy(BaseComponent);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): util/index.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  const getSelector = element => {
+    let selector = element.getAttribute('data-bs-target');
+
+    if (!selector || selector === '#') {
+      let hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
+      // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
+      // `document.querySelector` will rightfully complain it is invalid.
+      // See https://github.com/twbs/bootstrap/issues/32273
+
+      if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
+        return null;
+      } // Just in case some CMS puts out a full URL with the anchor appended
+
+
+      if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
+        hrefAttr = `#${hrefAttr.split('#')[1]}`;
+      }
+
+      selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
+    }
+
+    return selector;
   };
 
-  var getjQuery = function getjQuery() {
-    var _window = window,
-        jQuery = _window.jQuery;
+  const getElementFromSelector = element => {
+    const selector = getSelector(element);
+    return selector ? document.querySelector(selector) : null;
+  };
+
+  const isDisabled = element => {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      return true;
+    }
+
+    if (element.classList.contains('disabled')) {
+      return true;
+    }
+
+    if (typeof element.disabled !== 'undefined') {
+      return element.disabled;
+    }
+
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+  };
+  /**
+   * Trick to restart an element's animation
+   *
+   * @param {HTMLElement} element
+   * @return void
+   *
+   * @see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
+   */
+
+
+  const reflow = element => {
+    // eslint-disable-next-line no-unused-expressions
+    element.offsetHeight;
+  };
+
+  const getjQuery = () => {
+    const {
+      jQuery
+    } = window;
 
     if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
       return jQuery;
@@ -721,27 +812,35 @@ createCommonjsModule(function (module, exports) {
     return null;
   };
 
-  var onDOMContentLoaded = function onDOMContentLoaded(callback) {
+  const DOMContentLoadedCallbacks = [];
+
+  const onDOMContentLoaded = callback => {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', callback);
+      // add listener on the first call when the document is in loading state
+      if (!DOMContentLoadedCallbacks.length) {
+        document.addEventListener('DOMContentLoaded', () => {
+          DOMContentLoadedCallbacks.forEach(callback => callback());
+        });
+      }
+
+      DOMContentLoadedCallbacks.push(callback);
     } else {
       callback();
     }
   };
 
-  document.documentElement.dir === 'rtl';
-
-  var defineJQueryPlugin = function defineJQueryPlugin(name, plugin) {
-    onDOMContentLoaded(function () {
-      var $ = getjQuery();
+  const defineJQueryPlugin = plugin => {
+    onDOMContentLoaded(() => {
+      const $ = getjQuery();
       /* istanbul ignore if */
 
       if ($) {
-        var JQUERY_NO_CONFLICT = $.fn[name];
+        const name = plugin.NAME;
+        const JQUERY_NO_CONFLICT = $.fn[name];
         $.fn[name] = plugin.jQueryInterface;
         $.fn[name].Constructor = plugin;
 
-        $.fn[name].noConflict = function () {
+        $.fn[name].noConflict = () => {
           $.fn[name] = JQUERY_NO_CONFLICT;
           return plugin.jQueryInterface;
         };
@@ -750,70 +849,70 @@ createCommonjsModule(function (module, exports) {
   };
 
   /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): tab.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+  /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
 
-  var NAME = 'tab';
-  var DATA_KEY = 'bs.tab';
-  var EVENT_KEY = "." + DATA_KEY;
-  var DATA_API_KEY = '.data-api';
-  var EVENT_HIDE = "hide" + EVENT_KEY;
-  var EVENT_HIDDEN = "hidden" + EVENT_KEY;
-  var EVENT_SHOW = "show" + EVENT_KEY;
-  var EVENT_SHOWN = "shown" + EVENT_KEY;
-  var EVENT_CLICK_DATA_API = "click" + EVENT_KEY + DATA_API_KEY;
-  var CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu';
-  var CLASS_NAME_ACTIVE = 'active';
-  var CLASS_NAME_DISABLED = 'disabled';
-  var CLASS_NAME_FADE = 'fade';
-  var CLASS_NAME_SHOW = 'show';
-  var SELECTOR_DROPDOWN = '.dropdown';
-  var SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
-  var SELECTOR_ACTIVE = '.active';
-  var SELECTOR_ACTIVE_UL = ':scope > li > .active';
-  var SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]';
-  var SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
-  var SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .dropdown-menu .active';
+  const NAME = 'tab';
+  const DATA_KEY = 'bs.tab';
+  const EVENT_KEY = `.${DATA_KEY}`;
+  const DATA_API_KEY = '.data-api';
+  const EVENT_HIDE = `hide${EVENT_KEY}`;
+  const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
+  const EVENT_SHOW = `show${EVENT_KEY}`;
+  const EVENT_SHOWN = `shown${EVENT_KEY}`;
+  const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
+  const CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu';
+  const CLASS_NAME_ACTIVE = 'active';
+  const CLASS_NAME_FADE = 'fade';
+  const CLASS_NAME_SHOW = 'show';
+  const SELECTOR_DROPDOWN = '.dropdown';
+  const SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
+  const SELECTOR_ACTIVE = '.active';
+  const SELECTOR_ACTIVE_UL = ':scope > li > .active';
+  const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]';
+  const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
+  const SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .dropdown-menu .active';
   /**
    * ------------------------------------------------------------------------
    * Class Definition
    * ------------------------------------------------------------------------
    */
 
-  var Tab = /*#__PURE__*/function (_BaseComponent) {
-    _inheritsLoose(Tab, _BaseComponent);
+  class Tab extends BaseComponent__default.default {
+    // Getters
+    static get NAME() {
+      return NAME;
+    } // Public
 
-    function Tab() {
-      return _BaseComponent.apply(this, arguments) || this;
-    }
 
-    var _proto = Tab.prototype;
-
-    // Public
-    _proto.show = function show() {
-      var _this = this;
-
-      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && this._element.classList.contains(CLASS_NAME_ACTIVE) || this._element.classList.contains(CLASS_NAME_DISABLED)) {
+    show() {
+      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && this._element.classList.contains(CLASS_NAME_ACTIVE)) {
         return;
       }
 
-      var previous;
-      var target = getElementFromSelector(this._element);
+      let previous;
+      const target = getElementFromSelector(this._element);
 
-      var listElement = this._element.closest(SELECTOR_NAV_LIST_GROUP);
+      const listElement = this._element.closest(SELECTOR_NAV_LIST_GROUP);
 
       if (listElement) {
-        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
-        previous = SelectorEngine__default['default'].find(itemSelector, listElement);
+        const itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
+        previous = SelectorEngine__default.default.find(itemSelector, listElement);
         previous = previous[previous.length - 1];
       }
 
-      var hideEvent = previous ? EventHandler__default['default'].trigger(previous, EVENT_HIDE, {
+      const hideEvent = previous ? EventHandler__default.default.trigger(previous, EVENT_HIDE, {
         relatedTarget: this._element
       }) : null;
-      var showEvent = EventHandler__default['default'].trigger(this._element, EVENT_SHOW, {
+      const showEvent = EventHandler__default.default.trigger(this._element, EVENT_SHOW, {
         relatedTarget: previous
       });
 
@@ -823,11 +922,11 @@ createCommonjsModule(function (module, exports) {
 
       this._activate(this._element, listElement);
 
-      var complete = function complete() {
-        EventHandler__default['default'].trigger(previous, EVENT_HIDDEN, {
-          relatedTarget: _this._element
+      const complete = () => {
+        EventHandler__default.default.trigger(previous, EVENT_HIDDEN, {
+          relatedTarget: this._element
         });
-        EventHandler__default['default'].trigger(_this._element, EVENT_SHOWN, {
+        EventHandler__default.default.trigger(this._element, EVENT_SHOWN, {
           relatedTarget: previous
         });
       };
@@ -838,33 +937,28 @@ createCommonjsModule(function (module, exports) {
         complete();
       }
     } // Private
-    ;
 
-    _proto._activate = function _activate(element, container, callback) {
-      var _this2 = this;
 
-      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? SelectorEngine__default['default'].find(SELECTOR_ACTIVE_UL, container) : SelectorEngine__default['default'].children(container, SELECTOR_ACTIVE);
-      var active = activeElements[0];
-      var isTransitioning = callback && active && active.classList.contains(CLASS_NAME_FADE);
+    _activate(element, container, callback) {
+      const activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? SelectorEngine__default.default.find(SELECTOR_ACTIVE_UL, container) : SelectorEngine__default.default.children(container, SELECTOR_ACTIVE);
+      const active = activeElements[0];
+      const isTransitioning = callback && active && active.classList.contains(CLASS_NAME_FADE);
 
-      var complete = function complete() {
-        return _this2._transitionComplete(element, active, callback);
-      };
+      const complete = () => this._transitionComplete(element, active, callback);
 
       if (active && isTransitioning) {
-        var transitionDuration = getTransitionDurationFromElement(active);
         active.classList.remove(CLASS_NAME_SHOW);
-        EventHandler__default['default'].one(active, 'transitionend', complete);
-        emulateTransitionEnd(active, transitionDuration);
+
+        this._queueCallback(complete, element, true);
       } else {
         complete();
       }
-    };
+    }
 
-    _proto._transitionComplete = function _transitionComplete(element, active, callback) {
+    _transitionComplete(element, active, callback) {
       if (active) {
         active.classList.remove(CLASS_NAME_ACTIVE);
-        var dropdownChild = SelectorEngine__default['default'].findOne(SELECTOR_DROPDOWN_ACTIVE_CHILD, active.parentNode);
+        const dropdownChild = SelectorEngine__default.default.findOne(SELECTOR_DROPDOWN_ACTIVE_CHILD, active.parentNode);
 
         if (dropdownChild) {
           dropdownChild.classList.remove(CLASS_NAME_ACTIVE);
@@ -887,13 +981,17 @@ createCommonjsModule(function (module, exports) {
         element.classList.add(CLASS_NAME_SHOW);
       }
 
-      if (element.parentNode && element.parentNode.classList.contains(CLASS_NAME_DROPDOWN_MENU)) {
-        var dropdownElement = element.closest(SELECTOR_DROPDOWN);
+      let parent = element.parentNode;
+
+      if (parent && parent.nodeName === 'LI') {
+        parent = parent.parentNode;
+      }
+
+      if (parent && parent.classList.contains(CLASS_NAME_DROPDOWN_MENU)) {
+        const dropdownElement = element.closest(SELECTOR_DROPDOWN);
 
         if (dropdownElement) {
-          SelectorEngine__default['default'].find(SELECTOR_DROPDOWN_TOGGLE).forEach(function (dropdown) {
-            return dropdown.classList.add(CLASS_NAME_ACTIVE);
-          });
+          SelectorEngine__default.default.find(SELECTOR_DROPDOWN_TOGGLE, dropdownElement).forEach(dropdown => dropdown.classList.add(CLASS_NAME_ACTIVE));
         }
 
         element.setAttribute('aria-expanded', true);
@@ -903,32 +1001,23 @@ createCommonjsModule(function (module, exports) {
         callback();
       }
     } // Static
-    ;
 
-    Tab.jQueryInterface = function jQueryInterface(config) {
+
+    static jQueryInterface(config) {
       return this.each(function () {
-        var data = Data__default['default'].getData(this, DATA_KEY) || new Tab(this);
+        const data = Tab.getOrCreateInstance(this);
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new TypeError(`No method named "${config}"`);
           }
 
           data[config]();
         }
       });
-    };
+    }
 
-    _createClass(Tab, null, [{
-      key: "DATA_KEY",
-      get: // Getters
-      function get() {
-        return DATA_KEY;
-      }
-    }]);
-
-    return Tab;
-  }(BaseComponent__default['default']);
+  }
   /**
    * ------------------------------------------------------------------------
    * Data Api implementation
@@ -936,9 +1025,16 @@ createCommonjsModule(function (module, exports) {
    */
 
 
-  EventHandler__default['default'].on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
-    event.preventDefault();
-    var data = Data__default['default'].getData(this, DATA_KEY) || new Tab(this);
+  EventHandler__default.default.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+
+    if (isDisabled(this)) {
+      return;
+    }
+
+    const data = Tab.getOrCreateInstance(this);
     data.show();
   });
   /**
@@ -948,83 +1044,120 @@ createCommonjsModule(function (module, exports) {
    * add .Tab to jQuery only if jQuery is present
    */
 
-  defineJQueryPlugin(NAME, Tab);
+  defineJQueryPlugin(Tab);
 
   return Tab;
 
-})));
+}));
 
-});
+}(tab));
 
-var script = defineComponent({
+var script$3 = defineComponent({
   props: [
     'choices',
     'helpText',
     'input',
-    'label',
+    'name',
     'required',
     'type',
   ],
 
   setup(props) {
-    return props;
+    const formType = computed(() => {
+      return props.type === "datetime" ? "datetime-local" : props.type;
+    });
+
+    return {...props, formType};
   }
 });
 
-const _hoisted_1 = { class: "form-label" };
-const _hoisted_2 = {
+const _hoisted_1$3 = { class: "form-label d-flex" };
+const _hoisted_2$3 = { class: "me-auto" };
+const _hoisted_3$3 = {
   key: 0,
   class: "text-danger"
 };
-const _hoisted_3 = { class: "input-group" };
-const _hoisted_4 = { class: "form-text text-muted" };
+const _hoisted_4$2 = { class: "text-muted" };
+const _hoisted_5$2 = { class: "input-group" };
+const _hoisted_6$2 = ["value"];
+const _hoisted_7$1 = ["value"];
+const _hoisted_8$1 = { class: "input-group-text" };
+const _hoisted_9$1 = ["checked", "id"];
+const _hoisted_10$1 = ["for"];
+const _hoisted_11$1 = ["type", "value"];
+const _hoisted_12$1 = ["disabled"];
+const _hoisted_13$1 = {
+  key: 0,
+  class: "form-text text-muted"
+};
 
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock(Fragment, null, [
-    createVNode("label", _hoisted_1, [
-      (_ctx.required)
-        ? (openBlock(), createBlock("span", _hoisted_2, "*"))
-        : createCommentVNode("v-if", true),
-      createTextVNode(" " + toDisplayString(_ctx.label), 1 /* TEXT */)
+function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createElementBlock(Fragment, null, [
+    createBaseVNode("label", _hoisted_1$3, [
+      createBaseVNode("span", _hoisted_2$3, [
+        (_ctx.required)
+          ? (openBlock(), createElementBlock("span", _hoisted_3$3, "*"))
+          : createCommentVNode("v-if", true),
+        createTextVNode(" " + toDisplayString(_ctx.name), 1 /* TEXT */)
+      ]),
+      createBaseVNode("small", _hoisted_4$2, toDisplayString(_ctx.type || 'string'), 1 /* TEXT */)
     ]),
-    createVNode("div", _hoisted_3, [
-      (_ctx.type === 'single-choice')
-        ? (openBlock(), createBlock("select", {
+    createBaseVNode("div", _hoisted_5$2, [
+      (_ctx.formType === 'single-choice')
+        ? (openBlock(), createElementBlock("select", {
             key: 0,
-            value: _ctx.input.ref.value,
-            onChange: _cache[1] || (_cache[1] = $event => (_ctx.input.setValue($event.target.value))),
+            value: _ctx.input.valueStr.value,
+            onChange: _cache[0] || (_cache[0] = $event => (_ctx.input.setValueStr($event.target.value))),
             class: "form-select"
           }, [
-            (openBlock(true), createBlock(Fragment, null, renderList(_ctx.choices, (choice) => {
-              return (openBlock(), createBlock("option", {
+            (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.choices, (choice) => {
+              return (openBlock(), createElementBlock("option", {
                 value: choice,
                 key: choice
-              }, toDisplayString(choice), 9 /* TEXT, PROPS */, ["value"]))
+              }, toDisplayString(choice), 9 /* TEXT, PROPS */, _hoisted_7$1))
             }), 128 /* KEYED_FRAGMENT */))
-          ], 40 /* PROPS, HYDRATE_EVENTS */, ["value"]))
-        : (openBlock(), createBlock("input", {
-            key: 1,
-            type: _ctx.type,
-            value: _ctx.input.ref.value,
-            onInput: _cache[2] || (_cache[2] = $event => (_ctx.input.setValue($event.target.value))),
-            class: ["form-control", {'form-control-color': _ctx.type === 'color'}]
-          }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, ["type", "value"])),
+          ], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_6$2))
+        : (_ctx.formType === 'boolean')
+          ? (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+              createBaseVNode("div", _hoisted_8$1, [
+                createBaseVNode("input", {
+                  class: "form-check-input mt-0",
+                  type: "checkbox",
+                  checked: _ctx.input.valueParsed.value,
+                  onChange: _cache[1] || (_cache[1] = $event => (_ctx.input.setValueStr($event.target.checked.toString()))),
+                  id: _ctx.name
+                }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_9$1)
+              ]),
+              createBaseVNode("label", {
+                class: "input-group-text flex-fill bg-body",
+                for: _ctx.name
+              }, toDisplayString(_ctx.helpText), 9 /* TEXT, PROPS */, _hoisted_10$1)
+            ], 64 /* STABLE_FRAGMENT */))
+          : (openBlock(), createElementBlock("input", {
+              key: 2,
+              type: _ctx.formType,
+              value: _ctx.input.valueStr.value,
+              onInput: _cache[2] || (_cache[2] = $event => (_ctx.input.setValueStr($event.target.value))),
+              class: normalizeClass(["form-control mw-100", {'form-control-color': _ctx.formType === 'color'}])
+            }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_11$1)),
       (_ctx.input.hasDefault)
-        ? (openBlock(), createBlock("button", {
-            key: 2,
+        ? (openBlock(), createElementBlock("button", {
+            key: 3,
             onClick: _cache[3] || (_cache[3] = $event => (_ctx.input.resetToDefault())),
             disabled: _ctx.input.isDefault.value,
             type: "button",
             class: "btn btn-light border"
-          }, "Reset", 8 /* PROPS */, ["disabled"]))
+          }, "Reset", 8 /* PROPS */, _hoisted_12$1))
         : createCommentVNode("v-if", true)
     ]),
-    createVNode("small", _hoisted_4, toDisplayString(_ctx.helpText), 1 /* TEXT */)
+    (_ctx.formType !== 'boolean')
+      ? (openBlock(), createElementBlock("small", _hoisted_13$1, toDisplayString(_ctx.helpText), 1 /* TEXT */))
+      : createCommentVNode("v-if", true)
   ], 64 /* STABLE_FRAGMENT */))
 }
 
-script.render = render;
-script.__file = "node_modules/togostanza/src/components/FormField.vue";
+script$3.render = render$3;
+script$3.__file = "node_modules/togostanza/src/components/FormField.vue";
 
 /**
  * lodash (Custom Build) <https://lodash.com/>
@@ -1404,7 +1537,7 @@ function toNumber(value) {
 
 var lodash_debounce = debounce;
 
-var script$1 = defineComponent({
+var script$2 = defineComponent({
   props: ['value'],
 
   setup(props) {
@@ -1429,40 +1562,45 @@ var script$1 = defineComponent({
   }
 });
 
-const _hoisted_1$1 = /*#__PURE__*/createTextVNode(" Copied ");
-const _hoisted_2$1 = /*#__PURE__*/createTextVNode(" Copy to clipboard ");
+const _hoisted_1$2 = ["innerHTML"];
+const _hoisted_2$2 = /*#__PURE__*/createTextVNode(" Copied ");
+const _hoisted_3$2 = /*#__PURE__*/createTextVNode(" Copy to clipboard ");
 
-function render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock("button", mergeProps({
+function render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createElementBlock("button", mergeProps({
     type: "button",
-    onClick: _cache[1] || (_cache[1] = $event => (_ctx.copyToClipboard()))
+    onClick: _cache[0] || (_cache[0] = $event => (_ctx.copyToClipboard()))
   }, _ctx.$attrs), [
     (_ctx.isCopiedShown)
-      ? (openBlock(), createBlock(Fragment, { key: 0 }, [
-          createVNode("span", {
+      ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+          createBaseVNode("span", {
             innerHTML: _ctx.checkIcon.toSVG({height: 19})
-          }, null, 8 /* PROPS */, ["innerHTML"]),
-          _hoisted_1$1
+          }, null, 8 /* PROPS */, _hoisted_1$2),
+          _hoisted_2$2
         ], 64 /* STABLE_FRAGMENT */))
-      : (openBlock(), createBlock(Fragment, { key: 1 }, [
-          _hoisted_2$1
-        ], 64 /* STABLE_FRAGMENT */))
+      : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+          _hoisted_3$2
+        ], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */))
   ], 16 /* FULL_PROPS */))
 }
 
-script$1.render = render$1;
-script$1.__file = "node_modules/togostanza/src/components/CopyButton.vue";
+script$2.render = render$2;
+script$2.__file = "node_modules/togostanza/src/components/CopyButton.vue";
 
-var utils = createCommonjsModule(function (module, exports) {
+var handlebars_runtime = {exports: {}};
 
-exports.__esModule = true;
-exports.extend = extend;
-exports.indexOf = indexOf;
-exports.escapeExpression = escapeExpression;
-exports.isEmpty = isEmpty;
-exports.createFrame = createFrame;
-exports.blockParams = blockParams;
-exports.appendContextPath = appendContextPath;
+var base = {};
+
+var utils = {};
+
+utils.__esModule = true;
+utils.extend = extend;
+utils.indexOf = indexOf;
+utils.escapeExpression = escapeExpression;
+utils.isEmpty = isEmpty;
+utils.createFrame = createFrame;
+utils.blockParams = blockParams;
+utils.appendContextPath = appendContextPath;
 var escape = {
   '&': '&amp;',
   '<': '&lt;',
@@ -1494,7 +1632,7 @@ function extend(obj /* , ...source */) {
 
 var toString = Object.prototype.toString;
 
-exports.toString = toString;
+utils.toString = toString;
 // Sourced from lodash
 // https://github.com/bestiejs/lodash/blob/master/LICENSE.txt
 /* eslint-disable func-style */
@@ -1504,11 +1642,11 @@ var isFunction = function isFunction(value) {
 // fallback for older versions of Chrome and Safari
 /* istanbul ignore next */
 if (isFunction(/x/)) {
-  exports.isFunction = isFunction = function (value) {
+  utils.isFunction = isFunction = function (value) {
     return typeof value === 'function' && toString.call(value) === '[object Function]';
   };
 }
-exports.isFunction = isFunction;
+utils.isFunction = isFunction;
 
 /* eslint-enable func-style */
 
@@ -1517,7 +1655,7 @@ var isArray = Array.isArray || function (value) {
   return value && typeof value === 'object' ? toString.call(value) === '[object Array]' : false;
 };
 
-exports.isArray = isArray;
+utils.isArray = isArray;
 // Older IE versions do not directly support indexOf so we must implement our own, sadly.
 
 function indexOf(array, value) {
@@ -1577,9 +1715,9 @@ function appendContextPath(contextPath, id) {
   return (contextPath ? contextPath + '.' : '') + id;
 }
 
-});
+var exception = {exports: {}};
 
-var exception = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 
 exports.__esModule = true;
 var errorProps = ['description', 'fileName', 'lineNumber', 'endLineNumber', 'message', 'name', 'number', 'stack'];
@@ -1643,13 +1781,17 @@ Exception.prototype = new Error();
 exports['default'] = Exception;
 module.exports = exports['default'];
 
-});
+}(exception, exception.exports));
 
-var blockHelperMissing = createCommonjsModule(function (module, exports) {
+var helpers = {};
+
+var blockHelperMissing = {exports: {}};
+
+(function (module, exports) {
 
 exports.__esModule = true;
 
-
+var _utils = utils;
 
 exports['default'] = function (instance) {
   instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -1660,7 +1802,7 @@ exports['default'] = function (instance) {
       return fn(this);
     } else if (context === false || context == null) {
       return inverse(this);
-    } else if (utils.isArray(context)) {
+    } else if (_utils.isArray(context)) {
       if (context.length > 0) {
         if (options.ids) {
           options.ids = [options.name];
@@ -1672,8 +1814,8 @@ exports['default'] = function (instance) {
       }
     } else {
       if (options.data && options.ids) {
-        var data = utils.createFrame(options.data);
-        data.contextPath = utils.appendContextPath(options.data.contextPath, options.name);
+        var data = _utils.createFrame(options.data);
+        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.name);
         options = { data: data };
       }
 
@@ -1684,20 +1826,22 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(blockHelperMissing, blockHelperMissing.exports));
 
-var each = createCommonjsModule(function (module, exports) {
+var each = {exports: {}};
+
+(function (module, exports) {
 
 exports.__esModule = true;
 // istanbul ignore next
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _utils = utils;
 
+var _exception = exception.exports;
 
-
-
-var _exception2 = _interopRequireDefault(exception);
+var _exception2 = _interopRequireDefault(_exception);
 
 exports['default'] = function (instance) {
   instance.registerHelper('each', function (context, options) {
@@ -1713,15 +1857,15 @@ exports['default'] = function (instance) {
         contextPath = undefined;
 
     if (options.data && options.ids) {
-      contextPath = utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';
+      contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';
     }
 
-    if (utils.isFunction(context)) {
+    if (_utils.isFunction(context)) {
       context = context.call(this);
     }
 
     if (options.data) {
-      data = utils.createFrame(options.data);
+      data = _utils.createFrame(options.data);
     }
 
     function execIteration(field, index, last) {
@@ -1738,12 +1882,12 @@ exports['default'] = function (instance) {
 
       ret = ret + fn(context[field], {
         data: data,
-        blockParams: utils.blockParams([context[field], field], [contextPath + field, null])
+        blockParams: _utils.blockParams([context[field], field], [contextPath + field, null])
       });
     }
 
     if (context && typeof context === 'object') {
-      if (utils.isArray(context)) {
+      if (_utils.isArray(context)) {
         for (var j = context.length; i < j; i++) {
           if (i in context) {
             execIteration(i, i, i === context.length - 1);
@@ -1790,18 +1934,20 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(each, each.exports));
 
-var helperMissing = createCommonjsModule(function (module, exports) {
+var helperMissing = {exports: {}};
+
+(function (module, exports) {
 
 exports.__esModule = true;
 // istanbul ignore next
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _exception = exception.exports;
 
-
-var _exception2 = _interopRequireDefault(exception);
+var _exception2 = _interopRequireDefault(_exception);
 
 exports['default'] = function (instance) {
   instance.registerHelper('helperMissing', function () /* [args, ]options */{
@@ -1817,34 +1963,36 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(helperMissing, helperMissing.exports));
 
-var _if = createCommonjsModule(function (module, exports) {
+var _if = {exports: {}};
+
+(function (module, exports) {
 
 exports.__esModule = true;
 // istanbul ignore next
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _utils = utils;
 
+var _exception = exception.exports;
 
-
-
-var _exception2 = _interopRequireDefault(exception);
+var _exception2 = _interopRequireDefault(_exception);
 
 exports['default'] = function (instance) {
   instance.registerHelper('if', function (conditional, options) {
     if (arguments.length != 2) {
       throw new _exception2['default']('#if requires exactly one argument');
     }
-    if (utils.isFunction(conditional)) {
+    if (_utils.isFunction(conditional)) {
       conditional = conditional.call(this);
     }
 
     // Default behavior is to render the positive path if the value is truthy and not empty.
     // The `includeZero` option may be set to treat the condtional as purely not empty based on the
     // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.
-    if (!options.hash.includeZero && !conditional || utils.isEmpty(conditional)) {
+    if (!options.hash.includeZero && !conditional || _utils.isEmpty(conditional)) {
       return options.inverse(this);
     } else {
       return options.fn(this);
@@ -1865,9 +2013,11 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(_if, _if.exports));
 
-var log = createCommonjsModule(function (module, exports) {
+var log$1 = {exports: {}};
+
+(function (module, exports) {
 
 exports.__esModule = true;
 
@@ -1893,9 +2043,11 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(log$1, log$1.exports));
 
-var lookup = createCommonjsModule(function (module, exports) {
+var lookup = {exports: {}};
+
+(function (module, exports) {
 
 exports.__esModule = true;
 
@@ -1911,42 +2063,44 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(lookup, lookup.exports));
 
-var _with = createCommonjsModule(function (module, exports) {
+var _with = {exports: {}};
+
+(function (module, exports) {
 
 exports.__esModule = true;
 // istanbul ignore next
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _utils = utils;
 
+var _exception = exception.exports;
 
-
-
-var _exception2 = _interopRequireDefault(exception);
+var _exception2 = _interopRequireDefault(_exception);
 
 exports['default'] = function (instance) {
   instance.registerHelper('with', function (context, options) {
     if (arguments.length != 2) {
       throw new _exception2['default']('#with requires exactly one argument');
     }
-    if (utils.isFunction(context)) {
+    if (_utils.isFunction(context)) {
       context = context.call(this);
     }
 
     var fn = options.fn;
 
-    if (!utils.isEmpty(context)) {
+    if (!_utils.isEmpty(context)) {
       var data = options.data;
       if (options.data && options.ids) {
-        data = utils.createFrame(options.data);
-        data.contextPath = utils.appendContextPath(options.data.contextPath, options.ids[0]);
+        data = _utils.createFrame(options.data);
+        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]);
       }
 
       return fn(context, {
         data: data,
-        blockParams: utils.blockParams([context], [data && data.contextPath])
+        blockParams: _utils.blockParams([context], [data && data.contextPath])
       });
     } else {
       return options.inverse(this);
@@ -1956,41 +2110,42 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(_with, _with.exports));
 
-var registerDefaultHelpers_1 = registerDefaultHelpers;
-var moveHelperToHooks_1 = moveHelperToHooks;
+helpers.__esModule = true;
+helpers.registerDefaultHelpers = registerDefaultHelpers;
+helpers.moveHelperToHooks = moveHelperToHooks;
 // istanbul ignore next
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault$3(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _helpersBlockHelperMissing = blockHelperMissing.exports;
 
+var _helpersBlockHelperMissing2 = _interopRequireDefault$3(_helpersBlockHelperMissing);
 
-var _helpersBlockHelperMissing2 = _interopRequireDefault(blockHelperMissing);
+var _helpersEach = each.exports;
 
+var _helpersEach2 = _interopRequireDefault$3(_helpersEach);
 
+var _helpersHelperMissing = helperMissing.exports;
 
-var _helpersEach2 = _interopRequireDefault(each);
+var _helpersHelperMissing2 = _interopRequireDefault$3(_helpersHelperMissing);
 
+var _helpersIf = _if.exports;
 
+var _helpersIf2 = _interopRequireDefault$3(_helpersIf);
 
-var _helpersHelperMissing2 = _interopRequireDefault(helperMissing);
+var _helpersLog = log$1.exports;
 
+var _helpersLog2 = _interopRequireDefault$3(_helpersLog);
 
+var _helpersLookup = lookup.exports;
 
-var _helpersIf2 = _interopRequireDefault(_if);
+var _helpersLookup2 = _interopRequireDefault$3(_helpersLookup);
 
+var _helpersWith = _with.exports;
 
-
-var _helpersLog2 = _interopRequireDefault(log);
-
-
-
-var _helpersLookup2 = _interopRequireDefault(lookup);
-
-
-
-var _helpersWith2 = _interopRequireDefault(_with);
+var _helpersWith2 = _interopRequireDefault$3(_helpersWith);
 
 function registerDefaultHelpers(instance) {
   _helpersBlockHelperMissing2['default'](instance);
@@ -2011,17 +2166,15 @@ function moveHelperToHooks(instance, helperName, keepHelper) {
   }
 }
 
+var decorators = {};
 
-var helpers = /*#__PURE__*/Object.defineProperty({
-	registerDefaultHelpers: registerDefaultHelpers_1,
-	moveHelperToHooks: moveHelperToHooks_1
-}, '__esModule', {value: true});
+var inline = {exports: {}};
 
-var inline = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 
 exports.__esModule = true;
 
-
+var _utils = utils;
 
 exports['default'] = function (instance) {
   instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -2031,7 +2184,7 @@ exports['default'] = function (instance) {
       ret = function (context, options) {
         // Create a new partials stack frame prior to exec.
         var original = container.partials;
-        container.partials = utils.extend({}, original, props.partials);
+        container.partials = _utils.extend({}, original, props.partials);
         var ret = fn(context, options);
         container.partials = original;
         return ret;
@@ -2046,31 +2199,29 @@ exports['default'] = function (instance) {
 
 module.exports = exports['default'];
 
-});
+}(inline, inline.exports));
 
-var registerDefaultDecorators_1 = registerDefaultDecorators;
+decorators.__esModule = true;
+decorators.registerDefaultDecorators = registerDefaultDecorators;
 // istanbul ignore next
 
-function _interopRequireDefault$1(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _decoratorsInline = inline.exports;
 
-
-var _decoratorsInline2 = _interopRequireDefault$1(inline);
+var _decoratorsInline2 = _interopRequireDefault$2(_decoratorsInline);
 
 function registerDefaultDecorators(instance) {
   _decoratorsInline2['default'](instance);
 }
 
+var logger$1 = {exports: {}};
 
-var decorators = /*#__PURE__*/Object.defineProperty({
-	registerDefaultDecorators: registerDefaultDecorators_1
-}, '__esModule', {value: true});
-
-var logger_1 = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 
 exports.__esModule = true;
 
-
+var _utils = utils;
 
 var logger = {
   methodMap: ['debug', 'info', 'warn', 'error'],
@@ -2079,7 +2230,7 @@ var logger = {
   // Maps a given level value to the `methodMap` indexes above.
   lookupLevel: function lookupLevel(level) {
     if (typeof level === 'string') {
-      var levelMap = utils.indexOf(logger.methodMap, level.toLowerCase());
+      var levelMap = _utils.indexOf(logger.methodMap, level.toLowerCase());
       if (levelMap >= 0) {
         level = levelMap;
       } else {
@@ -2113,11 +2264,16 @@ var logger = {
 exports['default'] = logger;
 module.exports = exports['default'];
 
-});
+}(logger$1, logger$1.exports));
 
-var createNewLookupObject_2 = createNewLookupObject;
+var protoAccess = {};
 
+var createNewLookupObject$1 = {};
 
+createNewLookupObject$1.__esModule = true;
+createNewLookupObject$1.createNewLookupObject = createNewLookupObject;
+
+var _utils$2 = utils;
 
 /**
  * Create a new object with "null"-prototype to avoid truthy results on prototype properties.
@@ -2131,26 +2287,22 @@ function createNewLookupObject() {
     sources[_key] = arguments[_key];
   }
 
-  return utils.extend.apply(undefined, [Object.create(null)].concat(sources));
+  return _utils$2.extend.apply(undefined, [Object.create(null)].concat(sources));
 }
 
-
-var createNewLookupObject_1 = /*#__PURE__*/Object.defineProperty({
-	createNewLookupObject: createNewLookupObject_2
-}, '__esModule', {value: true});
-
-var createProtoAccessControl_1 = createProtoAccessControl;
-var resultIsAllowed_1 = resultIsAllowed;
-var resetLoggedProperties_1 = resetLoggedProperties;
+protoAccess.__esModule = true;
+protoAccess.createProtoAccessControl = createProtoAccessControl;
+protoAccess.resultIsAllowed = resultIsAllowed;
+protoAccess.resetLoggedProperties = resetLoggedProperties;
 // istanbul ignore next
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+function _interopRequireWildcard$1(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
+var _createNewLookupObject = createNewLookupObject$1;
 
+var _logger$1 = logger$1.exports;
 
-
-
-var logger = _interopRequireWildcard(logger_1);
+var logger = _interopRequireWildcard$1(_logger$1);
 
 var loggedProperties = Object.create(null);
 
@@ -2167,11 +2319,11 @@ function createProtoAccessControl(runtimeOptions) {
 
   return {
     properties: {
-      whitelist: createNewLookupObject_1.createNewLookupObject(defaultPropertyWhiteList, runtimeOptions.allowedProtoProperties),
+      whitelist: _createNewLookupObject.createNewLookupObject(defaultPropertyWhiteList, runtimeOptions.allowedProtoProperties),
       defaultValue: runtimeOptions.allowProtoPropertiesByDefault
     },
     methods: {
-      whitelist: createNewLookupObject_1.createNewLookupObject(defaultMethodWhiteList, runtimeOptions.allowedProtoMethods),
+      whitelist: _createNewLookupObject.createNewLookupObject(defaultMethodWhiteList, runtimeOptions.allowedProtoMethods),
       defaultValue: runtimeOptions.allowProtoMethodsByDefault
     }
   };
@@ -2209,41 +2361,35 @@ function resetLoggedProperties() {
   });
 }
 
-
-var protoAccess = /*#__PURE__*/Object.defineProperty({
-	createProtoAccessControl: createProtoAccessControl_1,
-	resultIsAllowed: resultIsAllowed_1,
-	resetLoggedProperties: resetLoggedProperties_1
-}, '__esModule', {value: true});
-
-var HandlebarsEnvironment_1 = HandlebarsEnvironment;
+base.__esModule = true;
+base.HandlebarsEnvironment = HandlebarsEnvironment;
 // istanbul ignore next
 
-function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault$1(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _utils$1 = utils;
 
+var _exception$1 = exception.exports;
 
+var _exception2$1 = _interopRequireDefault$1(_exception$1);
 
+var _helpers$1 = helpers;
 
-var _exception2 = _interopRequireDefault$2(exception);
+var _decorators = decorators;
 
+var _logger = logger$1.exports;
 
+var _logger2 = _interopRequireDefault$1(_logger);
 
-
-
-
-
-var _logger2 = _interopRequireDefault$2(logger_1);
-
-
+var _internalProtoAccess$1 = protoAccess;
 
 var VERSION = '4.7.7';
-var VERSION_1 = VERSION;
+base.VERSION = VERSION;
 var COMPILER_REVISION = 8;
-var COMPILER_REVISION_1 = COMPILER_REVISION;
+base.COMPILER_REVISION = COMPILER_REVISION;
 var LAST_COMPATIBLE_COMPILER_REVISION = 7;
 
-var LAST_COMPATIBLE_COMPILER_REVISION_1 = LAST_COMPATIBLE_COMPILER_REVISION;
+base.LAST_COMPATIBLE_COMPILER_REVISION = LAST_COMPATIBLE_COMPILER_REVISION;
 var REVISION_CHANGES = {
   1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
   2: '== 1.0.0-rc.3',
@@ -2255,16 +2401,16 @@ var REVISION_CHANGES = {
   8: '>= 4.3.0'
 };
 
-var REVISION_CHANGES_1 = REVISION_CHANGES;
+base.REVISION_CHANGES = REVISION_CHANGES;
 var objectType = '[object Object]';
 
-function HandlebarsEnvironment(helpers$1, partials, decorators$1) {
-  this.helpers = helpers$1 || {};
+function HandlebarsEnvironment(helpers, partials, decorators) {
+  this.helpers = helpers || {};
   this.partials = partials || {};
-  this.decorators = decorators$1 || {};
+  this.decorators = decorators || {};
 
-  helpers.registerDefaultHelpers(this);
-  decorators.registerDefaultDecorators(this);
+  _helpers$1.registerDefaultHelpers(this);
+  _decorators.registerDefaultDecorators(this);
 }
 
 HandlebarsEnvironment.prototype = {
@@ -2274,11 +2420,11 @@ HandlebarsEnvironment.prototype = {
   log: _logger2['default'].log,
 
   registerHelper: function registerHelper(name, fn) {
-    if (utils.toString.call(name) === objectType) {
+    if (_utils$1.toString.call(name) === objectType) {
       if (fn) {
-        throw new _exception2['default']('Arg not supported with multiple helpers');
+        throw new _exception2$1['default']('Arg not supported with multiple helpers');
       }
-      utils.extend(this.helpers, name);
+      _utils$1.extend(this.helpers, name);
     } else {
       this.helpers[name] = fn;
     }
@@ -2288,11 +2434,11 @@ HandlebarsEnvironment.prototype = {
   },
 
   registerPartial: function registerPartial(name, partial) {
-    if (utils.toString.call(name) === objectType) {
-      utils.extend(this.partials, name);
+    if (_utils$1.toString.call(name) === objectType) {
+      _utils$1.extend(this.partials, name);
     } else {
       if (typeof partial === 'undefined') {
-        throw new _exception2['default']('Attempting to register a partial called "' + name + '" as undefined');
+        throw new _exception2$1['default']('Attempting to register a partial called "' + name + '" as undefined');
       }
       this.partials[name] = partial;
     }
@@ -2302,11 +2448,11 @@ HandlebarsEnvironment.prototype = {
   },
 
   registerDecorator: function registerDecorator(name, fn) {
-    if (utils.toString.call(name) === objectType) {
+    if (_utils$1.toString.call(name) === objectType) {
       if (fn) {
-        throw new _exception2['default']('Arg not supported with multiple decorators');
+        throw new _exception2$1['default']('Arg not supported with multiple decorators');
       }
-      utils.extend(this.decorators, name);
+      _utils$1.extend(this.decorators, name);
     } else {
       this.decorators[name] = fn;
     }
@@ -2319,29 +2465,19 @@ HandlebarsEnvironment.prototype = {
    * @deprecated should only be used in handlebars test-cases
    */
   resetLoggedPropertyAccesses: function resetLoggedPropertyAccesses() {
-    protoAccess.resetLoggedProperties();
+    _internalProtoAccess$1.resetLoggedProperties();
   }
 };
 
-var log$1 = _logger2['default'].log;
+var log = _logger2['default'].log;
 
-var log_1 = log$1;
-var createFrame = utils.createFrame;
-var logger$1 = _logger2['default'];
+base.log = log;
+base.createFrame = _utils$1.createFrame;
+base.logger = _logger2['default'];
 
+var safeString = {exports: {}};
 
-var base = /*#__PURE__*/Object.defineProperty({
-	HandlebarsEnvironment: HandlebarsEnvironment_1,
-	VERSION: VERSION_1,
-	COMPILER_REVISION: COMPILER_REVISION_1,
-	LAST_COMPATIBLE_COMPILER_REVISION: LAST_COMPATIBLE_COMPILER_REVISION_1,
-	REVISION_CHANGES: REVISION_CHANGES_1,
-	log: log_1,
-	createFrame: createFrame,
-	logger: logger$1
-}, '__esModule', {value: true});
-
-var safeString = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 
 exports.__esModule = true;
 function SafeString(string) {
@@ -2355,9 +2491,14 @@ SafeString.prototype.toString = SafeString.prototype.toHTML = function () {
 exports['default'] = SafeString;
 module.exports = exports['default'];
 
-});
+}(safeString, safeString.exports));
 
-var wrapHelper_2 = wrapHelper;
+var runtime$1 = {};
+
+var wrapHelper$1 = {};
+
+wrapHelper$1.__esModule = true;
+wrapHelper$1.wrapHelper = wrapHelper;
 
 function wrapHelper(helper, transformOptionsFn) {
   if (typeof helper !== 'function') {
@@ -2373,66 +2514,62 @@ function wrapHelper(helper, transformOptionsFn) {
   return wrapper;
 }
 
-
-var wrapHelper_1 = /*#__PURE__*/Object.defineProperty({
-	wrapHelper: wrapHelper_2
-}, '__esModule', {value: true});
-
-var checkRevision_1 = checkRevision;
-var template_1 = template;
-var wrapProgram_1 = wrapProgram;
-var resolvePartial_1 = resolvePartial;
-var invokePartial_1 = invokePartial;
-var noop_1 = noop;
+runtime$1.__esModule = true;
+runtime$1.checkRevision = checkRevision;
+runtime$1.template = template;
+runtime$1.wrapProgram = wrapProgram;
+runtime$1.resolvePartial = resolvePartial;
+runtime$1.invokePartial = invokePartial;
+runtime$1.noop = noop;
 // istanbul ignore next
 
-function _interopRequireDefault$3(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 // istanbul ignore next
 
-function _interopRequireWildcard$1(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
+var _utils = utils;
 
+var Utils = _interopRequireWildcard(_utils);
 
-var Utils = _interopRequireWildcard$1(utils);
+var _exception = exception.exports;
 
+var _exception2 = _interopRequireDefault(_exception);
 
+var _base = base;
 
-var _exception2$1 = _interopRequireDefault$3(exception);
+var _helpers = helpers;
 
+var _internalWrapHelper = wrapHelper$1;
 
-
-
-
-
-
-
+var _internalProtoAccess = protoAccess;
 
 function checkRevision(compilerInfo) {
   var compilerRevision = compilerInfo && compilerInfo[0] || 1,
-      currentRevision = base.COMPILER_REVISION;
+      currentRevision = _base.COMPILER_REVISION;
 
-  if (compilerRevision >= base.LAST_COMPATIBLE_COMPILER_REVISION && compilerRevision <= base.COMPILER_REVISION) {
+  if (compilerRevision >= _base.LAST_COMPATIBLE_COMPILER_REVISION && compilerRevision <= _base.COMPILER_REVISION) {
     return;
   }
 
-  if (compilerRevision < base.LAST_COMPATIBLE_COMPILER_REVISION) {
-    var runtimeVersions = base.REVISION_CHANGES[currentRevision],
-        compilerVersions = base.REVISION_CHANGES[compilerRevision];
-    throw new _exception2$1['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
+  if (compilerRevision < _base.LAST_COMPATIBLE_COMPILER_REVISION) {
+    var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
+        compilerVersions = _base.REVISION_CHANGES[compilerRevision];
+    throw new _exception2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
   } else {
     // Use the embedded version info since the runtime doesn't know about this revision yet
-    throw new _exception2$1['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
+    throw new _exception2['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
   }
 }
 
 function template(templateSpec, env) {
   /* istanbul ignore next */
   if (!env) {
-    throw new _exception2$1['default']('No environment passed to template');
+    throw new _exception2['default']('No environment passed to template');
   }
   if (!templateSpec || !templateSpec.main) {
-    throw new _exception2$1['default']('Unknown template object: ' + typeof templateSpec);
+    throw new _exception2['default']('Unknown template object: ' + typeof templateSpec);
   }
 
   templateSpec.main.decorator = templateSpec.main_d;
@@ -2478,7 +2615,7 @@ function template(templateSpec, env) {
       }
       return result;
     } else {
-      throw new _exception2$1['default']('The partial ' + options.name + ' could not be compiled when running in runtime-only mode');
+      throw new _exception2['default']('The partial ' + options.name + ' could not be compiled when running in runtime-only mode');
     }
   }
 
@@ -2486,7 +2623,7 @@ function template(templateSpec, env) {
   var container = {
     strict: function strict(obj, name, loc) {
       if (!obj || !(name in obj)) {
-        throw new _exception2$1['default']('"' + name + '" not defined in ' + obj, {
+        throw new _exception2['default']('"' + name + '" not defined in ' + obj, {
           loc: loc
         });
       }
@@ -2501,7 +2638,7 @@ function template(templateSpec, env) {
         return result;
       }
 
-      if (protoAccess.resultIsAllowed(result, container.protoAccessControl, propertyName)) {
+      if (_internalProtoAccess.resultIsAllowed(result, container.protoAccessControl, propertyName)) {
         return result;
       }
       return undefined;
@@ -2606,11 +2743,11 @@ function template(templateSpec, env) {
       }
 
       container.hooks = {};
-      container.protoAccessControl = protoAccess.createProtoAccessControl(options);
+      container.protoAccessControl = _internalProtoAccess.createProtoAccessControl(options);
 
       var keepHelperInHelpers = options.allowCallsToHelperMissing || templateWasPrecompiledWithCompilerV7;
-      helpers.moveHelperToHooks(container, 'helperMissing', keepHelperInHelpers);
-      helpers.moveHelperToHooks(container, 'blockHelperMissing', keepHelperInHelpers);
+      _helpers.moveHelperToHooks(container, 'helperMissing', keepHelperInHelpers);
+      _helpers.moveHelperToHooks(container, 'blockHelperMissing', keepHelperInHelpers);
     } else {
       container.protoAccessControl = options.protoAccessControl; // internal option
       container.helpers = options.helpers;
@@ -2622,10 +2759,10 @@ function template(templateSpec, env) {
 
   ret._child = function (i, data, blockParams, depths) {
     if (templateSpec.useBlockParams && !blockParams) {
-      throw new _exception2$1['default']('must pass block params');
+      throw new _exception2['default']('must pass block params');
     }
     if (templateSpec.useDepths && !depths) {
-      throw new _exception2$1['default']('must pass parent depths');
+      throw new _exception2['default']('must pass parent depths');
     }
 
     return wrapProgram(container, i, templateSpec[i], data, 0, blockParams, depths);
@@ -2683,7 +2820,7 @@ function invokePartial(partial, context, options) {
   var partialBlock = undefined;
   if (options.fn && options.fn !== noop) {
     (function () {
-      options.data = base.createFrame(options.data);
+      options.data = _base.createFrame(options.data);
       // Wrapper function to get access to currentPartialBlock from the closure
       var fn = options.fn;
       partialBlock = options.data['partial-block'] = function partialBlockWrapper(context) {
@@ -2691,7 +2828,7 @@ function invokePartial(partial, context, options) {
 
         // Restore the partial-block from the closure for the execution of the block
         // i.e. the part inside the block of the partial call.
-        options.data = base.createFrame(options.data);
+        options.data = _base.createFrame(options.data);
         options.data['partial-block'] = currentPartialBlock;
         return fn(context, options);
       };
@@ -2706,7 +2843,7 @@ function invokePartial(partial, context, options) {
   }
 
   if (partial === undefined) {
-    throw new _exception2$1['default']('The partial ' + options.name + ' could not be found');
+    throw new _exception2['default']('The partial ' + options.name + ' could not be found');
   } else if (partial instanceof Function) {
     return partial(context, options);
   }
@@ -2718,7 +2855,7 @@ function noop() {
 
 function initData(context, data) {
   if (!data || !('root' in data)) {
-    data = data ? base.createFrame(data) : {};
+    data = data ? _base.createFrame(data) : {};
     data.root = context;
   }
   return data;
@@ -2742,22 +2879,14 @@ function wrapHelpersToPassLookupProperty(mergedHelpers, container) {
 
 function passLookupPropertyOption(helper, container) {
   var lookupProperty = container.lookupProperty;
-  return wrapHelper_1.wrapHelper(helper, function (options) {
+  return _internalWrapHelper.wrapHelper(helper, function (options) {
     return Utils.extend({ lookupProperty: lookupProperty }, options);
   });
 }
 
+var noConflict = {exports: {}};
 
-var runtime = /*#__PURE__*/Object.defineProperty({
-	checkRevision: checkRevision_1,
-	template: template_1,
-	wrapProgram: wrapProgram_1,
-	resolvePartial: resolvePartial_1,
-	invokePartial: invokePartial_1,
-	noop: noop_1
-}, '__esModule', {value: true});
-
-var noConflict = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 
 exports.__esModule = true;
 
@@ -2776,9 +2905,9 @@ exports['default'] = function (Handlebars) {
 
 module.exports = exports['default'];
 
-});
+}(noConflict, noConflict.exports));
 
-var handlebars_runtime = createCommonjsModule(function (module, exports) {
+(function (module, exports) {
 
 exports.__esModule = true;
 // istanbul ignore next
@@ -2789,32 +2918,32 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
+var _handlebarsBase = base;
 
-
-var base$1 = _interopRequireWildcard(base);
+var base$1 = _interopRequireWildcard(_handlebarsBase);
 
 // Each of these augment the Handlebars object. No need to setup here.
 // (This is done to easily share code between commonjs and browse envs)
 
+var _handlebarsSafeString = safeString.exports;
 
+var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
-var _handlebarsSafeString2 = _interopRequireDefault(safeString);
+var _handlebarsException = exception.exports;
 
+var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
+var _handlebarsUtils = utils;
 
-var _handlebarsException2 = _interopRequireDefault(exception);
+var Utils = _interopRequireWildcard(_handlebarsUtils);
 
+var _handlebarsRuntime = runtime$1;
 
+var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-var Utils = _interopRequireWildcard(utils);
+var _handlebarsNoConflict = noConflict.exports;
 
-
-
-var runtime$1 = _interopRequireWildcard(runtime);
-
-
-
-var _handlebarsNoConflict2 = _interopRequireDefault(noConflict);
+var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
 // For compatibility and usage outside of module systems, make the Handlebars object a namespace
 function create() {
@@ -2826,9 +2955,9 @@ function create() {
   hb.Utils = Utils;
   hb.escapeExpression = Utils.escapeExpression;
 
-  hb.VM = runtime$1;
+  hb.VM = runtime;
   hb.template = function (spec) {
-    return runtime$1.template(spec, hb);
+    return runtime.template(spec, hb);
   };
 
   return hb;
@@ -2844,13 +2973,23 @@ inst['default'] = inst;
 exports['default'] = inst;
 module.exports = exports['default'];
 
-});
+}(handlebars_runtime, handlebars_runtime.exports));
 
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
-var runtime$1 = handlebars_runtime['default'];
+var runtime = handlebars_runtime.exports['default'];
 
-var Template = /*#__PURE__*/runtime$1.template({"1":function(container,depth0,helpers,partials,data,blockParams) {
+function Helpers0 (Handlebars) {
+  Handlebars.registerHelper('eq', (a, b) => a === b);
+  Handlebars.registerHelper('and', (a, b) => a && b);
+}
+
+function init() {
+  Helpers0.__initialized || (Helpers0(runtime), Helpers0.__initialized = true);
+}
+
+init();
+var Template$2 = /*#__PURE__*/runtime.template({"1":function(container,depth0,helpers,partials,data,blockParams) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -2887,11 +3026,12 @@ var Template = /*#__PURE__*/runtime$1.template({"1":function(container,depth0,he
   return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"styleVars") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams),"inverse":container.noop,"data":data,"blockParams":blockParams,"loc":{"start":{"line":1,"column":0},"end":{"line":9,"column":7}}})) != null ? stack1 : "");
 },"useData":true,"useBlockParams":true});
 function styleSnippetTemplate(data, options, asString) {
-  var html = Template(data, options);
+  var html = Template$2(data, options);
   return (asString || true) ? html : $(html);
 }
 
-var Template$1 = /*#__PURE__*/runtime$1.template({"1":function(container,depth0,helpers,partials,data,blockParams) {
+init();
+var Template$1 = /*#__PURE__*/runtime.template({"1":function(container,depth0,helpers,partials,data,blockParams) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -2902,11 +3042,40 @@ var Template$1 = /*#__PURE__*/runtime$1.template({"1":function(container,depth0,
   return "<"
     + alias4(((helper = (helper = lookupProperty(helpers,"tagName") || (depth0 != null ? lookupProperty(depth0,"tagName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tagName","hash":{},"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":2,"column":1},"end":{"line":2,"column":12}}}) : helper)))
     + "\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"params") : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 1, blockParams),"inverse":container.noop,"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":3,"column":2},"end":{"line":5,"column":11}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"params") : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 1, blockParams),"inverse":container.noop,"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":3,"column":2},"end":{"line":11,"column":11}}})) != null ? stack1 : "")
     + "></"
-    + alias4(((helper = (helper = lookupProperty(helpers,"tagName") || (depth0 != null ? lookupProperty(depth0,"tagName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tagName","hash":{},"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":6,"column":3},"end":{"line":6,"column":14}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"tagName") || (depth0 != null ? lookupProperty(depth0,"tagName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tagName","hash":{},"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":12,"column":3},"end":{"line":12,"column":14}}}) : helper)))
     + ">\n";
 },"2":function(container,depth0,helpers,partials,data,blockParams) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(lookupProperty(helpers,"eq")||(depth0 && lookupProperty(depth0,"eq"))||container.hooks.helperMissing).call(alias1,((stack1 = blockParams[0][0]) != null ? lookupProperty(stack1,"type") : stack1),"boolean",{"name":"eq","hash":{},"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":4,"column":8},"end":{"line":4,"column":33}}}),{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams),"inverse":container.program(6, data, 0, blockParams),"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":4,"column":2},"end":{"line":10,"column":9}}})) != null ? stack1 : "");
+},"3":function(container,depth0,helpers,partials,data,blockParams) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = lookupProperty(helpers,"if").call(alias1,(lookupProperty(helpers,"eq")||(depth0 && lookupProperty(depth0,"eq"))||container.hooks.helperMissing).call(alias1,((stack1 = blockParams[1][0]) != null ? lookupProperty(stack1,"value") : stack1),"true",{"name":"eq","hash":{},"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":5,"column":8},"end":{"line":5,"column":31}}}),{"name":"if","hash":{},"fn":container.program(4, data, 0, blockParams),"inverse":container.noop,"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":5,"column":2},"end":{"line":7,"column":9}}})) != null ? stack1 : "");
+},"4":function(container,depth0,helpers,partials,data,blockParams) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "  "
+    + container.escapeExpression(container.lambda(((stack1 = blockParams[2][0]) != null ? lookupProperty(stack1,"name") : stack1), depth0))
+    + "\n";
+},"6":function(container,depth0,helpers,partials,data,blockParams) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -2915,11 +3084,11 @@ var Template$1 = /*#__PURE__*/runtime$1.template({"1":function(container,depth0,
     };
 
   return "  "
-    + alias2(alias1(((stack1 = blockParams[0][0]) != null ? lookupProperty(stack1,"name") : stack1), depth0))
+    + alias2(alias1(((stack1 = blockParams[1][0]) != null ? lookupProperty(stack1,"name") : stack1), depth0))
     + "=\""
-    + alias2(alias1(((stack1 = blockParams[0][0]) != null ? lookupProperty(stack1,"value") : stack1), depth0))
+    + alias2(alias1(((stack1 = blockParams[1][0]) != null ? lookupProperty(stack1,"value") : stack1), depth0))
     + "\"\n";
-},"4":function(container,depth0,helpers,partials,data) {
+},"8":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -2928,9 +3097,9 @@ var Template$1 = /*#__PURE__*/runtime$1.template({"1":function(container,depth0,
     };
 
   return "<"
-    + alias4(((helper = (helper = lookupProperty(helpers,"tagName") || (depth0 != null ? lookupProperty(depth0,"tagName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tagName","hash":{},"data":data,"loc":{"source":"style-snippet.html.hbs","start":{"line":8,"column":1},"end":{"line":8,"column":12}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"tagName") || (depth0 != null ? lookupProperty(depth0,"tagName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tagName","hash":{},"data":data,"loc":{"source":"style-snippet.html.hbs","start":{"line":14,"column":1},"end":{"line":14,"column":12}}}) : helper)))
     + "></"
-    + alias4(((helper = (helper = lookupProperty(helpers,"tagName") || (depth0 != null ? lookupProperty(depth0,"tagName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tagName","hash":{},"data":data,"loc":{"source":"style-snippet.html.hbs","start":{"line":8,"column":15},"end":{"line":8,"column":26}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"tagName") || (depth0 != null ? lookupProperty(depth0,"tagName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tagName","hash":{},"data":data,"loc":{"source":"style-snippet.html.hbs","start":{"line":14,"column":15},"end":{"line":14,"column":26}}}) : helper)))
     + ">\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -2940,14 +3109,15 @@ var Template$1 = /*#__PURE__*/runtime$1.template({"1":function(container,depth0,
         return undefined
     };
 
-  return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"params") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams),"inverse":container.program(4, data, 0, blockParams),"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":1,"column":0},"end":{"line":9,"column":7}}})) != null ? stack1 : "");
+  return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"params") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams),"inverse":container.program(8, data, 0, blockParams),"data":data,"blockParams":blockParams,"loc":{"source":"style-snippet.html.hbs","start":{"line":1,"column":0},"end":{"line":15,"column":7}}})) != null ? stack1 : "");
 },"useData":true,"useBlockParams":true});
 function stanzaSnippetTemplate(data, options, asString) {
   var html = Template$1(data, options);
   return (asString || true) ? html : $(html);
 }
 
-var Template$2 = /*#__PURE__*/runtime$1.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+init();
+var Template = /*#__PURE__*/runtime.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -2960,202 +3130,295 @@ var Template$2 = /*#__PURE__*/runtime$1.template({"compiler":[8,">= 4.3.0"],"mai
     + "\" async></script>\n";
 },"useData":true});
 function loaderSnippetTemplate(data, options, asString) {
-  var html = Template$2(data, options);
+  var html = Template(data, options);
   return (asString || true) ? html : $(html);
 }
 
-var script$2 = defineComponent({
+var script$1 = defineComponent({
   props: ['metadata', 'params', 'styleVars'],
 
   components: {
-    CopyButton: script$1
+    CopyButton: script$2,
   },
 
   setup(props) {
-    const id      = props.metadata['@id'];
+    const id = props.metadata['@id'];
     const tagName = `togostanza-${id}`;
+
+    const stanzaProps = computed(() => {
+      return props.params.reduce((acc, param) => {
+        return param.type === 'boolean' && param.value === 'false'
+          ? acc
+          : {
+              ...acc,
+              [param.name]: param.value,
+            };
+      }, {});
+    });
 
     const stanzaSnippet = computed(() => {
       return stanzaSnippetTemplate({
         tagName,
-        params: props.params
+        params: props.params,
       });
     });
 
     const styleSnippet = computed(() => {
       return styleSnippetTemplate({
         tagName,
-        styleVars: props.styleVars
+        styleVars: props.styleVars,
       });
     });
 
-    const scriptSrc     = new URL(`./${id}.js`, location.href).href;
-    const loaderSnippet = loaderSnippetTemplate({scriptSrc});
+    const scriptSrc = new URL(`./${id}.js`, location.href).href;
+    const loaderSnippet = loaderSnippetTemplate({ scriptSrc });
 
     const combinedSnippet = computed(() => {
-      return [
-        loaderSnippet,
-        styleSnippet.value,
-        stanzaSnippet.value
-      ].filter(Boolean).join('\n');
+      return [loaderSnippet, styleSnippet.value, stanzaSnippet.value]
+        .filter(Boolean)
+        .join('\n');
+    });
+
+    const stanzaContainer = ref();
+
+    watch(styleSnippet, () => {
+      const stanzaElement = stanzaContainer.value.childNodes[0];
+      stanzaElement.render();
     });
 
     return {
-      stanzaSnippet,
+      tagName,
+      props: stanzaProps,
       styleSnippet,
-      combinedSnippet
+      stanzaSnippet,
+      combinedSnippet,
+      stanzaContainer,
     };
-  }
+  },
 });
 
-const _hoisted_1$2 = { class: "bg-dark" };
-const _hoisted_2$2 = { class: "text-end p-2" };
+const _hoisted_1$1 = { class: "bg-dark" };
+const _hoisted_2$1 = { class: "text-end p-2" };
 const _hoisted_3$1 = { class: "overflow-auto p-3 pt-0 text-white" };
 const _hoisted_4$1 = { class: "overflow-auto p-3 bg-light" };
+const _hoisted_5$1 = ["innerHTML"];
+const _hoisted_6$1 = { ref: "stanzaContainer" };
 
-function render$2(_ctx, _cache, $props, $setup, $data, $options) {
+function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_CopyButton = resolveComponent("CopyButton");
 
-  return (openBlock(), createBlock(Fragment, null, [
-    createVNode("div", _hoisted_1$2, [
-      createVNode("div", _hoisted_2$2, [
+  return (openBlock(), createElementBlock(Fragment, null, [
+    createBaseVNode("div", _hoisted_1$1, [
+      createBaseVNode("div", _hoisted_2$1, [
         createVNode(_component_CopyButton, {
           value: _ctx.combinedSnippet,
           class: "btn btn-sm btn-light"
         }, null, 8 /* PROPS */, ["value"])
       ]),
-      createVNode("pre", _hoisted_3$1, [
-        createVNode("code", null, toDisplayString(_ctx.combinedSnippet), 1 /* TEXT */)
+      createBaseVNode("pre", _hoisted_3$1, [
+        createBaseVNode("code", null, toDisplayString(_ctx.combinedSnippet), 1 /* TEXT */)
       ])
     ]),
-    createVNode("div", _hoisted_4$1, [
-      createVNode("div", { innerHTML: _ctx.styleSnippet }, null, 8 /* PROPS */, ["innerHTML"]),
-      createVNode("div", { innerHTML: _ctx.stanzaSnippet }, null, 8 /* PROPS */, ["innerHTML"])
+    createBaseVNode("div", _hoisted_4$1, [
+      createBaseVNode("div", { innerHTML: _ctx.styleSnippet }, null, 8 /* PROPS */, _hoisted_5$1),
+      createBaseVNode("div", _hoisted_6$1, [
+        (openBlock(), createBlock(resolveDynamicComponent(_ctx.tagName), normalizeProps(guardReactiveProps(_ctx.props)), null, 16 /* FULL_PROPS */))
+      ], 512 /* NEED_PATCH */)
     ])
   ], 64 /* STABLE_FRAGMENT */))
 }
 
-script$2.render = render$2;
-script$2.__file = "node_modules/togostanza/src/components/StanzaPreviewer.vue";
+script$1.render = render$1;
+script$1.__file = "node_modules/togostanza/src/components/StanzaPreviewer.vue";
 
-var script$3 = defineComponent({
+var script = defineComponent({
   components: {
-    FormField: script,
+    FormField: script$3,
     Layout: script$4,
-    StanzaPreviewer: script$2
+    StanzaPreviewer: script$1,
   },
 
   props: ['metadata', 'readme'],
 
-  setup({metadata, readme}) {
+  setup({ metadata, readme }) {
     const paramFields = (metadata['stanza:parameter'] || []).map((param) => {
       return {
         param,
-        input: useInput(param['stanza:example'], false)
+        input: useInput(param['stanza:example'], param['stanza:type'], false),
       };
     });
 
-    const aboutLinkPlacement = useInput(metadata['stanza:about-link-placement'] || 'bottom-right');
+    const menuPlacement = useInput(
+      metadata['stanza:menu-placement'] || 'bottom-right',
+      'string'
+    );
 
     const params = computed(() => {
       return [
-        ...paramFields.map(({param, input}) => {
+        ...paramFields.map(({ param, input }) => {
           return {
             name: param['stanza:key'],
-            input
+            type: param['stanza:type'],
+            input,
           };
         }),
         {
-          name:  'togostanza-about-link-placement',
-          input: aboutLinkPlacement
-        }
-      ].filter(({input}) => (
-        !input.isDefault.value
-      )).map(({name, input}) => {
-        return {
-          name,
-          value: input.ref.value
-        };
-      });
+          name: 'togostanza-menu-placement',
+          input: menuPlacement,
+        },
+      ]
+        .filter(({ input }) => !input.isDefault.value)
+        .map(({ name, input, type }) => {
+          return {
+            name,
+            type,
+            value: input.valueStr.value,
+          };
+        });
     });
 
     const styleFields = (metadata['stanza:style'] || []).map((style) => {
       return {
         style,
-        input: useInput(style['stanza:default'])
+        input: useInput(style['stanza:default'], style['stanza:type']),
       };
     });
 
     const styleVars = computed(() => {
-      return styleFields.filter(({input}) => (
-        !input.isDefault.value
-      )).map(({style, input}) => {
-        return {
-          name:  style['stanza:key'],
-          value: input.ref.value
-        };
-      });
+      return styleFields
+        .filter(({ input }) => !input.isDefault.value)
+        .map(({ style, input }) => {
+          return {
+            name: style['stanza:key'],
+            value: input.valueStr.value,
+          };
+        });
     });
+
+    const outgoingEvents = (metadata['stanza:outgoingEvent'] || []).map(
+      (event) => {
+        return {
+          name: event['stanza:key'],
+          description: event['stanza:description'],
+        };
+      }
+    );
+
+    const incomingEvents = (metadata['stanza:incomingEvent'] || []).map(
+      (event) => {
+        return {
+          name: event['stanza:key'],
+          description: event['stanza:description'],
+        };
+      }
+    );
 
     return {
       metadata,
       readme,
       paramFields,
-      aboutLinkPlacement,
+      menuPlacement,
       params,
       styleFields,
-      styleVars
+      styleVars,
+      outgoingEvents,
+      incomingEvents,
     };
-  }
+  },
 });
 
-function useInput(initValue, hasDefault = true) {
-  const _ref      = ref(initValue);
-  const isDefault = computed(() => hasDefault && (_ref.value === initValue));
+function useInput(initValue, type, hasDefault = true) {
+  const initValueStr = stringify(initValue, type);
+  const valueStr = ref(initValueStr);
+  const valueParsed = computed(() => parse(valueStr.value, type));
+  const isDefault = computed(
+    () => hasDefault && valueStr.value === initValueStr
+  );
 
-  function setValue(newVal) {
-    _ref.value = newVal;
+  function setValueStr(newValStr) {
+    valueStr.value = newValStr;
   }
 
   function resetToDefault() {
-    if (!hasDefault) { return; }
+    if (!hasDefault) {
+      return;
+    }
 
-    _ref.value = initValue;
+    this.setValueStr(initValueStr);
   }
 
   return {
-    ref: _ref,
-    setValue,
+    valueStr,
+    valueParsed,
+    setValueStr,
     hasDefault,
     isDefault,
-    resetToDefault
+    resetToDefault,
   };
 }
 
-const _withId = /*#__PURE__*/withScopeId("data-v-0732abc2");
+function stringify(value, type) {
+  if (value === null || value === undefined) {
+    return null;
+  }
 
-pushScopeId("data-v-0732abc2");
-const _hoisted_1$3 = { class: "display-4" };
-const _hoisted_2$3 = { class: "lead" };
-const _hoisted_3$2 = { class: "row" };
-const _hoisted_4$2 = { class: "col-lg-6" };
-const _hoisted_5 = /*#__PURE__*/createVNode("nav", {
+  switch (type) {
+    case 'boolean':
+    case 'number':
+    case 'json':
+      return JSON.stringify(value);
+    default:
+      // value is a string (event if type is not a string. e.g. date)
+      return value;
+  }
+}
+
+function parse(valueStr, type) {
+  if (valueStr === null || valueStr === undefined) {
+    return null;
+  }
+
+  switch (type) {
+    case 'boolean':
+    case 'number':
+    case 'json':
+      return JSON.parse(valueStr);
+    case 'date':
+    case 'datetime':
+      return new Date(valueStr);
+    default:
+      return valueStr;
+  }
+}
+
+const _withScopeId = n => (pushScopeId("data-v-0732abc2"),n=n(),popScopeId(),n);
+const _hoisted_1 = { class: "display-4" };
+const _hoisted_2 = { class: "lead" };
+const _hoisted_3 = { class: "row" };
+const _hoisted_4 = { class: "col-lg-6" };
+const _hoisted_5 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("nav", {
   class: "nav nav-tabs",
   role: "tablist"
 }, [
-  /*#__PURE__*/createVNode("a", {
+  /*#__PURE__*/createBaseVNode("a", {
     class: "nav-link active",
     href: "#overview",
     "data-bs-toggle": "tab",
     role: "tab"
   }, "Overview"),
-  /*#__PURE__*/createVNode("a", {
+  /*#__PURE__*/createBaseVNode("a", {
     class: "nav-link",
     href: "#customize",
     "data-bs-toggle": "tab",
     role: "tab"
-  }, "Customize")
-], -1 /* HOISTED */);
+  }, "Customize"),
+  /*#__PURE__*/createBaseVNode("a", {
+    class: "nav-link",
+    href: "#event",
+    "data-bs-toggle": "tab",
+    role: "tab"
+  }, "Event")
+], -1 /* HOISTED */));
 const _hoisted_6 = { class: "tab-content mt-3" };
 const _hoisted_7 = {
   class: "tab-pane active px-lg-5",
@@ -3163,181 +3426,216 @@ const _hoisted_7 = {
   role: "tabpanel"
 };
 const _hoisted_8 = { class: "table table-borderless border mb-1" };
-const _hoisted_9 = /*#__PURE__*/createVNode("th", null, "Display", -1 /* HOISTED */);
-const _hoisted_10 = /*#__PURE__*/createVNode("th", null, "Type", -1 /* HOISTED */);
-const _hoisted_11 = /*#__PURE__*/createVNode("th", null, "Provider", -1 /* HOISTED */);
-const _hoisted_12 = /*#__PURE__*/createVNode("th", null, "Author", -1 /* HOISTED */);
-const _hoisted_13 = { class: "mb-0" };
-const _hoisted_14 = /*#__PURE__*/createTextVNode(" <");
-const _hoisted_15 = /*#__PURE__*/createTextVNode("> ");
-const _hoisted_16 = /*#__PURE__*/createVNode("th", null, "Contributors", -1 /* HOISTED */);
-const _hoisted_17 = {
+const _hoisted_9 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("th", null, "Author", -1 /* HOISTED */));
+const _hoisted_10 = { class: "mb-0" };
+const _hoisted_11 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("th", null, "Contributors", -1 /* HOISTED */));
+const _hoisted_12 = {
   key: 0,
   class: "list-unstyled mb-0"
 };
-const _hoisted_18 = /*#__PURE__*/createTextVNode(" - ");
-const _hoisted_19 = /*#__PURE__*/createVNode("th", null, "License", -1 /* HOISTED */);
-const _hoisted_20 = /*#__PURE__*/createVNode("th", null, "Created", -1 /* HOISTED */);
-const _hoisted_21 = /*#__PURE__*/createVNode("th", null, "Updated", -1 /* HOISTED */);
-const _hoisted_22 = { class: "text-end" };
-const _hoisted_23 = {
+const _hoisted_13 = /*#__PURE__*/createTextVNode(" - ");
+const _hoisted_14 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("th", null, "License", -1 /* HOISTED */));
+const _hoisted_15 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("th", null, "Created", -1 /* HOISTED */));
+const _hoisted_16 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("th", null, "Updated", -1 /* HOISTED */));
+const _hoisted_17 = { class: "text-end" };
+const _hoisted_18 = ["href"];
+const _hoisted_19 = ["innerHTML"];
+const _hoisted_20 = {
   class: "tab-pane",
   id: "customize",
   role: "tabpanel"
 };
-const _hoisted_24 = /*#__PURE__*/createVNode("h2", { class: "my-3" }, "Parameters", -1 /* HOISTED */);
-const _hoisted_25 = { class: "row row-cols-1 row-cols-sm-2 row-cols-lg-1 row-cols-xl-2 gx-4 gy-3" };
-const _hoisted_26 = { class: "col" };
-const _hoisted_27 = /*#__PURE__*/createVNode("hr", { class: "mt-4 mb-3" }, null, -1 /* HOISTED */);
-const _hoisted_28 = /*#__PURE__*/createVNode("h2", { class: "my-3" }, "Styles", -1 /* HOISTED */);
-const _hoisted_29 = { class: "row row-cols-1 row-cols-sm-2 row-cols-lg-1 row-cols-xl-2 gx-4 gy-3" };
-const _hoisted_30 = {
+const _hoisted_21 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("h2", { class: "my-3" }, "Parameters", -1 /* HOISTED */));
+const _hoisted_22 = { class: "row row-cols-1 row-cols-sm-2 row-cols-lg-1 row-cols-xl-2 gx-4 gy-3" };
+const _hoisted_23 = { class: "col" };
+const _hoisted_24 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("hr", { class: "mt-4 mb-3" }, null, -1 /* HOISTED */));
+const _hoisted_25 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("h2", { class: "my-3" }, "Styles", -1 /* HOISTED */));
+const _hoisted_26 = { class: "row row-cols-1 row-cols-sm-2 row-cols-lg-1 row-cols-xl-2 gx-4 gy-3" };
+const _hoisted_27 = {
   key: 0,
-  class: "font-italic"
+  class: "fst-italic"
 };
-const _hoisted_31 = { class: "col-lg-6" };
-const _hoisted_32 = /*#__PURE__*/createVNode("hr", { class: "d-lg-none mb-4" }, null, -1 /* HOISTED */);
-popScopeId();
+const _hoisted_28 = {
+  class: "tab-pane",
+  id: "event",
+  role: "tabpanel"
+};
+const _hoisted_29 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("h2", { class: "my-3" }, "Outgoing Events", -1 /* HOISTED */));
+const _hoisted_30 = { class: "row row-cols-2" };
+const _hoisted_31 = { class: "text-muted" };
+const _hoisted_32 = {
+  key: 0,
+  class: "fst-italic"
+};
+const _hoisted_33 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("h2", { class: "my-3" }, "Incoming Events", -1 /* HOISTED */));
+const _hoisted_34 = { class: "row row-cols-2" };
+const _hoisted_35 = { class: "text-muted" };
+const _hoisted_36 = {
+  key: 1,
+  class: "fst-italic"
+};
+const _hoisted_37 = { class: "col-lg-6" };
+const _hoisted_38 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/createBaseVNode("hr", { class: "d-lg-none mb-4" }, null, -1 /* HOISTED */));
 
-const render$3 = /*#__PURE__*/_withId((_ctx, _cache, $props, $setup, $data, $options) => {
+function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_FormField = resolveComponent("FormField");
   const _component_StanzaPreviewer = resolveComponent("StanzaPreviewer");
   const _component_Layout = resolveComponent("Layout");
 
   return (openBlock(), createBlock(_component_Layout, { containerClass: "container-fluid" }, {
-    default: _withId(() => [
-      createVNode("h1", _hoisted_1$3, toDisplayString(_ctx.metadata['stanza:label']), 1 /* TEXT */),
-      createVNode("p", _hoisted_2$3, toDisplayString(_ctx.metadata['stanza:definition']), 1 /* TEXT */),
-      createVNode("div", _hoisted_3$2, [
-        createVNode("div", _hoisted_4$2, [
+    default: withCtx(() => [
+      createBaseVNode("h1", _hoisted_1, toDisplayString(_ctx.metadata['stanza:label']), 1 /* TEXT */),
+      createBaseVNode("p", _hoisted_2, toDisplayString(_ctx.metadata['stanza:definition']), 1 /* TEXT */),
+      createBaseVNode("div", _hoisted_3, [
+        createBaseVNode("div", _hoisted_4, [
           _hoisted_5,
-          createVNode("div", _hoisted_6, [
-            createVNode("div", _hoisted_7, [
-              createVNode("table", _hoisted_8, [
-                createVNode("tbody", null, [
-                  createVNode("tr", null, [
+          createBaseVNode("div", _hoisted_6, [
+            createBaseVNode("div", _hoisted_7, [
+              createBaseVNode("table", _hoisted_8, [
+                createBaseVNode("tbody", null, [
+                  createBaseVNode("tr", null, [
                     _hoisted_9,
-                    createVNode("td", null, toDisplayString(_ctx.metadata['stanza:display'] || '-'), 1 /* TEXT */)
-                  ]),
-                  createVNode("tr", null, [
-                    _hoisted_10,
-                    createVNode("td", null, toDisplayString(_ctx.metadata['stanza:type'] || '-'), 1 /* TEXT */)
-                  ]),
-                  createVNode("tr", null, [
-                    _hoisted_11,
-                    createVNode("td", null, toDisplayString(_ctx.metadata['stanza:provider'] || '-'), 1 /* TEXT */)
-                  ]),
-                  createVNode("tr", null, [
-                    _hoisted_12,
-                    createVNode("td", null, [
-                      createVNode("address", _hoisted_13, [
-                        createTextVNode(toDisplayString(_ctx.metadata['stanza:author'] || '-') + " ", 1 /* TEXT */),
-                        (_ctx.metadata['stanza:address'])
-                          ? (openBlock(), createBlock(Fragment, { key: 0 }, [
-                              _hoisted_14,
-                              createVNode("a", {
-                                href: `mailto:${_ctx.metadata['stanza:address']}`
-                              }, toDisplayString(_ctx.metadata['stanza:address']), 9 /* TEXT, PROPS */, ["href"]),
-                              _hoisted_15
-                            ], 64 /* STABLE_FRAGMENT */))
-                          : createCommentVNode("v-if", true)
-                      ])
+                    createBaseVNode("td", null, [
+                      createBaseVNode("address", _hoisted_10, toDisplayString(_ctx.metadata['stanza:author'] || '-'), 1 /* TEXT */)
                     ])
                   ]),
-                  createVNode("tr", null, [
-                    _hoisted_16,
-                    createVNode("td", null, [
-                      (_ctx.metadata['stanza:contributor'] && _ctx.metadata['stanza:contributor'].length > 0)
-                        ? (openBlock(), createBlock("ul", _hoisted_17, [
-                            (openBlock(true), createBlock(Fragment, null, renderList(_ctx.metadata['stanza:contributor'], (contributor) => {
-                              return (openBlock(), createBlock("li", { key: contributor }, toDisplayString(contributor), 1 /* TEXT */))
+                  createBaseVNode("tr", null, [
+                    _hoisted_11,
+                    createBaseVNode("td", null, [
+                      (
+                        _ctx.metadata['stanza:contributor'] &&
+                        _ctx.metadata['stanza:contributor'].length > 0
+                      )
+                        ? (openBlock(), createElementBlock("ul", _hoisted_12, [
+                            (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.metadata['stanza:contributor'], (contributor) => {
+                              return (openBlock(), createElementBlock("li", { key: contributor }, toDisplayString(contributor), 1 /* TEXT */))
                             }), 128 /* KEYED_FRAGMENT */))
                           ]))
-                        : (openBlock(), createBlock(Fragment, { key: 1 }, [
-                            _hoisted_18
-                          ], 64 /* STABLE_FRAGMENT */))
+                        : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+                            _hoisted_13
+                          ], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */))
                     ])
                   ]),
-                  createVNode("tr", null, [
-                    _hoisted_19,
-                    createVNode("td", null, toDisplayString(_ctx.metadata['stanza:license'] || '-'), 1 /* TEXT */)
+                  createBaseVNode("tr", null, [
+                    _hoisted_14,
+                    createBaseVNode("td", null, toDisplayString(_ctx.metadata['stanza:license'] || '-'), 1 /* TEXT */)
                   ]),
-                  createVNode("tr", null, [
-                    _hoisted_20,
-                    createVNode("td", null, toDisplayString(_ctx.metadata['stanza:created'] || '-'), 1 /* TEXT */)
+                  createBaseVNode("tr", null, [
+                    _hoisted_15,
+                    createBaseVNode("td", null, toDisplayString(_ctx.metadata['stanza:created'] || '-'), 1 /* TEXT */)
                   ]),
-                  createVNode("tr", null, [
-                    _hoisted_21,
-                    createVNode("td", null, toDisplayString(_ctx.metadata['stanza:updated'] || '-'), 1 /* TEXT */)
+                  createBaseVNode("tr", null, [
+                    _hoisted_16,
+                    createBaseVNode("td", null, toDisplayString(_ctx.metadata['stanza:updated'] || '-'), 1 /* TEXT */)
                   ])
                 ])
               ]),
-              createVNode("div", _hoisted_22, [
-                createVNode("a", {
+              createBaseVNode("div", _hoisted_17, [
+                createBaseVNode("a", {
                   href: `./${_ctx.metadata['@id']}/metadata.json`
-                }, "Download JSON", 8 /* PROPS */, ["href"])
+                }, "Download JSON", 8 /* PROPS */, _hoisted_18)
               ]),
-              createVNode("div", {
+              createBaseVNode("div", {
                 innerHTML: _ctx.readme,
                 class: "mt-4"
-              }, null, 8 /* PROPS */, ["innerHTML"])
+              }, null, 8 /* PROPS */, _hoisted_19)
             ]),
-            createVNode("div", _hoisted_23, [
-              createVNode("section", null, [
-                _hoisted_24,
-                createVNode("div", _hoisted_25, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(_ctx.paramFields, ({param, input}) => {
-                    return (openBlock(), createBlock("div", {
+            createBaseVNode("div", _hoisted_20, [
+              createBaseVNode("section", null, [
+                _hoisted_21,
+                createBaseVNode("div", _hoisted_22, [
+                  (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.paramFields, ({ param, input }) => {
+                    return (openBlock(), createElementBlock("div", {
                       key: param['stanza:key'],
                       class: "col"
                     }, [
                       createVNode(_component_FormField, {
                         input: input,
-                        label: param['stanza:key'],
+                        name: param['stanza:key'],
+                        type: param['stanza:type'],
+                        choices: param['stanza:choice'],
                         required: param['stanza:required'],
                         "help-text": param['stanza:description']
-                      }, null, 8 /* PROPS */, ["input", "label", "required", "help-text"])
+                      }, null, 8 /* PROPS */, ["input", "name", "type", "choices", "required", "help-text"])
                     ]))
                   }), 128 /* KEYED_FRAGMENT */)),
-                  createVNode("div", _hoisted_26, [
+                  createBaseVNode("div", _hoisted_23, [
                     createVNode(_component_FormField, {
-                      input: _ctx.aboutLinkPlacement,
-                      label: 'togostanza-about-link-placement',
-                      type: 'single-choice',
-                      choices: ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'none'],
+                      input: _ctx.menuPlacement,
+                      name: "togostanza-menu-placement",
+                      type: "single-choice",
+                      choices: [
+                      'top-left',
+                      'top-right',
+                      'bottom-left',
+                      'bottom-right',
+                      'none',
+                    ],
                       "help-text": 'Placement of the information icon which links to this page.'
                     }, null, 8 /* PROPS */, ["input", "help-text"])
                   ])
                 ])
               ]),
-              _hoisted_27,
-              createVNode("section", null, [
-                _hoisted_28,
-                createVNode("div", _hoisted_29, [
-                  (openBlock(true), createBlock(Fragment, null, renderList(_ctx.styleFields, ({style, input}) => {
-                    return (openBlock(), createBlock("div", {
+              _hoisted_24,
+              createBaseVNode("section", null, [
+                _hoisted_25,
+                createBaseVNode("div", _hoisted_26, [
+                  (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.styleFields, ({ style, input }) => {
+                    return (openBlock(), createElementBlock("div", {
                       key: style['stanza:key'],
                       class: "col"
                     }, [
                       createVNode(_component_FormField, {
                         input: input,
-                        label: style['stanza:key'],
+                        name: style['stanza:key'],
                         type: style['stanza:type'],
                         choices: style['stanza:choice'],
                         "help-text": style['stanza:description']
-                      }, null, 8 /* PROPS */, ["input", "label", "type", "choices", "help-text"])
+                      }, null, 8 /* PROPS */, ["input", "name", "type", "choices", "help-text"])
                     ]))
                   }), 128 /* KEYED_FRAGMENT */))
                 ]),
                 (_ctx.styleFields.length === 0)
-                  ? (openBlock(), createBlock("p", _hoisted_30, " No styles defined. "))
+                  ? (openBlock(), createElementBlock("p", _hoisted_27, " No styles defined. "))
                   : createCommentVNode("v-if", true)
               ])
+            ]),
+            createBaseVNode("div", _hoisted_28, [
+              _hoisted_29,
+              createBaseVNode("div", _hoisted_30, [
+                (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.outgoingEvents, ({ name, description }) => {
+                  return (openBlock(), createElementBlock("div", {
+                    key: name,
+                    class: "col"
+                  }, [
+                    createBaseVNode("div", null, toDisplayString(name), 1 /* TEXT */),
+                    createBaseVNode("div", _hoisted_31, toDisplayString(description), 1 /* TEXT */)
+                  ]))
+                }), 128 /* KEYED_FRAGMENT */))
+              ]),
+              (_ctx.outgoingEvents.length === 0)
+                ? (openBlock(), createElementBlock("p", _hoisted_32, " No events defined. "))
+                : createCommentVNode("v-if", true),
+              _hoisted_33,
+              createBaseVNode("div", _hoisted_34, [
+                (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.incomingEvents, ({ name, description }) => {
+                  return (openBlock(), createElementBlock("div", {
+                    key: name,
+                    class: "col"
+                  }, [
+                    createBaseVNode("div", null, toDisplayString(name), 1 /* TEXT */),
+                    createBaseVNode("div", _hoisted_35, toDisplayString(description), 1 /* TEXT */)
+                  ]))
+                }), 128 /* KEYED_FRAGMENT */))
+              ]),
+              (_ctx.incomingEvents.length === 0)
+                ? (openBlock(), createElementBlock("p", _hoisted_36, " No events defined. "))
+                : createCommentVNode("v-if", true)
             ])
           ])
         ]),
-        createVNode("div", _hoisted_31, [
-          _hoisted_32,
+        createBaseVNode("div", _hoisted_37, [
+          _hoisted_38,
           createVNode(_component_StanzaPreviewer, {
             metadata: _ctx.metadata,
             params: _ctx.params,
@@ -3348,18 +3646,18 @@ const render$3 = /*#__PURE__*/_withId((_ctx, _cache, $props, $setup, $data, $opt
     ]),
     _: 1 /* STABLE */
   }))
-});
-
-var css = "\nth[data-v-0732abc2] {\n  background-color: var(--bs-light);\n  text-align: center;\n  white-space: nowrap;\n  width: 1%;\n}\nth[data-v-0732abc2], td[data-v-0732abc2] {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n";
-n(css,{});
-
-script$3.render = render$3;
-script$3.__scopeId = "data-v-0732abc2";
-script$3.__file = "node_modules/togostanza/src/components/Help.vue";
-
-function helpApp({metadata, readme}) {
-  return createApp(script$3, {metadata, readme})
 }
 
-export default helpApp;
+var css = "\nth[data-v-0732abc2] {\n  background-color: var(--bs-light);\n  text-align: center;\n  white-space: nowrap;\n  width: 1%;\n}\nth[data-v-0732abc2],\ntd[data-v-0732abc2] {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n";
+n(css,{});
+
+script.render = render;
+script.__scopeId = "data-v-0732abc2";
+script.__file = "node_modules/togostanza/src/components/Help.vue";
+
+function helpApp({metadata, readme}) {
+  return createApp(script, {metadata, readme})
+}
+
+export { helpApp as default };
 //# sourceMappingURL=help-app.js.map

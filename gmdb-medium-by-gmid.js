@@ -1,35 +1,33 @@
-import { c as createCommonjsModule, a as getDefaultExportFromCjs, d as defineStanzaElement } from './stanza-element-30b71100.js';
-import { g as getData_1 } from './get-data-0bfc4761.js';
-import { v as variables } from './variables-9f76df9f.js';
-import { s as stanza } from './stanza-2f6b2733.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
+import { g as getData } from './getData-d291c717.js';
+import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
+import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
+import './index-6aec0cc7.js';
 
-var gmdbMediumByGmid_1 = createCommonjsModule(function (module, exports) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.__TEST__ = void 0;
-
-
-
-async function gmdbMediumByGmid(stanza$1, params) {
-    if (!params.gm_id) {
-        return;
+class GmdbMediumByGmid extends Stanza {
+    render() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = this.params;
+            if (!params.gm_id) {
+                return;
+            }
+            const apiName = "gmdb_medium_by_gmid";
+            const result = yield getData(`${API_GROWTH_MEDIUM}${apiName}`, {
+                gm_id: params.gm_id,
+            });
+            const parameters = parseData(result, params);
+            const template = "stanza.html.hbs";
+            this.renderTemplate({ template, parameters });
+            importWebFontForTogoMedium(this);
+        });
     }
-    const apiName = "gmdb_medium_by_gmid";
-    const result = await getData_1.getData(`${variables.API_GROWTH_MEDIUM}${apiName}`, {
-        gm_id: params.gm_id,
-    });
-    const data = parseData(result, params);
-    stanza$1.render({
-        template: "stanza.html.hbs",
-        parameters: data,
-    });
-    stanza.importWebFontForTogoMedium(stanza$1);
 }
-exports.default = gmdbMediumByGmid;
 const parseData = (data, params) => {
+    var _a;
     switch (true) {
         case data.status !== 200:
             return makeErrorData(`Error ${data.status}<br />${data.message}`);
-        case data.body.meta === null:
+        case !((_a = data === null || data === void 0 ? void 0 : data.body) === null || _a === void 0 ? void 0 : _a.meta):
             return makeErrorData(`No Medium Found with ${params.gm_id}`);
         default:
             return makeSuccessData(data.body);
@@ -37,11 +35,11 @@ const parseData = (data, params) => {
 };
 const makeErrorData = (msg) => {
     return {
-        id: null,
-        name: null,
-        src_url: null,
-        src_label: null,
-        ph: null,
+        id: undefined,
+        name: undefined,
+        src_url: undefined,
+        src_label: undefined,
+        ph: undefined,
         components: [],
         error: true,
         statusText: msg,
@@ -61,27 +59,13 @@ const makeSuccessData = (body) => {
     };
 };
 const processComponentTables = (tables) => {
-    return tables.map((table) => ({
-        ...table,
-        items: table.items.map((item) => {
+    return tables.map((table) => (Object.assign(Object.assign({}, table), { items: table.items.map((item) => {
             var _a, _b;
-            return ({
-                ...item,
-                can_wrap_label: ((_a = item.label) === null || _a === void 0 ? void 0 : _a.length) >= 20,
-                can_wrap_name: ((_b = item.component_name) === null || _b === void 0 ? void 0 : _b.length) >= 20,
-                properties: item.properties.map((property) => ({
-                    ...property,
-                    displayLabel: getShortPropertyLabel(property.label),
-                })),
-            });
-        }),
-    }));
+            return (Object.assign(Object.assign({}, item), { can_wrap_label: ((_a = item.label) === null || _a === void 0 ? void 0 : _a.length) >= 20, can_wrap_name: ((_b = item.component_name) === null || _b === void 0 ? void 0 : _b.length) >= 20, properties: item.properties.map((property) => (Object.assign(Object.assign({}, property), { displayLabel: getShortPropertyLabel(property.label) }))) }));
+        }) })));
 };
 const processComponentComments = (comments) => {
-    return comments.map((item) => ({
-        ...item,
-        comment: item.comment ? item.comment : "&nbsp;",
-    }));
+    return comments.map((item) => (Object.assign(Object.assign({}, item), { comment: item.comment ? item.comment : "&nbsp;" })));
 };
 function getShortPropertyLabel(str) {
     const dic = {
@@ -112,11 +96,13 @@ const getSrcLabel = (str) => {
             return "SRC";
     }
 };
-exports.__TEST__ = { getSrcLabel };
+const __TEST__ = { getSrcLabel };
 
+var stanzaModule = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': GmdbMediumByGmid,
+  __TEST__: __TEST__
 });
-
-var main = /*@__PURE__*/getDefaultExportFromCjs(gmdbMediumByGmid_1);
 
 var metadata = {
 	"@context": {
@@ -300,7 +286,7 @@ var templates = [
 },"useData":true}]
 ];
 
-var css = "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  line-height: 1;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\nbody {\n  line-height: 1;\n}\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\n\nsub {\n  vertical-align: sub;\n  font-size: smaller;\n}\n\nsup {\n  vertical-align: super;\n  font-size: smaller;\n}\n\nul {\n  list-style: none;\n}\n\nblockquote, q {\n  quotes: none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\";\n  content: none;\n}\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none;\n}\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold;\n}\n\ndel {\n  text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0;\n}\n\ninput, select {\n  vertical-align: middle;\n}\n\n.wrapper {\n  position: relative;\n  font-size: 16px;\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  padding: 16px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  font-weight: 300;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #333333;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n}\n\nheader h2 {\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  -webkit-font-smoothing: antialiased;\n  font-size: 24px;\n  font-weight: 600;\n  margin-bottom: 8px;\n  padding-left: 8px;\n}\n\na {\n  color: #6FA80C;\n  text-decoration: underline;\n}\n\na:hover {\n  text-decoration: none;\n}\n\n.error {\n  color: #990000;\n}\n\n.gm-id .value {\n  margin: 0 16px 0 4px;\n  line-height: 1.5;\n}\n.gm-id .links {\n  position: relative;\n  margin-top: 4px;\n  white-space: nowrap;\n}\n.gm-id .links a {\n  background-color: #8FC31F;\n  color: #FFFFFF;\n  padding: 4px 8px 2px;\n  border-radius: 3px;\n  text-decoration: none;\n  font-size: 14px;\n  font-weight: 600;\n  display: inline-block;\n  line-height: 1;\n}\n\np.title {\n  font-size: 40px;\n  margin: 24px 0 16px;\n}\np.title .ph {\n  font-size: 24px;\n}\n\nh3 {\n  font-weight: 600;\n  margin-top: 24px;\n  margin-bottom: 8px;\n  font-size: 20px;\n}\n\n.recipe h4 {\n  font-size: 16px;\n  margin-top: 8px;\n}\n.recipe p {\n  margin: 4px 0;\n  line-height: 1.2;\n}\n\n.component-table {\n  margin-top: 8px;\n  border: 1px solid #ddd;\n  width: 100%;\n}\n.component-table th {\n  font-weight: 600;\n  text-align: left;\n}\n.component-table th, .component-table td {\n  border: 1px solid #ddd;\n  padding: 8px 8px;\n  box-sizing: border-box;\n}\n.component-table .name {\n  width: 35%;\n}\n.component-table .id {\n  width: 10%;\n  white-space: nowrap;\n}\n.component-table .volume {\n  width: 10%;\n}\n.component-table .volume span:first-child {\n  display: inline-block;\n  width: 60%;\n  text-align: right;\n  box-sizing: border-box;\n  padding-right: 4px;\n}\n.component-table .volume span:last-child {\n  display: inline-block;\n  width: 40%;\n  text-align: left;\n}\n.component-table .properties span {\n  border: 1px solid #6FA80C;\n  border-radius: 3px;\n  font-size: 13px;\n  font-weight: 600;\n  padding: 3px;\n  display: inline-block;\n}\n.component-table .functions span {\n  font-size: 13px;\n  font-weight: 600;\n}";
+const url = import.meta.url.replace(/\?.*$/, '');
 
-defineStanzaElement(main, {metadata, templates, css, url: import.meta.url});
+defineStanzaElement({stanzaModule, metadata, templates, url});
 //# sourceMappingURL=gmdb-medium-by-gmid.js.map

@@ -1,17 +1,24 @@
-import { d as defineStanzaElement } from './stanza-element-30b71100.js';
-import { s as stanza } from './stanza-2f6b2733.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
+import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 
-async function gmdbPhenotypeInfo(stanza$1, params) {
-    if (!params.tax_id) {
-        return;
+class GmdbPhenotypeInfo extends Stanza {
+    render() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = this.params;
+            if (!params.tax_id) {
+                return;
+            }
+            const template = "stanza.html.hbs";
+            this.renderTemplate({ template });
+            importWebFontForTogoMedium(this);
+        });
     }
-    stanza$1.render({
-        template: "stanza.html.hbs",
-        parameters: null,
-    });
-    stanza.importWebFontForTogoMedium(stanza$1);
 }
-var _default = gmdbPhenotypeInfo;
+
+var stanzaModule = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': GmdbPhenotypeInfo
+});
 
 var metadata = {
 	"@context": {
@@ -66,7 +73,7 @@ var templates = [
 },"useData":true}]
 ];
 
-var css = "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  line-height: 1;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\nbody {\n  line-height: 1;\n}\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\n\nsub {\n  vertical-align: sub;\n  font-size: smaller;\n}\n\nsup {\n  vertical-align: super;\n  font-size: smaller;\n}\n\nul {\n  list-style: none;\n}\n\nblockquote, q {\n  quotes: none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\";\n  content: none;\n}\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent;\n}\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none;\n}\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold;\n}\n\ndel {\n  text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0;\n}\n\ninput, select {\n  vertical-align: middle;\n}\n\n.wrapper {\n  position: relative;\n  font-size: 16px;\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  padding: 16px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  font-weight: 300;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #333333;\n  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);\n}\n\nheader h2 {\n  font-family: \"Fira Sans Condensed\", sans-serif;\n  -webkit-font-smoothing: antialiased;\n  font-size: 24px;\n  font-weight: 600;\n  margin-bottom: 8px;\n  padding-left: 8px;\n}\n\na {\n  color: #6FA80C;\n  text-decoration: underline;\n}\n\na:hover {\n  text-decoration: none;\n}\n\n.error {\n  color: #990000;\n}\n\ntable {\n  font-size: 14px;\n  width: 100%;\n  border: 1px solid #ccc;\n  border-collapse: collapse;\n}\ntable td, table th {\n  border: 1px solid #ccc;\n  padding: 5px;\n  text-align: center;\n}\ntable th {\n  font-weight: bold;\n}";
+const url = import.meta.url.replace(/\?.*$/, '');
 
-defineStanzaElement(_default, {metadata, templates, css, url: import.meta.url});
+defineStanzaElement({stanzaModule, metadata, templates, url});
 //# sourceMappingURL=gmdb-phenotype-info.js.map

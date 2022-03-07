@@ -2,27 +2,24 @@
   "@context": {
     "stanza": "http://togostanza.org/resource/stanza#"
   },
-  "@id": "hello",
-  "stanza:label": "Hello",
+  "@id": "hello-react",
+  "stanza:label": "Hello react",
   "stanza:definition": "",
-  "stanza:type": "Stanza",
-  "stanza:display": "Text",
-  "stanza:provider": "",
   "stanza:license": "MIT",
-  "stanza:author": "Satoshi Onoda",
-  "stanza:address": "satoshionoda@gmail.com",
+  "stanza:author": "Yoji Shidara",
   "stanza:contributor": [],
-  "stanza:created": "2021-03-03",
-  "stanza:updated": "2021-03-03",
+  "stanza:created": "2021-10-11",
+  "stanza:updated": "2021-10-11",
   "stanza:parameter": [
     {
       "stanza:key": "say-to",
+      "stanza:type": "string",
       "stanza:example": "world",
       "stanza:description": "who to say hello to",
       "stanza:required": false
     }
   ],
-  "stanza:about-link-placement": "bottom-right",
+  "stanza:menu-placement": "bottom-right",
   "stanza:style": [
     {
       "stanza:key": "--greeting-color",
@@ -41,5 +38,7 @@
       "stanza:default": "center",
       "stanza:description": "text align of greeting"
     }
-  ]
+  ],
+  "stanza:incomingEvent": [],
+  "stanza:outgoingEvent": []
 }
