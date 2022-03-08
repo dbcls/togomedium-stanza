@@ -1,13 +1,13 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { C as COLOR_WHITE, S as SIZE1, a as SIZE4, b as SIZE3, j as jsx, c as jsxs, d as COLOR_GRAY700, e as COLOR_PRIMARY, f as COLOR_GRAY, F as FONT_EN, g as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-07efdcf7.js';
+import { C as COLOR_WHITE, S as SIZE1, a as SIZE4, b as SIZE3, j as jsx, c as jsxs, d as COLOR_GRAY700, e as COLOR_PRIMARY, f as COLOR_GRAY, F as FONT_EN, g as Fragment, h as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-014d59de.js';
 import { c as css, j as jsx$1, r as react } from './index-6aec0cc7.js';
-import { c as clone, R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, I as IconCompact, d as IconExpand, e as IconBlank, T as Tooltip, P as PATH_COMPONENT, f as PATH_MEDIUM, g as PATH_ORGANISM, A as API_MEDIA_ALIMENT, h as Recoil_index_4 } from './paths-a146f7de.js';
+import { c as clone, R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, I as IconCompact, d as IconExpand, e as IconBlank, T as Tooltip, P as PATH_COMPONENT, f as PATH_MEDIUM, g as PATH_ORGANISM, A as API_MEDIA_ALIMENT, h as Recoil_index_4 } from './paths-0facaeac.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 import { s as stringToArray } from './string-ad764b4c.js';
 
 const WIDTH_EXPANDED = "200px";
-const WIDTH_COMPACT = "130px";
+const WIDTH_COMPACT = "150px";
 const WIDTH_ALIGNMENT_CELL = 40;
 const ROOT_COMPONENT = "GMO_000002";
 
@@ -247,7 +247,21 @@ const InfoCell = (props) => {
     return props.expanded ? jsx(Expanded, Object.assign({}, props), void 0) : jsx(Compact, Object.assign({}, props), void 0);
 };
 const Compact = ({ info, linkBase }) => {
-    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: info.map((item, index) => (jsxs("div", Object.assign({ className: "text" }, { children: [jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0) }), void 0), index < info.length - 1 && ","] }), item.id))) }), void 0) }), void 0));
+    const [item, setItem] = react.exports.useState({ label: "", id: "" });
+    const [restText, setRestText] = react.exports.useState("");
+    react.exports.useEffect(() => {
+        setItem(info[0]);
+        if (info.length > 1) {
+            const remain = info.length - 1;
+            if (remain === 1) {
+                setRestText(`, + ${remain} organism`);
+            }
+            else {
+                setRestText(`, + ${remain} organisms`);
+            }
+        }
+    }, [info]);
+    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: jsxs("div", Object.assign({ className: "text" }, { children: [jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0) }), void 0), info.length > 1 && jsx(Fragment, { children: restText }, void 0)] }), void 0) }), void 0) }), void 0));
 };
 const Expanded = ({ info, linkBase }) => {
     return (jsx("div", Object.assign({ css: wrapper$5, className: "expanded" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: info.map((item) => (jsxs("div", Object.assign({ className: "text" }, { children: [jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0), jsx("span", { children: item.label }, void 0)] }), item.id))) }), void 0) }), void 0));

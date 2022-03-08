@@ -1,8 +1,8 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { _ as _objectWithoutPropertiesLoose, M as propToStyleFunction, N as isPlainObject, O as useTheme, y as jsxRuntime, T as ThemeContext, Q as useTheme$1, A as generateUtilityClass, B as generateUtilityClasses, D as styled, h as capitalize, H as useThemeProps, K as composeClasses, J as clsx, U as rootShouldForwardProp, G as alpha, V as resolveProps, r as useControlled, l as createSvgIcon, u as useEnhancedEffect, v as useForkRef, p as ownerWindow, m as debounce, I as useTheme$2, t as useEventCallback, o as ownerDocument, W as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, X as SIZE2, Y as SIZE05, Z as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, g as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, $ as FONT_WEIGHT_BOLD, a as SIZE4, a0 as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-07efdcf7.js';
+import { _ as _objectWithoutPropertiesLoose, N as propToStyleFunction, O as isPlainObject, Q as useTheme, z as jsxRuntime, T as ThemeContext, U as useTheme$1, B as generateUtilityClass, D as generateUtilityClasses, G as styled, k as capitalize, I as useThemeProps, L as composeClasses, K as clsx, V as rootShouldForwardProp, H as alpha, W as resolveProps, t as useControlled, m as createSvgIcon, q as ownerWindow, n as debounce, J as useTheme$2, v as useEventCallback, p as ownerDocument, X as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, Y as SIZE2, Z as SIZE05, $ as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, h as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, a0 as FONT_WEIGHT_BOLD, a as SIZE4, g as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-014d59de.js';
 import { _ as _extends, r as react, T as ThemeContext$1, k as keyframes, c as css, d as dist, j as jsx$1 } from './index-6aec0cc7.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-a146f7de.js';
-import { B as ButtonBase, u as useFormControl, L as ListContext, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl, I as InputLabel, a as Select } from './TextField-924285d7.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-0facaeac.js';
+import { B as ButtonBase, u as useFormControl, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl } from './TextField-2485a2cc.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 
@@ -83,7 +83,7 @@ function getNormalizedScrollLeft(element, direction) {
   }
 }
 
-const _excluded$b = ["sx"];
+const _excluded$a = ["sx"];
 
 const splitProps = props => {
   const result = {
@@ -104,7 +104,7 @@ function extendSxProp(props) {
   const {
     sx: inSx
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$b);
+        other = _objectWithoutPropertiesLoose(props, _excluded$a);
 
   const {
     systemProps,
@@ -204,9 +204,9 @@ function getTypographyUtilityClass(slot) {
 }
 generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
 
-const _excluded$a = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
+const _excluded$9 = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
 
-const useUtilityClasses$9 = ownerState => {
+const useUtilityClasses$8 = ownerState => {
   const {
     align,
     gutterBottom,
@@ -292,7 +292,7 @@ const Typography = /*#__PURE__*/react.exports.forwardRef(function Typography(inP
     variant = 'body1',
     variantMapping = defaultVariantMapping
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$a);
+        other = _objectWithoutPropertiesLoose(props, _excluded$9);
 
   const ownerState = _extends({}, props, {
     align,
@@ -307,7 +307,7 @@ const Typography = /*#__PURE__*/react.exports.forwardRef(function Typography(inP
   });
 
   const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
-  const classes = useUtilityClasses$9(ownerState);
+  const classes = useUtilityClasses$8(ownerState);
   return /*#__PURE__*/jsxRuntime.exports.jsx(TypographyRoot, _extends({
     as: Component,
     ref: ref,
@@ -330,9 +330,9 @@ const ButtonGroupContext = /*#__PURE__*/react.exports.createContext({});
 
 var ButtonGroupContext$1 = ButtonGroupContext;
 
-const _excluded$9 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
+const _excluded$8 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
 
-const useUtilityClasses$8 = ownerState => {
+const useUtilityClasses$7 = ownerState => {
   const {
     color,
     disableElevation,
@@ -555,7 +555,7 @@ const Button = /*#__PURE__*/react.exports.forwardRef(function Button(inProps, re
     type,
     variant = 'text'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$9);
+        other = _objectWithoutPropertiesLoose(props, _excluded$8);
 
   const ownerState = _extends({}, props, {
     color,
@@ -569,7 +569,7 @@ const Button = /*#__PURE__*/react.exports.forwardRef(function Button(inProps, re
     variant
   });
 
-  const classes = useUtilityClasses$8(ownerState);
+  const classes = useUtilityClasses$7(ownerState);
 
   const startIcon = startIconProp && /*#__PURE__*/jsxRuntime.exports.jsx(ButtonStartIcon, {
     className: classes.startIcon,
@@ -604,9 +604,9 @@ function getSwitchBaseUtilityClass(slot) {
 }
 generateUtilityClasses('PrivateSwitchBase', ['root', 'checked', 'disabled', 'input', 'edgeStart', 'edgeEnd']);
 
-const _excluded$8 = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
+const _excluded$7 = ["autoFocus", "checked", "checkedIcon", "className", "defaultChecked", "disabled", "disableFocusRipple", "edge", "icon", "id", "inputProps", "inputRef", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"];
 
-const useUtilityClasses$7 = ownerState => {
+const useUtilityClasses$6 = ownerState => {
   const {
     classes,
     checked,
@@ -674,7 +674,7 @@ const SwitchBase = /*#__PURE__*/react.exports.forwardRef(function SwitchBase(pro
     type,
     value
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$8);
+        other = _objectWithoutPropertiesLoose(props, _excluded$7);
 
   const [checked, setCheckedState] = useControlled({
     controlled: checkedProp,
@@ -736,7 +736,7 @@ const SwitchBase = /*#__PURE__*/react.exports.forwardRef(function SwitchBase(pro
     edge
   });
 
-  const classes = useUtilityClasses$7(ownerState);
+  const classes = useUtilityClasses$6(ownerState);
   return /*#__PURE__*/jsxRuntime.exports.jsxs(SwitchBaseRoot, _extends({
     component: "span",
     className: clsx(classes.root, className),
@@ -790,9 +790,9 @@ function getCheckboxUtilityClass(slot) {
 const checkboxClasses = generateUtilityClasses('MuiCheckbox', ['root', 'checked', 'disabled', 'indeterminate', 'colorPrimary', 'colorSecondary']);
 var checkboxClasses$1 = checkboxClasses;
 
-const _excluded$7 = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size"];
+const _excluded$6 = ["checkedIcon", "color", "icon", "indeterminate", "indeterminateIcon", "inputProps", "size"];
 
-const useUtilityClasses$6 = ownerState => {
+const useUtilityClasses$5 = ownerState => {
   const {
     classes,
     indeterminate,
@@ -860,7 +860,7 @@ const Checkbox = /*#__PURE__*/react.exports.forwardRef(function Checkbox(inProps
     inputProps,
     size = 'medium'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$7);
+        other = _objectWithoutPropertiesLoose(props, _excluded$6);
 
   const icon = indeterminate ? indeterminateIconProp : iconProp;
   const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon;
@@ -871,7 +871,7 @@ const Checkbox = /*#__PURE__*/react.exports.forwardRef(function Checkbox(inProps
     size
   });
 
-  const classes = useUtilityClasses$6(ownerState);
+  const classes = useUtilityClasses$5(ownerState);
   return /*#__PURE__*/jsxRuntime.exports.jsx(CheckboxRoot, _extends({
     type: "checkbox",
     inputProps: _extends({
@@ -896,7 +896,7 @@ function getCircularProgressUtilityClass(slot) {
 }
 generateUtilityClasses('MuiCircularProgress', ['root', 'determinate', 'indeterminate', 'colorPrimary', 'colorSecondary', 'svg', 'circle', 'circleDeterminate', 'circleIndeterminate', 'circleDisableShrink']);
 
-const _excluded$6 = ["className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"];
+const _excluded$5 = ["className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"];
 
 let _ = t => t,
     _t,
@@ -930,7 +930,7 @@ const circularDashKeyframe = keyframes(_t2 || (_t2 = _`
   }
 `));
 
-const useUtilityClasses$5 = ownerState => {
+const useUtilityClasses$4 = ownerState => {
   const {
     classes,
     variant,
@@ -1026,7 +1026,7 @@ const CircularProgress = /*#__PURE__*/react.exports.forwardRef(function Circular
     value = 0,
     variant = 'indeterminate'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$6);
+        other = _objectWithoutPropertiesLoose(props, _excluded$5);
 
   const ownerState = _extends({}, props, {
     color,
@@ -1037,7 +1037,7 @@ const CircularProgress = /*#__PURE__*/react.exports.forwardRef(function Circular
     variant
   });
 
-  const classes = useUtilityClasses$5(ownerState);
+  const classes = useUtilityClasses$4(ownerState);
   const circleStyle = {};
   const rootStyle = {};
   const rootProps = {};
@@ -1079,18 +1079,15 @@ const CircularProgress = /*#__PURE__*/react.exports.forwardRef(function Circular
 });
 var CircularProgress$1 = CircularProgress;
 
-const dividerClasses = generateUtilityClasses('MuiDivider', ['root', 'absolute', 'fullWidth', 'inset', 'middle', 'flexItem', 'light', 'vertical', 'withChildren', 'withChildrenVertical', 'textAlignRight', 'textAlignLeft', 'wrapper', 'wrapperVertical']);
-var dividerClasses$1 = dividerClasses;
-
 function getFormControlLabelUtilityClasses(slot) {
   return generateUtilityClass('MuiFormControlLabel', slot);
 }
 const formControlLabelClasses = generateUtilityClasses('MuiFormControlLabel', ['root', 'labelPlacementStart', 'labelPlacementTop', 'labelPlacementBottom', 'disabled', 'label']);
 var formControlLabelClasses$1 = formControlLabelClasses;
 
-const _excluded$5 = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "value"];
+const _excluded$4 = ["checked", "className", "componentsProps", "control", "disabled", "disableTypography", "inputRef", "label", "labelPlacement", "name", "onChange", "value"];
 
-const useUtilityClasses$4 = ownerState => {
+const useUtilityClasses$3 = ownerState => {
   const {
     classes,
     disabled,
@@ -1168,7 +1165,7 @@ const FormControlLabel = /*#__PURE__*/react.exports.forwardRef(function FormCont
     label,
     labelPlacement = 'end'
   } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$5);
+        other = _objectWithoutPropertiesLoose(props, _excluded$4);
 
   const muiFormControl = useFormControl();
   let disabled = disabledProp;
@@ -1196,7 +1193,7 @@ const FormControlLabel = /*#__PURE__*/react.exports.forwardRef(function FormCont
     labelPlacement
   });
 
-  const classes = useUtilityClasses$4(ownerState);
+  const classes = useUtilityClasses$3(ownerState);
   return /*#__PURE__*/jsxRuntime.exports.jsxs(FormControlLabelRoot, _extends({
     className: clsx(classes.root, className),
     ownerState: ownerState,
@@ -1211,188 +1208,6 @@ const FormControlLabel = /*#__PURE__*/react.exports.forwardRef(function FormCont
   }));
 });
 var FormControlLabel$1 = FormControlLabel;
-
-const listItemIconClasses = generateUtilityClasses('MuiListItemIcon', ['root', 'alignItemsFlexStart']);
-var listItemIconClasses$1 = listItemIconClasses;
-
-const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
-var listItemTextClasses$1 = listItemTextClasses;
-
-function getMenuItemUtilityClass(slot) {
-  return generateUtilityClass('MuiMenuItem', slot);
-}
-const menuItemClasses = generateUtilityClasses('MuiMenuItem', ['root', 'focusVisible', 'dense', 'disabled', 'divider', 'gutters', 'selected']);
-var menuItemClasses$1 = menuItemClasses;
-
-const _excluded$4 = ["autoFocus", "component", "dense", "divider", "disableGutters", "focusVisibleClassName", "role", "tabIndex"];
-const overridesResolver = (props, styles) => {
-  const {
-    ownerState
-  } = props;
-  return [styles.root, ownerState.dense && styles.dense, ownerState.divider && styles.divider, !ownerState.disableGutters && styles.gutters];
-};
-
-const useUtilityClasses$3 = ownerState => {
-  const {
-    disabled,
-    dense,
-    divider,
-    disableGutters,
-    selected,
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root', dense && 'dense', disabled && 'disabled', !disableGutters && 'gutters', divider && 'divider', selected && 'selected']
-  };
-  const composedClasses = composeClasses(slots, getMenuItemUtilityClass, classes);
-  return _extends({}, classes, composedClasses);
-};
-
-const MenuItemRoot = styled(ButtonBase, {
-  shouldForwardProp: prop => rootShouldForwardProp(prop) || prop === 'classes',
-  name: 'MuiMenuItem',
-  slot: 'Root',
-  overridesResolver
-})(({
-  theme,
-  ownerState
-}) => _extends({}, theme.typography.body1, {
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  position: 'relative',
-  textDecoration: 'none',
-  minHeight: 48,
-  paddingTop: 6,
-  paddingBottom: 6,
-  boxSizing: 'border-box',
-  whiteSpace: 'nowrap'
-}, !ownerState.disableGutters && {
-  paddingLeft: 16,
-  paddingRight: 16
-}, ownerState.divider && {
-  borderBottom: `1px solid ${theme.palette.divider}`,
-  backgroundClip: 'padding-box'
-}, {
-  '&:hover': {
-    textDecoration: 'none',
-    backgroundColor: theme.palette.action.hover,
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      backgroundColor: 'transparent'
-    }
-  },
-  [`&.${menuItemClasses$1.selected}`]: {
-    backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-    [`&.${menuItemClasses$1.focusVisible}`]: {
-      backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
-    }
-  },
-  [`&.${menuItemClasses$1.selected}:hover`]: {
-    backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
-    }
-  },
-  [`&.${menuItemClasses$1.focusVisible}`]: {
-    backgroundColor: theme.palette.action.focus
-  },
-  [`&.${menuItemClasses$1.disabled}`]: {
-    opacity: theme.palette.action.disabledOpacity
-  },
-  [`& + .${dividerClasses$1.root}`]: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  },
-  [`& + .${dividerClasses$1.inset}`]: {
-    marginLeft: 52
-  },
-  [`& .${listItemTextClasses$1.root}`]: {
-    marginTop: 0,
-    marginBottom: 0
-  },
-  [`& .${listItemTextClasses$1.inset}`]: {
-    paddingLeft: 36
-  },
-  [`& .${listItemIconClasses$1.root}`]: {
-    minWidth: 36
-  }
-}, !ownerState.dense && {
-  [theme.breakpoints.up('sm')]: {
-    minHeight: 'auto'
-  }
-}, ownerState.dense && _extends({
-  minHeight: 32,
-  // https://material.io/components/menus#specs > Dense
-  paddingTop: 4,
-  paddingBottom: 4
-}, theme.typography.body2, {
-  [`& .${listItemIconClasses$1.root} svg`]: {
-    fontSize: '1.25rem'
-  }
-})));
-const MenuItem = /*#__PURE__*/react.exports.forwardRef(function MenuItem(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiMenuItem'
-  });
-
-  const {
-    autoFocus = false,
-    component = 'li',
-    dense = false,
-    divider = false,
-    disableGutters = false,
-    focusVisibleClassName,
-    role = 'menuitem',
-    tabIndex: tabIndexProp
-  } = props,
-        other = _objectWithoutPropertiesLoose(props, _excluded$4);
-
-  const context = react.exports.useContext(ListContext);
-  const childContext = {
-    dense: dense || context.dense || false,
-    disableGutters
-  };
-  const menuItemRef = react.exports.useRef(null);
-  useEnhancedEffect(() => {
-    if (autoFocus) {
-      if (menuItemRef.current) {
-        menuItemRef.current.focus();
-      }
-    }
-  }, [autoFocus]);
-
-  const ownerState = _extends({}, props, {
-    dense: childContext.dense,
-    divider,
-    disableGutters
-  });
-
-  const classes = useUtilityClasses$3(props);
-  const handleRef = useForkRef(menuItemRef, ref);
-  let tabIndex;
-
-  if (!props.disabled) {
-    tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1;
-  }
-
-  return /*#__PURE__*/jsxRuntime.exports.jsx(ListContext.Provider, {
-    value: childContext,
-    children: /*#__PURE__*/jsxRuntime.exports.jsx(MenuItemRoot, _extends({
-      ref: handleRef,
-      role: role,
-      tabIndex: tabIndex,
-      component: component,
-      focusVisibleClassName: clsx(classes.focusVisible, focusVisibleClassName)
-    }, other, {
-      ownerState: ownerState,
-      classes: classes
-    }))
-  });
-});
-var MenuItem$1 = MenuItem;
 
 function getTabUtilityClass(slot) {
   return generateUtilityClass('MuiTab', slot);
@@ -2947,8 +2762,14 @@ const checkBoxStyle$1 = css `
 const SelectBox = ({ css, className, label, items, queryKey, handleEnabledChange, handleValueChange, }) => {
     const [value, setValue] = react.exports.useState("");
     const [enabled, setEnabled] = react.exports.useState(false);
-    const handleSelectChange = (event) => {
-        setValue(event.target.value);
+    const handleSelectChange = (event, value) => {
+        console.log(value);
+        if (value) {
+            setValue(value[1]);
+        }
+        else {
+            setValue("");
+        }
     };
     const handleCheckChange = (event, checked) => {
         setEnabled(checked);
@@ -2962,7 +2783,7 @@ const SelectBox = ({ css, className, label, items, queryKey, handleEnabledChange
             handleEnabledChange(queryKey, false);
         }
     }, [value, enabled]);
-    return (jsxs("div", Object.assign({ css: [selectBox, css], className: className }, { children: [jsx(Checkbox$1, { css: checkBoxStyle, onChange: handleCheckChange }, void 0), jsxs(FormControl, Object.assign({ sx: { m: 1, minWidth: 200 } }, { children: [jsx(InputLabel, Object.assign({ id: queryKey }, { children: label }), void 0), jsx(Select, Object.assign({ labelId: queryKey, id: queryKey, value: value, label: label, onChange: handleSelectChange, disabled: enabled ? undefined : true }, { children: items.map(([value, name]) => (jsx(MenuItem$1, Object.assign({ value: value }, { children: name }), value))) }), void 0)] }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: [selectBox, css], className: className }, { children: [jsx(Checkbox$1, { css: checkBoxStyle, onChange: handleCheckChange }, void 0), jsx(FormControl, Object.assign({ sx: { m: 1, minWidth: 200 } }, { children: jsx(Autocomplete, { filterSelectedOptions: true, onChange: handleSelectChange, disablePortal: true, disableClearable: true, options: items, disabled: enabled ? undefined : true, getOptionLabel: (item) => item[1], renderInput: (params) => (jsx(TextField, Object.assign({}, params, { label: label, InputProps: Object.assign(Object.assign({}, params.InputProps), { endAdornment: jsx(Fragment, { children: params.InputProps.endAdornment }, void 0) }) }), void 0)), renderTags: (value, getTagProps) => value.map((option, index) => (jsx$1(Chip, Object.assign({ variant: "outlined" }, getTagProps({ index }), { label: option[1], key: option[0] })))) }, void 0) }), void 0)] }), void 0));
 };
 const selectBox = css `
   background-color: ${COLOR_WHITE};
