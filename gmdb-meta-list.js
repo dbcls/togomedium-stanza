@@ -1,6 +1,7 @@
 import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
 import { m as makeFormBody } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
+import { c as convertHTMLEntity } from './string-59b68535.js';
 import './index-6aec0cc7.js';
 
 class GmdbMetaList extends Stanza {
@@ -74,6 +75,7 @@ const makeSuccessData = (response, offset, stanzaParams) => {
                 value.nowrap = true;
             }
             result.push(value);
+            value.label = convertHTMLEntity(value.label);
         });
         return result;
     });

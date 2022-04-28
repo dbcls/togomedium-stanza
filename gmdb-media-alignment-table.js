@@ -4,7 +4,7 @@ import { c as css, j as jsx$1, r as react } from './index-6aec0cc7.js';
 import { c as clone, R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, I as IconCompact, d as IconExpand, e as IconBlank, T as Tooltip, P as PATH_COMPONENT, f as PATH_MEDIUM, g as PATH_ORGANISM, A as API_MEDIA_ALIMENT, h as Recoil_index_4 } from './paths-0facaeac.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
-import { s as stringToArray } from './string-ad764b4c.js';
+import { s as stringToArray } from './string-59b68535.js';
 
 const WIDTH_EXPANDED = "200px";
 const WIDTH_COMPACT = "150px";

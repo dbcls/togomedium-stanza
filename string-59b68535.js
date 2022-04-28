@@ -23,6 +23,14 @@ const makeNcbiOrganismLink = (taxid) => {
 const stringToArray = (str) => {
     return str.split(",").map((str) => str.trim());
 };
+const convertHTMLEntity = (text) => {
+    const span = document.createElement("span");
+    return text.replace(/&[#A-Za-z0-9]+;/gi, (entity, position, text) => {
+        span.innerHTML = entity;
+        console.log("converted", text, span.innerText);
+        return span.innerText;
+    });
+};
 
-export { makeNcbiOrganismLink as a, capitalizeFirstLetter as c, makeTogoGenomeOrganismLink as m, stringToArray as s, unescapeJsonString as u };
-//# sourceMappingURL=string-ad764b4c.js.map
+export { capitalizeFirstLetter as a, makeNcbiOrganismLink as b, convertHTMLEntity as c, makeTogoGenomeOrganismLink as m, stringToArray as s, unescapeJsonString as u };
+//# sourceMappingURL=string-59b68535.js.map

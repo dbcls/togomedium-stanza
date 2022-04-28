@@ -1,7 +1,7 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
 import { _ as _objectWithoutPropertiesLoose, N as propToStyleFunction, O as isPlainObject, Q as useTheme, z as jsxRuntime, T as ThemeContext, U as useTheme$1, B as generateUtilityClass, D as generateUtilityClasses, G as styled, k as capitalize, I as useThemeProps, L as composeClasses, K as clsx, V as rootShouldForwardProp, H as alpha, W as resolveProps, t as useControlled, m as createSvgIcon, q as ownerWindow, n as debounce, J as useTheme$2, v as useEventCallback, p as ownerDocument, X as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, Y as SIZE2, Z as SIZE05, $ as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, h as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, a0 as FONT_WEIGHT_BOLD, a as SIZE4, g as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-014d59de.js';
 import { _ as _extends, r as react, T as ThemeContext$1, k as keyframes, c as css, d as dist, j as jsx$1 } from './index-6aec0cc7.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-0facaeac.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, e as IconBlank, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-0facaeac.js';
 import { B as ButtonBase, u as useFormControl, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl } from './TextField-2485a2cc.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
@@ -3026,10 +3026,12 @@ const tabCSS = css `
   //width: 200px;
 `;
 
-const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
-    return (jsxs("li", Object.assign({ css: [wrapper$2, css], className: className }, { children: [jsxs("div", Object.assign({ css: inner }, { children: [jsxs("div", Object.assign({ css: left }, { children: [jsx("span", Object.assign({ onClick: () => onToggleChildren(id) }, { children: jsx(ToggleIcon, Object.assign({}, { hasChildren, isOpen }), void 0) }), void 0), jsx(Tooltip, Object.assign({ title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start" }, { children: jsx("span", { children: label }, void 0) }), void 0), tag && jsx("span", Object.assign({ css: tagTip }, { children: tag }), void 0), linkString && linkURL && (jsxs("a", Object.assign({ href: linkURL, target: "_blank", rel: "noreferrer" }, { children: ["[", linkString, "]"] }), void 0))] }), void 0), jsx(Checkbox$1, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) }, void 0)] }), void 0), isOpen && !!children && jsx("ul", Object.assign({ css: childrenWrapper }, { children: children }), void 0)] }), void 0));
+const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
+    return (jsxs("li", Object.assign({ css: [wrapper$2, css], className: className }, { children: [jsxs("div", Object.assign({ css: inner }, { children: [jsxs("div", Object.assign({ css: left }, { children: [jsx("span", Object.assign({ onClick: () => onToggleChildren(id) }, { children: jsx(ToggleIcon, Object.assign({}, { hasChildren, isOpen, isLoading }), void 0) }), void 0), jsx(Tooltip, Object.assign({ title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start" }, { children: jsx("span", { children: label }, void 0) }), void 0), tag && jsx("span", Object.assign({ css: tagTip }, { children: tag }), void 0), linkString && linkURL && (jsxs("a", Object.assign({ href: linkURL, target: "_blank", rel: "noreferrer" }, { children: ["[", linkString, "]"] }), void 0))] }), void 0), jsx(Checkbox$1, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) }, void 0)] }), void 0), isOpen && !!children && jsx("ul", Object.assign({ css: childrenWrapper }, { children: children }), void 0)] }), void 0));
 };
-const ToggleIcon = ({ hasChildren, isOpen }) => {
+const ToggleIcon = ({ hasChildren, isOpen, isLoading, }) => {
+    if (isLoading)
+        return jsx(IconBlank, { css: icon }, void 0);
     if (!hasChildren)
         return jsx(IconNoChildren, { css: icon }, void 0);
     if (isOpen)
@@ -3090,7 +3092,6 @@ const retrieveTaxonInfo = (info, addTaxonToList, setTaxonChildren) => {
         const params = {
             tax_id: info.id,
         };
-        console.log(info.id);
         const response = yield getData(API_TAXONOMY_CHILDREN, params);
         setTaxonChildren(info.id, (_b = (_a = response === null || response === void 0 ? void 0 : response.body) === null || _a === void 0 ? void 0 : _a.map((item) => item.tax_id)) !== null && _b !== void 0 ? _b : []);
         (_c = response === null || response === void 0 ? void 0 : response.body) === null || _c === void 0 ? void 0 : _c.forEach((item) => {
@@ -3260,42 +3261,45 @@ const TaxonomicTreeBranch = ({ id, css, className }) => {
     const myInfo = react.exports.useMemo(() => {
         return taxonList.find((item) => item.id === id);
     }, [taxonList, id]);
-    const { branchChildren } = useBranchChildren(myInfo);
+    const { branchChildren, isLoading } = useBranchChildren(myInfo);
     const { label, rank } = useTaxonInfo(id, myInfo);
     const { descendants, ascendants } = useLineages(id, taxonList);
     const { check, onClickCheck } = useChecked(id, taxonList, ascendants, descendants);
     const { ascendantsLabel } = useAscendantsLabel(ascendants);
-    const [linkString, linkURL] = useLinkString(id);
+    const [linkString, linkURL] = useLinkString(id, rank);
     const [isOpen, setIsOpen] = react.exports.useState(false);
     const onToggleChildren = () => {
         setIsOpen((prev) => !prev);
     };
-    return (jsx(TreeBranchView, Object.assign({ css: css, className: className, label: label, id: id, tag: rank, linkString: linkString, linkURL: linkURL, toolTipLabel: ascendantsLabel, check: check, hasChildren: !!branchChildren.length, isOpen: isOpen, onClickCheck: () => onClickCheck(), onToggleChildren: onToggleChildren }, { children: isOpen &&
+    return (jsx(TreeBranchView, Object.assign({ css: css, className: className, label: label, id: id, tag: rank, linkString: linkString, linkURL: linkURL, toolTipLabel: ascendantsLabel, check: check, hasChildren: !!branchChildren.length, isOpen: isOpen, isLoading: isLoading, onClickCheck: () => onClickCheck(), onToggleChildren: onToggleChildren }, { children: isOpen &&
             branchChildren.length &&
             branchChildren.map((childId) => jsx(TaxonomicTreeBranch, { id: childId }, childId)) }), void 0));
 };
-const useLinkString = (id) => {
+const useLinkString = (id, rank) => {
     const [linkString, setLinkString] = react.exports.useState("");
     const [linkURL, setLinkURL] = react.exports.useState("");
     react.exports.useEffect(() => {
         setLinkString(`tax_id:${id}`);
-        setLinkURL(`http://growthmedium.org/organism/${id}`);
-    }, [id]);
+        setLinkURL(`http://growthmedium.org/${rank === "Species" ? "organism" : "taxon"}/${id}`);
+    }, [id, rank]);
     return [linkString, linkURL];
 };
 const useBranchChildren = (info) => {
     const [branchChildren, setBranchChildren] = react.exports.useState([]);
     const { setTaxonAsLoading, addTaxonToList, setTaxonChildren } = useTaxonListMutators();
+    const [isLoading, setIsLoading] = react.exports.useState(false);
     react.exports.useEffect(() => {
+        setIsLoading((info === null || info === void 0 ? void 0 : info.children) === "loading");
         if ((info === null || info === void 0 ? void 0 : info.children) === "not-yet") {
             setTaxonAsLoading(info.id);
+            setIsLoading(true);
             retrieveTaxonInfo(info, addTaxonToList, setTaxonChildren);
         }
         if (info && dist.isArray(info.children)) {
             setBranchChildren(info.children);
         }
     }, [info]);
-    return { branchChildren };
+    return { branchChildren, isLoading };
 };
 const useTaxonInfo = (id, myInfo) => {
     const [rank, setRank] = react.exports.useState("");
