@@ -69,7 +69,7 @@ var metadata = {
 
 var templates = [
   ["stanza.html.hbs", {"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<header>\n  <h2>Phenotype Information</h2>\n</header>\n<div class=\"wrapper\">\n\n  <table>\n    <tr>\n      <th>Cell shape</th>\n      <th>Temperature range</th>\n      <th>Motility</th>\n      <th>Staining</th>\n      <th>Energy source</th>\n    </tr>\n    <tr>\n      <td>N/A</td>\n      <td>N/A</td>\n      <td>N/A</td>\n      <td>N/A</td>\n      <td>N/A</td>\n    </tr>\n\n  </table>\n</div>\n";
+    return "<header>\n  <h2>Phenotype information</h2>\n</header>\n<div class=\"wrapper\">\n\n  <table>\n    <tr>\n      <th>Cell shape</th>\n      <th>Temperature range</th>\n      <th>Motility</th>\n      <th>Staining</th>\n      <th>Energy source</th>\n    </tr>\n    <tr>\n      <td>N/A</td>\n      <td>N/A</td>\n      <td>N/A</td>\n      <td>N/A</td>\n      <td>N/A</td>\n    </tr>\n\n  </table>\n</div>\n";
 },"useData":true}]
 ];
 
