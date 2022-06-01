@@ -1,7 +1,7 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { _ as _objectWithoutPropertiesLoose, N as propToStyleFunction, O as isPlainObject, Q as useTheme, z as jsxRuntime, T as ThemeContext, U as useTheme$1, B as generateUtilityClass, D as generateUtilityClasses, G as styled, k as capitalize, I as useThemeProps, L as composeClasses, K as clsx, V as rootShouldForwardProp, H as alpha, W as resolveProps, t as useControlled, m as createSvgIcon, q as ownerWindow, n as debounce, J as useTheme$2, v as useEventCallback, p as ownerDocument, X as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, Y as SIZE2, Z as SIZE05, $ as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, h as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, a0 as FONT_WEIGHT_BOLD, a as SIZE4, g as Fragment, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-014d59de.js';
+import { _ as _objectWithoutPropertiesLoose, N as propToStyleFunction, O as isPlainObject, Q as useTheme, z as jsxRuntime, T as ThemeContext, U as useTheme$1, B as generateUtilityClass, D as generateUtilityClasses, G as styled, k as capitalize, I as useThemeProps, L as composeClasses, K as clsx, V as rootShouldForwardProp, H as alpha, W as resolveProps, t as useControlled, m as createSvgIcon, q as ownerWindow, n as debounce, J as useTheme$2, v as useEventCallback, p as ownerDocument, X as ROUNDED_CORNER, C as COLOR_WHITE, S as SIZE1, Y as SIZE2, Z as SIZE05, $ as FONT_WEIGHT_MEDIUM, c as jsxs, j as jsx, h as COLOR_GRAY_LINE, e as COLOR_PRIMARY, d as COLOR_GRAY700, a0 as FONT_WEIGHT_BOLD, b as SIZE3, g as Fragment, a as SIZE4, a1 as COLOR_GRAY300, a2 as COLOR_GRAY400, a3 as COLOR_GRAY_BG, a4 as createTheme, F as FONT_EN, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-014d59de.js';
 import { _ as _extends, r as react, T as ThemeContext$1, k as keyframes, c as css, d as dist, j as jsx$1 } from './index-6aec0cc7.js';
-import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, i as API_ALL_COMPONENTS, j as API_MEDIA_BY_ATTRIBUTES, g as PATH_ORGANISM, c as clone, k as API_ORGANISMS_BY_PHENOTYPES, l as API_MEDIA_BY_TAXON, T as Tooltip, e as IconBlank, m as IconNoChildren, I as IconCompact, d as IconExpand, n as API_TAXONOMY_CHILDREN, h as Recoil_index_4 } from './paths-0facaeac.js';
+import { R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, f as PATH_MEDIUM, T as Tooltip, i as API_TAXONOMY_CHILDREN, j as API_MEDIA_BY_ATTRIBUTES, k as API_MEDIA_BY_TAXON, l as API_ALL_COMPONENTS, g as PATH_ORGANISM, c as clone, m as API_ORGANISMS_BY_PHENOTYPES, e as IconBlank, n as IconNoChildren, I as IconCompact, d as IconExpand, h as Recoil_index_4 } from './paths-17841fa7.js';
 import { B as ButtonBase, u as useFormControl, T as TextField, C as Chip, A as Autocomplete, S as Slider, F as FormControl } from './TextField-2485a2cc.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
@@ -2272,6 +2272,8 @@ const ActionPane = ({ actionLabel, dispatchEvent }) => {
     const selectedMedia = useSelectedMediaState();
     const { clearSelectedMedia } = useSelectedMediaMutators();
     const onClickAction = () => {
+        if (!dispatchEvent)
+            return;
         dispatchEvent(selectedMedia);
     };
     return (jsxs("div", Object.assign({ css: wrapper$8 }, { children: [jsx("p", Object.assign({ className: "info" }, { children: getInfoText$2(selectedMedia.length) }), void 0), jsxs("div", Object.assign({ css: buttonWrapper }, { children: [jsx(Button$1, Object.assign({ variant: "contained", disableElevation: true, disabled: selectedMedia.length === 0, sx: { textTransform: "none" }, onClick: onClickAction }, { children: actionLabel }), void 0), jsx(Button$1, Object.assign({ variant: "outlined", onClick: clearSelectedMedia, sx: { textTransform: "none" } }, { children: "Clear selection" }), void 0)] }), void 0)] }), void 0));
@@ -2309,7 +2311,9 @@ const buttonWrapper = css `
 `;
 
 const MediaListItem = ({ id, label, isChecked, onClick }) => {
-    return (jsxs("div", Object.assign({ css: wrapper$7 }, { children: [jsx("a", Object.assign({ css: idCol$1, href: `${PATH_MEDIUM}${id}`, target: "_blank", rel: "noreferrer" }, { children: id }), void 0), jsx("span", Object.assign({ css: labelCol$1 }, { children: label }), void 0), jsx("span", Object.assign({ css: checkCol$1 }, { children: jsx(Checkbox$1, { checked: isChecked, onClick: () => onClick(id) }, void 0) }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$7 }, { children: [jsx("a", Object.assign({ css: idCol$1, href: `${PATH_MEDIUM}${id}`, target: "_blank", rel: "noreferrer" }, { children: id }), void 0), jsx("span", Object.assign({ css: labelCol$1 }, { children: jsx(Tooltip, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("span", { children: label }, void 0) }), void 0) }), void 0), jsx("span", Object.assign({ css: checkCol$1 }, { children: jsx(Checkbox$1, { checked: isChecked, onClick: () => onClick(id), css: css `
+            padding: 5px;
+          ` }, void 0) }), void 0)] }), void 0));
 };
 const wrapper$7 = css `
   & + & {
@@ -2341,10 +2345,6 @@ const checkCol$1 = css `
   flex-shrink: 0;
 `;
 
-const deepEqual = (a, b) => {
-    return JSON.stringify(a) === JSON.stringify(b);
-};
-
 const useResetScroll = (scrollInner, data) => {
     react.exports.useEffect(() => {
         if (!scrollInner.current)
@@ -2353,7 +2353,14 @@ const useResetScroll = (scrollInner, data) => {
     }, [data]);
 };
 
-const foundMedia = Recoil_index_6({ key: "foundMedia", default: [] });
+const nullResponse$1 = {
+    queryType: "",
+    response: { total: 0, limit: 10, contents: [], offset: 0 },
+};
+const foundMedia = Recoil_index_6({
+    key: "foundMedia",
+    default: nullResponse$1,
+});
 const useFoundMediaState = () => {
     return Recoil_index_18(foundMedia);
 };
@@ -2421,26 +2428,44 @@ const useMediaList = () => {
     const [data, setData] = react.exports.useState([]);
     const foundMedia = useFoundMediaState();
     const selectedMedia = useSelectedMediaState();
-    const { toggleMediumSelection, setSelectedMedia } = useSelectedMediaMutators();
+    const { toggleMediumSelection } = useSelectedMediaMutators();
     const toggleChecked = (id) => {
         toggleMediumSelection(id);
     };
     react.exports.useEffect(() => {
-        const result = foundMedia.map((medium) => {
+        const result = foundMedia.response.contents.map((medium) => {
             return {
-                id: medium.id,
-                label: medium.label,
-                isChecked: selectedMedia.includes(medium.id),
+                id: medium.gm_id,
+                label: medium.name,
+                isChecked: selectedMedia.includes(medium.gm_id),
             };
         });
         setData(result);
-        const updatedSelection = selectedMedia.filter((id) => result.find((info) => info.id === id));
-        if (!deepEqual(updatedSelection, selectedMedia)) {
-            setSelectedMedia(updatedSelection);
-        }
     }, [foundMedia, selectedMedia]);
     return { data, toggleChecked };
 };
+
+const Pagination = ({ css, className, total, current, displayLength, onClickNext, onClickPrev, }) => {
+    return (jsxs("div", Object.assign({ css: [pagination, css], className: className }, { children: [jsxs("div", { children: [current > 0 && jsx("input", { type: "button", value: "PREV", onClick: onClickPrev }, void 0), current + displayLength < total && (jsx("input", { type: "button", value: "NEXT", onClick: onClickNext }, void 0))] }, void 0), jsx("div", { children: makeDisplayMessage(total, current, displayLength) }, void 0)] }), void 0));
+};
+const makeDisplayMessage = (total, current, displayLength) => {
+    switch (true) {
+        case current + displayLength > total:
+            return `Showing ${current + 1} to ${total} of total ${total} items`;
+        default:
+            return `Showing ${current + 1} to ${current + displayLength} of total ${total} items`;
+    }
+};
+const pagination = css `
+  display: flex;
+  justify-content: space-between;
+  margin-top: ${SIZE1};
+  input[type="button"] {
+    cursor: pointer;
+    padding: 0 ${SIZE1};
+    margin-right: ${SIZE1};
+  }
+`;
 
 const queryDataToInfoText = (data) => {
     return Object.entries(data)
@@ -2482,10 +2507,255 @@ const wrapper$5 = css `
   }
 `;
 
+const selectedAttributes = Recoil_index_6({
+    key: "selectedAttributes",
+    default: { gmo_ids: [] },
+});
+const useSelectedAttributesState = () => {
+    return Recoil_index_18(selectedAttributes);
+};
+const useSelectedAttributesMutators = () => {
+    const setSelectedAttributes = Recoil_index_22(selectedAttributes);
+    return { setSelectedAttributes };
+};
+
+const selectedOrganisms = Recoil_index_6({ key: "selectedOrganisms", default: [] });
+const useSelectedOrganismsState = () => {
+    return Recoil_index_18(selectedOrganisms);
+};
+const useSelectedOrganismsMutators = () => {
+    const setSelectedOrganisms = Recoil_index_22(selectedOrganisms);
+    const toggleOrganismSelection = (id) => {
+        setSelectedOrganisms((prev) => {
+            let result;
+            if (prev.includes(id)) {
+                result = prev.filter((r) => r !== id);
+            }
+            else {
+                result = [...prev, id];
+            }
+            return result;
+        });
+    };
+    const clearSelectedOrganisms = () => {
+        setSelectedOrganisms([]);
+    };
+    return { setSelectedOrganisms, toggleOrganismSelection, clearSelectedOrganisms };
+};
+
+const retrieveTaxonInfo = (info, addTaxonToList, setTaxonChildren) => {
+    (() => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b, _c;
+        const params = {
+            tax_id: info.id,
+        };
+        const response = yield getData(API_TAXONOMY_CHILDREN, params);
+        setTaxonChildren(info.id, (_b = (_a = response === null || response === void 0 ? void 0 : response.body) === null || _a === void 0 ? void 0 : _a.map((item) => item.tax_id)) !== null && _b !== void 0 ? _b : []);
+        (_c = response === null || response === void 0 ? void 0 : response.body) === null || _c === void 0 ? void 0 : _c.forEach((item) => {
+            addTaxonToList({
+                id: item.tax_id,
+                label: item.name,
+                rank: item.rank,
+                children: item.rank === "Species" ? [] : "not-yet",
+            });
+        });
+    }))();
+};
+const findAscendants = (list, id) => {
+    let iterationCount = 0;
+    const result = [];
+    let currentId = id;
+    while (iterationCount < 255) {
+        iterationCount++;
+        const parent = findParent(list, currentId);
+        if (parent) {
+            result.unshift(parent.id);
+            currentId = parent.id;
+        }
+        else {
+            break;
+        }
+    }
+    return result;
+};
+const findDescendants = (list, id) => {
+    let result = [];
+    const process = (currentId) => {
+        const children = findChildren(list, currentId);
+        if (children && dist.isArray(children)) {
+            result = [...result, ...children];
+            children.forEach((childId) => process(childId));
+        }
+    };
+    process(id);
+    return result;
+};
+const makeNewSelection = (list, id, selection) => {
+    const isSelected = checkIsSelected(id, selection);
+    let result = setSelection(selection, id, !isSelected);
+    let currentId;
+    const ascendants = findAscendants(list, id).reverse();
+    const descendants = findDescendants(list, id);
+    if (descendants) {
+        result = setMultipleSelection(result, descendants, false);
+    }
+    const checkedAscendant = ascendants.find((ascendant) => result.includes(ascendant));
+    if (checkedAscendant) {
+        currentId = id;
+        for (let i = 0; i < ascendants.length; i++) {
+            const parent = ascendants[i];
+            result = setSelection(result, parent, false);
+            const siblings = findSiblings(list, currentId);
+            result = setMultipleSelection(result, siblings, true);
+            result = setSelection(result, currentId, false);
+            if (checkedAscendant === parent) {
+                break;
+            }
+            currentId = parent;
+        }
+    }
+    currentId = id;
+    for (let i = 0; i < ascendants.length; i++) {
+        const parent = ascendants[i];
+        const siblings = [...findSiblings(list, currentId), currentId];
+        const checkedSiblings = siblings.filter((siblingId) => result.includes(siblingId));
+        if (parent && checkedSiblings.length && checkedSiblings.length === siblings.length) {
+            result = setMultipleSelection(result, checkedSiblings, false);
+            result = setSelection(result, parent, true);
+        }
+        currentId = parent;
+    }
+    return result;
+};
+const checkIsSelected = (id, selection) => {
+    return selection.includes(id);
+};
+const setSelection = (selection, id, value) => {
+    const isSelected = checkIsSelected(id, selection);
+    switch (true) {
+        case isSelected && !value:
+            return selection.filter((item) => item !== id);
+        case !isSelected && value:
+            return [...selection, id];
+        default:
+            return [...selection];
+    }
+};
+const setMultipleSelection = (selection, ids, value) => {
+    let result = [...selection];
+    ids.forEach((id) => (result = setSelection(result, id, value)));
+    return result;
+};
+const findChildren = (list, id) => { var _a; return (_a = list.find((info) => info.id === id)) === null || _a === void 0 ? void 0 : _a.children; };
+const findParent = (list, id) => list.find((node) => { var _a; return (_a = node.children) === null || _a === void 0 ? void 0 : _a.includes(id); });
+const findSiblings = (list, id) => {
+    var _a;
+    const children = (_a = findParent(list, id)) === null || _a === void 0 ? void 0 : _a.children;
+    if (children && dist.isArray(children)) {
+        return children.filter((myId) => myId !== id);
+    }
+    else {
+        return [];
+    }
+};
+
+const selectedTaxon = Recoil_index_6({ key: "selectedTaxon", default: [] });
+const useSelectedTaxonState = () => {
+    return Recoil_index_18(selectedTaxon);
+};
+const useSelectedTaxonMutators = () => {
+    const setSelectedTaxon = Recoil_index_22(selectedTaxon);
+    const clearTaxonSelect = () => {
+        setSelectedTaxon([]);
+    };
+    const updateSelection = (list, id) => {
+        setSelectedTaxon((prev) => makeNewSelection(list, id, prev));
+    };
+    return {
+        __setSelectedTaxon: setSelectedTaxon,
+        clearTaxonSelect,
+        updateSelection,
+    };
+};
+
 const MediaSelectPane = ({ css, className }) => {
-    const foundMedia = useFoundMediaState();
+    const paginationParams = usePagination$1();
     const isLoading = useIsMediaLoading();
-    return (jsxs("div", Object.assign({ css: [wrapper$4, css], className: className }, { children: [jsx(QueryInfo, {}, void 0), jsx("p", Object.assign({ css: infoTextCSS$1 }, { children: getInfoText$1(foundMedia.length, isLoading) }), void 0), jsx(MediaList, { css: list }, void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: [wrapper$4, css], className: className }, { children: [jsx(QueryInfo, {}, void 0), jsx("p", Object.assign({ css: infoTextCSS$1 }, { children: getInfoText$1(paginationParams.total, isLoading) }), void 0), jsx(MediaList, { css: list }, void 0), !!paginationParams.total && !isLoading && jsx(Pagination, Object.assign({}, paginationParams), void 0)] }), void 0));
+};
+const usePagination$1 = () => {
+    const { response, queryType } = useFoundMediaState();
+    const { setFoundMedia } = useFoundMediaMutators();
+    const [total, setTotal] = react.exports.useState(0);
+    const [current, setCurrent] = react.exports.useState(0);
+    const [displayLength, setDisplayLength] = react.exports.useState(0);
+    const selectedTaxon = useSelectedTaxonState();
+    const selectedOrganisms = useSelectedOrganismsState();
+    const selectedAttributes = useSelectedAttributesState();
+    const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+    const onClickNext = () => {
+        setCurrent((prev) => prev + 10);
+    };
+    const onClickPrev = () => {
+        setCurrent((prev) => prev - 10);
+    };
+    react.exports.useEffect(() => {
+        setTotal(response.total);
+        setCurrent(response.offset);
+        setDisplayLength(response.limit);
+    }, [response]);
+    react.exports.useEffect(() => {
+        switch (true) {
+            case selectedTaxon.length === 0 && queryType === "taxon":
+            case selectedAttributes.gmo_ids.length === 0 && queryType === "attribute":
+            case selectedOrganisms.length === 0 && queryType === "organism":
+                setFoundMedia(nullResponse$1);
+                setNextMediaLoadAbort(null);
+                return;
+        }
+        switch (queryType) {
+            case "taxon":
+            case "organism":
+                (() => __awaiter(void 0, void 0, void 0, function* () {
+                    const params = {
+                        tax_ids: queryType === "taxon" ? selectedTaxon : selectedOrganisms,
+                        limit: 10,
+                        offset: current,
+                    };
+                    const abort = new AbortController();
+                    setNextMediaLoadAbort(abort);
+                    const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
+                    setNextMediaLoadAbort(null);
+                    if (response.body) {
+                        setFoundMedia({
+                            queryType,
+                            response: response.body,
+                        });
+                    }
+                }))();
+                break;
+            case "attribute":
+                (() => __awaiter(void 0, void 0, void 0, function* () {
+                    const params = {
+                        gmo_ids: selectedAttributes.gmo_ids,
+                        limit: 10,
+                        offset: current,
+                    };
+                    const abort = new AbortController();
+                    setNextMediaLoadAbort(abort);
+                    const response = yield getData(API_MEDIA_BY_ATTRIBUTES, params, abort);
+                    setNextMediaLoadAbort(null);
+                    if (response.body) {
+                        setFoundMedia({
+                            queryType,
+                            response: response.body,
+                        });
+                    }
+                }))();
+                break;
+        }
+    }, [current]);
+    return { onClickPrev, onClickNext, total, current, displayLength };
 };
 const wrapper$4 = css `
   ${ROUNDED_CORNER};
@@ -2498,11 +2768,11 @@ const wrapper$4 = css `
 const infoTextCSS$1 = css `
   font-size: 18px;
   ${FONT_WEIGHT_BOLD};
-  margin-top: ${SIZE4};
-  margin-bottom: ${SIZE1};
+  margin-top: ${SIZE3};
+  margin-bottom: ${SIZE05};
 `;
 const list = css `
-  flex-grow: 1;
+  flex-grow: 0;
 `;
 const getInfoText$1 = (mediaLength, isLoading) => {
     if (isLoading) {
@@ -2544,31 +2814,39 @@ const ComponentSelect = ({ onChangeSelection }) => {
 };
 
 const AttributesSection = () => {
+    const selectedAttributes = useSelectedAttributesState();
     const { setFoundMedia } = useFoundMediaMutators();
     const { setQueryData } = useQueryDataMutators();
     const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+    const { setSelectedAttributes } = useSelectedAttributesMutators();
+    const { clearSelectedMedia } = useSelectedMediaMutators();
     const onChangeSelection = (ids) => {
-        if (ids.length === 0) {
+        setSelectedAttributes({ gmo_ids: ids });
+    };
+    react.exports.useEffect(() => {
+        const gmo_ids = selectedAttributes.gmo_ids;
+        if (gmo_ids.length === 0) {
             setQueryData({});
-            setFoundMedia([]);
+            setFoundMedia(nullResponse$1);
             setNextMediaLoadAbort(null);
             return;
         }
+        clearSelectedMedia();
         (() => __awaiter(void 0, void 0, void 0, function* () {
-            const params = { gmo_ids: ids };
-            setQueryData(params);
+            const params = { gmo_ids, limit: 10, offset: 0 };
+            setQueryData({ gmo_ids });
             const abort = new AbortController();
             setNextMediaLoadAbort(abort);
             const response = yield getData(API_MEDIA_BY_ATTRIBUTES, params, abort);
             setNextMediaLoadAbort(null);
             if (response.body) {
-                setFoundMedia(response.body.map((item) => ({
-                    id: item.gm_id,
-                    label: item.name,
-                })));
+                setFoundMedia({
+                    queryType: "attribute",
+                    response: response.body,
+                });
             }
         }))();
-    };
+    }, [selectedAttributes]);
     return (jsx("div", { children: jsx(ComponentSelect, { onChangeSelection: onChangeSelection }, void 0) }, void 0));
 };
 
@@ -2612,7 +2890,13 @@ const checkCol = css `
   flex-grow: 0;
 `;
 
-const foundOrganisms = Recoil_index_6({ key: "foundOrganisms", default: [] });
+const nullResponse = {
+    response: { total: 0, limit: 10, contents: [], offset: 0 },
+};
+const foundOrganisms = Recoil_index_6({
+    key: "foundOrganisms",
+    default: nullResponse,
+});
 const useFoundOrganismsState = () => {
     return Recoil_index_18(foundOrganisms);
 };
@@ -2652,30 +2936,6 @@ const useOrganismLoadAbortMutators = () => {
     return { abortCurrentLoading, setNextOrganismLoadAbort };
 };
 
-const selectedOrganisms = Recoil_index_6({ key: "selectedOrganisms", default: [] });
-const useSelectedOrganismsState = () => {
-    return Recoil_index_18(selectedOrganisms);
-};
-const useSelectedOrganismsMutators = () => {
-    const setSelectedOrganisms = Recoil_index_22(selectedOrganisms);
-    const toggleOrganismSelection = (id) => {
-        setSelectedOrganisms((prev) => {
-            let result;
-            if (prev.includes(id)) {
-                result = prev.filter((r) => r !== id);
-            }
-            else {
-                result = [...prev, id];
-            }
-            return result;
-        });
-    };
-    const clearSelectedOrganisms = () => {
-        setSelectedOrganisms([]);
-    };
-    return { setSelectedOrganisms, toggleOrganismSelection, clearSelectedOrganisms };
-};
-
 const OrganismList = ({ css, className }) => {
     const isOrganismLoading = useIsOrganismLoading();
     const scrollInnerRef = react.exports.useRef(null);
@@ -2708,23 +2968,19 @@ const useOrganismList = () => {
     const [data, setData] = react.exports.useState([]);
     const foundOrganisms = useFoundOrganismsState();
     const selectedOrganisms = useSelectedOrganismsState();
-    const { toggleOrganismSelection, setSelectedOrganisms } = useSelectedOrganismsMutators();
+    const { toggleOrganismSelection } = useSelectedOrganismsMutators();
     const toggleChecked = (id) => {
         toggleOrganismSelection(id);
     };
     react.exports.useEffect(() => {
-        const result = foundOrganisms.map((organism) => {
+        const result = foundOrganisms.response.contents.map((organism) => {
             return {
-                id: organism.id,
-                label: organism.label,
-                isChecked: selectedOrganisms.includes(organism.id),
+                id: organism.tax_id,
+                label: organism.name,
+                isChecked: selectedOrganisms.includes(organism.tax_id),
             };
         });
         setData(result);
-        const updatedSelection = selectedOrganisms.filter((id) => result.find((info) => info.id === id));
-        if (!deepEqual(updatedSelection, selectedOrganisms)) {
-            setSelectedOrganisms(updatedSelection);
-        }
     }, [foundOrganisms, selectedOrganisms]);
     return { data, toggleChecked };
 };
@@ -2894,6 +3150,7 @@ const usePhenotypeQuery = () => {
     const { setFoundOrganisms } = useFoundOrganismsMutators();
     const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
     const { updatePhenotypeQuery, removePhenotypeQuery } = usePhenotypeQueryMutators();
+    const { clearSelectedOrganisms } = useSelectedOrganismsMutators();
     const handleEnabledChange = (key, enabled) => {
         if (!enabled) {
             removePhenotypeQuery(key);
@@ -2904,18 +3161,18 @@ const usePhenotypeQuery = () => {
     };
     react.exports.useEffect(() => {
         if (Object.entries(phenotypeQuery).length === 0) {
-            setFoundOrganisms([]);
+            setFoundOrganisms(nullResponse);
             setNextOrganismLoadAbort(null);
             return;
         }
+        clearSelectedOrganisms();
         (() => __awaiter(void 0, void 0, void 0, function* () {
-            console.log(phenotypeQuery);
             const abort = new AbortController();
             setNextOrganismLoadAbort(abort);
-            const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, phenotypeQuery, abort);
+            const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, Object.assign(Object.assign({}, phenotypeQuery), { limit: 10, offset: 0 }), abort);
             setNextOrganismLoadAbort(null);
             if (response.body) {
-                setFoundOrganisms(response.body.map((item) => ({ id: item.tax_id, label: item.name })));
+                setFoundOrganisms({ response: response.body });
             }
         }))();
     }, [phenotypeQuery]);
@@ -2923,10 +3180,11 @@ const usePhenotypeQuery = () => {
 };
 
 const PhenotypeSection = ({ css, className }) => {
-    const foundOrganism = useFoundOrganismsState();
+    const foundOrganisms = useFoundOrganismsState();
     const isLoading = useIsOrganismLoading();
     useMediaLoadFromOrganism();
-    return (jsxs("div", Object.assign({ css: [phenotypeSection, css], className: className }, { children: [jsx("div", Object.assign({ css: phenotypes }, { children: jsx(PhenotypeSearchArea, {}, void 0) }), void 0), jsxs("div", Object.assign({ css: organisms }, { children: [jsx("p", Object.assign({ css: infoTextCSS }, { children: getInfoText(foundOrganism.length, isLoading) }), void 0), jsx(OrganismList, {}, void 0)] }), void 0)] }), void 0));
+    const paginationParams = usePagination(foundOrganisms);
+    return (jsxs("div", Object.assign({ css: [phenotypeSection, css], className: className }, { children: [jsx("div", Object.assign({ css: phenotypes }, { children: jsx(PhenotypeSearchArea, {}, void 0) }), void 0), jsxs("div", Object.assign({ css: organisms }, { children: [jsx("p", Object.assign({ css: infoTextCSS }, { children: getInfoText(foundOrganisms.response.total, isLoading) }), void 0), jsx(OrganismList, {}, void 0), !!paginationParams.total && !isLoading && jsx(Pagination, Object.assign({}, paginationParams), void 0)] }), void 0)] }), void 0));
 };
 const phenotypeSection = css `
   background-color: ${COLOR_WHITE};
@@ -2972,28 +3230,59 @@ const useMediaLoadFromOrganism = () => {
     react.exports.useEffect(() => {
         if (selectedOrganisms.length === 0) {
             setQueryData({});
-            setFoundMedia([]);
+            setFoundMedia(nullResponse$1);
             setNextMediaLoadAbort(null);
             return;
         }
         (() => __awaiter(void 0, void 0, void 0, function* () {
-            const params = { tax_ids: selectedOrganisms };
-            setQueryData(params);
+            const params = { tax_ids: selectedOrganisms, limit: 10, offset: 0 };
+            setQueryData({ tax_ids: selectedOrganisms });
             const abort = new AbortController();
             setNextMediaLoadAbort(abort);
             const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
             setNextMediaLoadAbort(null);
             if (response.body) {
-                setFoundMedia(response.body.map((item) => ({
-                    id: item.gm_id,
-                    label: item.name,
-                })));
+                setFoundMedia({
+                    queryType: "organism",
+                    response: response.body,
+                });
             }
         }))();
     }, [selectedOrganisms]);
 };
+const usePagination = (foundOrganisms) => {
+    const [total, setTotal] = react.exports.useState(0);
+    const [current, setCurrent] = react.exports.useState(0);
+    const [displayLength, setDisplayLength] = react.exports.useState(0);
+    const { setNextOrganismLoadAbort } = useOrganismLoadAbortMutators();
+    const phenotypeQuery = usePhenotypeQueryState();
+    const { setFoundOrganisms } = useFoundOrganismsMutators();
+    const onClickNext = () => {
+        setCurrent((prev) => prev + 10);
+    };
+    const onClickPrev = () => {
+        setCurrent((prev) => prev - 10);
+    };
+    react.exports.useEffect(() => {
+        setTotal(foundOrganisms.response.total);
+        setCurrent(foundOrganisms.response.offset);
+        setDisplayLength(foundOrganisms.response.limit);
+    }, [foundOrganisms]);
+    react.exports.useEffect(() => {
+        (() => __awaiter(void 0, void 0, void 0, function* () {
+            const abort = new AbortController();
+            setNextOrganismLoadAbort(abort);
+            const response = yield getData(API_ORGANISMS_BY_PHENOTYPES, Object.assign(Object.assign({}, phenotypeQuery), { limit: 10, offset: current }), abort);
+            setNextOrganismLoadAbort(null);
+            if (response.body) {
+                setFoundOrganisms({ response: response.body });
+            }
+        }))();
+    }, [current]);
+    return { onClickPrev, onClickNext, total, current, displayLength };
+};
 
-const queryMethod = Recoil_index_6({ key: "queryMethod", default: "Taxonomic tree" });
+const queryMethod = Recoil_index_6({ key: "queryMethod", default: "Organism phenotypes" });
 const useQueryMethodState = () => {
     return Recoil_index_18(queryMethod);
 };
@@ -3085,139 +3374,6 @@ const tagTip = css `
   padding: 4px 6px;
   border-radius: 5px;
 `;
-
-const retrieveTaxonInfo = (info, addTaxonToList, setTaxonChildren) => {
-    (() => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b, _c;
-        const params = {
-            tax_id: info.id,
-        };
-        const response = yield getData(API_TAXONOMY_CHILDREN, params);
-        setTaxonChildren(info.id, (_b = (_a = response === null || response === void 0 ? void 0 : response.body) === null || _a === void 0 ? void 0 : _a.map((item) => item.tax_id)) !== null && _b !== void 0 ? _b : []);
-        (_c = response === null || response === void 0 ? void 0 : response.body) === null || _c === void 0 ? void 0 : _c.forEach((item) => {
-            addTaxonToList({
-                id: item.tax_id,
-                label: item.name,
-                rank: item.rank,
-                children: item.rank === "Species" ? [] : "not-yet",
-            });
-        });
-    }))();
-};
-const findAscendants = (list, id) => {
-    let iterationCount = 0;
-    const result = [];
-    let currentId = id;
-    while (iterationCount < 255) {
-        iterationCount++;
-        const parent = findParent(list, currentId);
-        if (parent) {
-            result.unshift(parent.id);
-            currentId = parent.id;
-        }
-        else {
-            break;
-        }
-    }
-    return result;
-};
-const findDescendants = (list, id) => {
-    let result = [];
-    const process = (currentId) => {
-        const children = findChildren(list, currentId);
-        if (children && dist.isArray(children)) {
-            result = [...result, ...children];
-            children.forEach((childId) => process(childId));
-        }
-    };
-    process(id);
-    return result;
-};
-const makeNewSelection = (list, id, selection) => {
-    const isSelected = checkIsSelected(id, selection);
-    let result = setSelection(selection, id, !isSelected);
-    let currentId;
-    const ascendants = findAscendants(list, id).reverse();
-    const descendants = findDescendants(list, id);
-    if (descendants) {
-        result = setMultipleSelection(result, descendants, false);
-    }
-    const checkedAscendant = ascendants.find((ascendant) => result.includes(ascendant));
-    if (checkedAscendant) {
-        currentId = id;
-        for (let i = 0; i < ascendants.length; i++) {
-            const parent = ascendants[i];
-            result = setSelection(result, parent, false);
-            const siblings = findSiblings(list, currentId);
-            result = setMultipleSelection(result, siblings, true);
-            result = setSelection(result, currentId, false);
-            if (checkedAscendant === parent) {
-                break;
-            }
-            currentId = parent;
-        }
-    }
-    currentId = id;
-    for (let i = 0; i < ascendants.length; i++) {
-        const parent = ascendants[i];
-        const siblings = [...findSiblings(list, currentId), currentId];
-        const checkedSiblings = siblings.filter((siblingId) => result.includes(siblingId));
-        if (parent && checkedSiblings.length && checkedSiblings.length === siblings.length) {
-            result = setMultipleSelection(result, checkedSiblings, false);
-            result = setSelection(result, parent, true);
-        }
-        currentId = parent;
-    }
-    return result;
-};
-const checkIsSelected = (id, selection) => {
-    return selection.includes(id);
-};
-const setSelection = (selection, id, value) => {
-    const isSelected = checkIsSelected(id, selection);
-    switch (true) {
-        case isSelected && !value:
-            return selection.filter((item) => item !== id);
-        case !isSelected && value:
-            return [...selection, id];
-        default:
-            return [...selection];
-    }
-};
-const setMultipleSelection = (selection, ids, value) => {
-    let result = [...selection];
-    ids.forEach((id) => (result = setSelection(result, id, value)));
-    return result;
-};
-const findChildren = (list, id) => { var _a; return (_a = list.find((info) => info.id === id)) === null || _a === void 0 ? void 0 : _a.children; };
-const findParent = (list, id) => list.find((node) => { var _a; return (_a = node.children) === null || _a === void 0 ? void 0 : _a.includes(id); });
-const findSiblings = (list, id) => {
-    var _a;
-    const children = (_a = findParent(list, id)) === null || _a === void 0 ? void 0 : _a.children;
-    if (children && dist.isArray(children)) {
-        return children.filter((myId) => myId !== id);
-    }
-    else {
-        return [];
-    }
-};
-
-const selectedTaxon = Recoil_index_6({ key: "selectedTaxon", default: [] });
-const useSelectedTaxonState = () => {
-    return Recoil_index_18(selectedTaxon);
-};
-const useSelectedTaxonMutators = () => {
-    const setSelectedTaxon = Recoil_index_22(selectedTaxon);
-    const clearTaxonSelect = () => setSelectedTaxon([]);
-    const updateSelection = (list, id) => {
-        setSelectedTaxon((prev) => makeNewSelection(list, id, prev));
-    };
-    return {
-        __setSelectedTaxon: setSelectedTaxon,
-        clearTaxonSelect,
-        updateSelection,
-    };
-};
 
 const taxonList = Recoil_index_6({ key: "taxonList", default: [] });
 const useTaxonListState = () => {
@@ -3403,25 +3559,27 @@ const useMediaLoadFromTaxon = () => {
     const { setQueryData } = useQueryDataMutators();
     const { setFoundMedia } = useFoundMediaMutators();
     const { setNextMediaLoadAbort } = useMediaLoadAbortMutators();
+    const { clearSelectedMedia } = useSelectedMediaMutators();
     react.exports.useEffect(() => {
         if (selectedTaxon.length === 0) {
             setQueryData({});
-            setFoundMedia([]);
+            setFoundMedia(nullResponse$1);
             setNextMediaLoadAbort(null);
             return;
         }
+        clearSelectedMedia();
         (() => __awaiter(void 0, void 0, void 0, function* () {
-            const params = { tax_ids: selectedTaxon };
-            setQueryData(params);
+            const params = { tax_ids: selectedTaxon, limit: 10, offset: 0 };
+            setQueryData({ tax_ids: selectedTaxon });
             const abort = new AbortController();
             setNextMediaLoadAbort(abort);
             const response = yield getData(API_MEDIA_BY_TAXON, params, abort);
             setNextMediaLoadAbort(null);
             if (response.body) {
-                setFoundMedia(response.body.map((item) => ({
-                    id: item.gm_id,
-                    label: item.name,
-                })));
+                setFoundMedia({
+                    queryType: "taxon",
+                    response: response.body,
+                });
             }
         }))();
     }, [selectedTaxon]);
@@ -3452,7 +3610,7 @@ const wrapper = css `
   position: relative;
   background-color: ${COLOR_GRAY_BG};
   padding: ${SIZE1};
-  min-height: 600px;
+  min-height: 640px;
   height: 1px;
   display: flex;
   gap: ${SIZE1};

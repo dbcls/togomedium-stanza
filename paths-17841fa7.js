@@ -8574,5 +8574,5 @@ const API_MEDIA_BY_TAXON = `${PATH_API}gmdb_media_by_taxon`;
 const API_TAXONOMY_CHILDREN = `${PATH_API}gmdb_taxonomy_children`;
 const API_ORGANISMS_BY_PHENOTYPES = `${PATH_API}gmdb_organisms_by_phenotypes`;
 
-export { API_MEDIA_ALIMENT as A, IconCompact as I, PATH_COMPONENT as P, Recoil_index_6 as R, Tooltip$1 as T, Recoil_index_18 as a, Recoil_index_22 as b, clone as c, IconExpand as d, IconBlank as e, PATH_MEDIUM as f, PATH_ORGANISM as g, Recoil_index_4 as h, API_ALL_COMPONENTS as i, API_MEDIA_BY_ATTRIBUTES as j, API_ORGANISMS_BY_PHENOTYPES as k, API_MEDIA_BY_TAXON as l, IconNoChildren as m, API_TAXONOMY_CHILDREN as n };
-//# sourceMappingURL=paths-0facaeac.js.map
+export { API_MEDIA_ALIMENT as A, IconCompact as I, PATH_COMPONENT as P, Recoil_index_6 as R, Tooltip$1 as T, Recoil_index_18 as a, Recoil_index_22 as b, clone as c, IconExpand as d, IconBlank as e, PATH_MEDIUM as f, PATH_ORGANISM as g, Recoil_index_4 as h, API_TAXONOMY_CHILDREN as i, API_MEDIA_BY_ATTRIBUTES as j, API_MEDIA_BY_TAXON as k, API_ALL_COMPONENTS as l, API_ORGANISMS_BY_PHENOTYPES as m, IconNoChildren as n };
+//# sourceMappingURL=paths-17841fa7.js.map
