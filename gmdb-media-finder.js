@@ -3282,7 +3282,7 @@ const usePagination = (foundOrganisms) => {
     return { onClickPrev, onClickNext, total, current, displayLength };
 };
 
-const queryMethod = Recoil_index_6({ key: "queryMethod", default: "Organism phenotypes" });
+const queryMethod = Recoil_index_6({ key: "queryMethod", default: "Taxonomic tree" });
 const useQueryMethodState = () => {
     return Recoil_index_18(queryMethod);
 };
