@@ -1,7 +1,7 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { C as COLOR_WHITE, S as SIZE1, a as SIZE4, b as SIZE3, j as jsx, c as jsxs, d as COLOR_GRAY700, e as COLOR_PRIMARY, f as COLOR_GRAY, F as FONT_EN, g as Fragment, h as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-014d59de.js';
+import { C as COLOR_WHITE, S as SIZE1, a as SIZE4, b as SIZE3, j as jsx, c as jsxs, d as COLOR_GRAY700, e as COLOR_PRIMARY, f as COLOR_GRAY, F as FONT_EN, g as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-07efdcf7.js';
 import { c as css, j as jsx$1, r as react } from './index-6aec0cc7.js';
-import { c as clone, R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, I as IconCompact, d as IconExpand, e as IconBlank, T as Tooltip, P as PATH_COMPONENT, f as PATH_MEDIUM, g as PATH_ORGANISM, A as API_MEDIA_ALIMENT, h as Recoil_index_4 } from './paths-17841fa7.js';
+import { c as clone, R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, I as IconCompact, d as IconExpand, e as IconBlank, T as Tooltip, P as PATH_COMPONENT, f as PATH_MEDIUM, g as PATH_ORGANISM, A as API_MEDIA_ALIGNMENT, h as Recoil_index_4 } from './paths-113500b3.js';
 import { g as getData } from './getData-d291c717.js';
 import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
 import { s as stringToArray } from './string-59b68535.js';
@@ -243,28 +243,41 @@ const wrapper$6 = css `
   }
 `;
 
-const InfoCell = (props) => {
-    return props.expanded ? jsx(Expanded, Object.assign({}, props), void 0) : jsx(Compact, Object.assign({}, props), void 0);
+const InfoCell = ({ info, linkBase, expanded, priority = [] }) => {
+    return expanded ? (jsx(Expanded, Object.assign({}, { info: sortInfo(info, priority), linkBase, priority }), void 0)) : (jsx(Compact, Object.assign({}, { info: sortInfo(info, priority), linkBase, priority }), void 0));
 };
-const Compact = ({ info, linkBase }) => {
-    const [item, setItem] = react.exports.useState({ label: "", id: "" });
+const sortInfo = (info, priority) => {
+    return [
+        ...priority.map((id) => info.find((item) => item.id === id)).filter((item) => !!item),
+        ...info.filter((item) => !priority.includes(item.id)),
+    ];
+};
+const Compact = ({ info, linkBase, priority = [] }) => {
+    const [items, setItems] = react.exports.useState([]);
     const [restText, setRestText] = react.exports.useState("");
     react.exports.useEffect(() => {
-        setItem(info[0]);
-        if (info.length > 1) {
-            const remain = info.length - 1;
-            if (remain === 1) {
-                setRestText(`, + ${remain} organism`);
-            }
-            else {
-                setRestText(`, + ${remain} organisms`);
-            }
+        const myPriorityItems = info
+            .map((item) => item.id)
+            .filter((str) => priority.includes(str));
+        setItems(myPriorityItems.length ? info.filter((item) => priority.includes(item.id)) : [info[0]]);
+        const remain = myPriorityItems.length ? info.length - myPriorityItems.length : info.length - 1;
+        switch (remain) {
+            case 0:
+                break;
+            case 1:
+                setRestText(` + ${remain} organism`);
+                break;
+            default:
+                setRestText(` + ${remain} organisms`);
         }
     }, [info]);
-    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: jsxs("div", Object.assign({ className: "text" }, { children: [jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0) }), void 0), info.length > 1 && jsx(Fragment, { children: restText }, void 0)] }), void 0) }), void 0) }), void 0));
+    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: jsxs("div", Object.assign({ className: "text" }, { children: [items.map((item, index) => (jsxs("span", { children: [jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0) }), void 0), index < items.length - 1 ? ", " : ""] }, index))), jsx("span", Object.assign({ style: { whiteSpace: "nowrap" } }, { children: restText }), void 0)] }), void 0) }), void 0) }), void 0));
 };
-const Expanded = ({ info, linkBase }) => {
-    return (jsx("div", Object.assign({ css: wrapper$5, className: "expanded" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: info.map((item) => (jsxs("div", Object.assign({ className: "text" }, { children: [jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0), jsx("span", { children: item.label }, void 0)] }), item.id))) }), void 0) }), void 0));
+const Expanded = ({ info, linkBase, priority = [] }) => {
+    return (jsx("div", Object.assign({ css: wrapper$5, className: "expanded" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: [
+                ...info.filter((item) => priority.includes(item.id)),
+                ...info.filter((item) => !priority.includes(item.id)),
+            ].map((item) => (jsxs("div", Object.assign({ className: "text" }, { children: [jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0), jsx("span", { children: item.label }, void 0)] }), item.id))) }), void 0) }), void 0));
 };
 const wrapper$5 = css `
   font-family: ${FONT_EN};
@@ -305,10 +318,10 @@ const wrapper$5 = css `
   }
 `;
 
-const MediaRow = ({ medium, organisms, components }) => {
+const MediaRow = ({ medium, organisms, components, prioritizedOrganism = [], }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
-    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }, void 0), jsx(InfoCell, { info: organisms, expanded: isOrganismsExpanded, linkBase: PATH_ORGANISM }, void 0), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 }, void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }, void 0), jsx(InfoCell, { info: organisms, expanded: isOrganismsExpanded, linkBase: PATH_ORGANISM, priority: prioritizedOrganism }, void 0), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 }, void 0)] }), void 0));
 };
 const wrapper$4 = css `
   display: flex;
@@ -418,7 +431,7 @@ const addToCollection = (data, collection) => {
     }
 };
 
-const AlignmentTable = ({ data }) => {
+const AlignmentTable = ({ data, prioritizedOrganism }) => {
     const [rowProps, setRowProps] = react.exports.useState([]);
     const componentTree = useComponentTreeState();
     const { setComponentTree } = useComponentTreeMutators();
@@ -431,7 +444,7 @@ const AlignmentTable = ({ data }) => {
         setFooterProps({ components });
         setRowProps(makeAlignmentData(data, components));
     }, [componentTree]);
-    return (jsxs("div", Object.assign({ css: wrapper$3 }, { children: [jsx(HeaderRow, {}, void 0), rowProps.map((props) => (jsx$1(MediaRow, Object.assign({}, props, { key: props.medium.id })))), jsx(FooterRow, Object.assign({}, footerProps), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$3 }, { children: [jsx(HeaderRow, {}, void 0), rowProps.map((props) => (jsx$1(MediaRow, Object.assign({}, props, { key: props.medium.id, prioritizedOrganism: prioritizedOrganism })))), jsx(FooterRow, Object.assign({}, footerProps), void 0)] }), void 0));
 };
 const wrapper$3 = css `
   display: flex;
@@ -441,7 +454,7 @@ const wrapper$3 = css `
   padding: 1px;
 `;
 
-const InfoColumns = ({ data, css, className }) => {
+const InfoColumns = ({ data, css, className, prioritizedOrganism = [] }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
     const { setIsMediaExpanded } = useIsMediaExpandedMutators();
@@ -459,7 +472,7 @@ const InfoColumns = ({ data, css, className }) => {
                     const label = organism ? organism.name : "";
                     return { id, label };
                 });
-                return (jsx(MediaRow, { medium: { id: m.gm_id, label: m.name }, organisms: organisms, components: [] }, m.gm_id));
+                return (jsx(MediaRow, { medium: { id: m.gm_id, label: m.name }, organisms: organisms, components: [], prioritizedOrganism: prioritizedOrganism }, m.gm_id));
             }), jsxs("div", Object.assign({ css: spacerRow }, { children: [jsx("span", { css: spacer, className: isMediaExpanded ? "expanded" : "compact" }, void 0), jsx("span", { css: spacer, className: isOrganismsExpanded ? "expanded" : "compact" }, void 0)] }), void 0)] }), void 0));
 };
 const wrapper$2 = css `
@@ -493,8 +506,8 @@ const spacer = css `
   }
 `;
 
-const ScrollableTable = ({ data }) => {
-    return (jsxs("div", Object.assign({ css: wrapper$1 }, { children: [jsx(HeaderRow, { css: header }, void 0), jsx(InfoColumns, { data: data, css: infoColumns }, void 0), jsx("div", Object.assign({ className: "inner" }, { children: jsx(AlignmentTable, { data: data }, void 0) }), void 0)] }), void 0));
+const ScrollableTable = ({ data, prioritizedOrganism = [] }) => {
+    return (jsxs("div", Object.assign({ css: wrapper$1 }, { children: [jsx(HeaderRow, { css: header }, void 0), jsx(InfoColumns, { data: data, prioritizedOrganism: prioritizedOrganism, css: infoColumns }, void 0), jsx("div", Object.assign({ className: "inner" }, { children: jsx(AlignmentTable, { data: data, prioritizedOrganism: prioritizedOrganism }, void 0) }), void 0)] }), void 0));
 };
 const wrapper$1 = css `
   position: relative;
@@ -518,19 +531,31 @@ const infoColumns = css `
   left: 0;
 `;
 
-const App = ({ gm_ids }) => {
+const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }) => {
     const [data, setData] = react.exports.useState();
     const [isLoading, setIsLoading] = react.exports.useState(true);
+    const dispatchLoadData = (detail) => {
+        if (!stanzaElement)
+            return;
+        stanzaElement.dispatchEvent(new CustomEvent("STANZA_ON_LOAD_DATA", { bubbles: true, composed: true, detail }));
+    };
+    const dispatchOnQueryData = (detail) => {
+        if (!stanzaElement)
+            return;
+        stanzaElement.dispatchEvent(new CustomEvent("STANZA_ON_QUERY_DATA", { bubbles: true, composed: true, detail }));
+    };
     react.exports.useEffect(() => {
         setData(undefined);
         setIsLoading(true);
         (() => __awaiter(void 0, void 0, void 0, function* () {
-            const response = yield getData(API_MEDIA_ALIMENT, { gm_ids });
+            dispatchOnQueryData(gm_ids);
+            const response = yield getData(API_MEDIA_ALIGNMENT, { gm_ids });
             setIsLoading(false);
             setData(response.body);
+            dispatchLoadData(response.body);
         }))();
     }, [gm_ids]);
-    return jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(ScrollableTable, { data: data }, void 0) }), void 0);
+    return (jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(ScrollableTable, { data: data, prioritizedOrganism: prioritizedOrganism }, void 0) }), void 0));
 };
 const wrapper = css `
   min-height: 100px;
@@ -553,7 +578,10 @@ class HelloReact extends Stanza {
     _render() {
         const main = this.root.querySelector("main");
         const gm_ids = stringToArray(this.params.gm_ids);
-        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, { gm_ids }), void 0) }, void 0) }, void 0) }, void 0), main);
+        const prioritizedOrganism = this.params.prioritized_tax_ids
+            ? stringToArray(this.params.prioritized_tax_ids)
+            : [];
+        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, { gm_ids, stanzaElement: this.root, prioritizedOrganism }), void 0) }, void 0) }, void 0) }, void 0), main);
     }
 }
 
@@ -582,6 +610,13 @@ var metadata = {
 		"stanza:example": "HM_D00001a,HM_D00065",
 		"stanza:description": "",
 		"stanza:required": true
+	},
+	{
+		"stanza:key": "prioritized_tax_ids",
+		"stanza:type": "string",
+		"stanza:example": "123456,12345",
+		"stanza:description": "",
+		"stanza:required": false
 	}
 ],
 	"stanza:menu-placement": "none",
