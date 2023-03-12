@@ -1,8 +1,8 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { s as select } from './index-7ac31beb.js';
-import './index-6aec0cc7.js';
-import { g as getData } from './getData-d291c717.js';
-import { A as API_GROWTH_MEDIUM } from './variables-a0dc13d9.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-311696ff.js';
+import { s as select } from './transform-83917164.js';
+import './index-8d82cef7.js';
+import { g as getData } from './getData-9618d463.js';
+import { U as URL_API } from './variables-37194d58.js';
 
 let mouseX = 0;
 let mouseY = 0;
@@ -15,7 +15,7 @@ class GmdbGmsByTid extends Stanza {
         return __awaiter(this, void 0, void 0, function* () {
             const params = this.params;
             const apiName = "gms_by_kegg_tids_3";
-            const result = yield getData(`${API_GROWTH_MEDIUM}${apiName}`, {
+            const result = yield getData(`${URL_API}${apiName}`, {
                 t_id: params.t_id,
             });
             const { sorted_groups } = processData(result.body);
@@ -320,7 +320,7 @@ var metadata = {
 		"stanza:required": true
 	}
 ],
-	"stanza:about-link-placement": "bottom-right",
+	"stanza:menu-placement": "none",
 	"stanza:style": [
 	{
 		"stanza:key": "--greeting-color",

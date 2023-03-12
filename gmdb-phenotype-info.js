@@ -1,5 +1,5 @@
-import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
+import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-311696ff.js';
+import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 
 class GmdbPhenotypeInfo extends Stanza {
     render() {
@@ -45,7 +45,7 @@ var metadata = {
 		"stanza:required": true
 	}
 ],
-	"stanza:about-link-placement": "bottom-right",
+	"stanza:menu-placement": "none",
 	"stanza:style": [
 	{
 		"stanza:key": "--greeting-color",

@@ -1,10 +1,17 @@
-import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-f44e302d.js';
-import { C as COLOR_WHITE, S as SIZE1, a as SIZE4, b as SIZE3, j as jsx, c as jsxs, d as COLOR_GRAY700, e as COLOR_PRIMARY, f as COLOR_GRAY, F as FONT_EN, g as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-07efdcf7.js';
-import { c as css, j as jsx$1, r as react } from './index-6aec0cc7.js';
-import { c as clone, R as Recoil_index_6, a as Recoil_index_18, b as Recoil_index_22, I as IconCompact, d as IconExpand, e as IconBlank, T as Tooltip, P as PATH_COMPONENT, f as PATH_MEDIUM, g as PATH_ORGANISM, A as API_MEDIA_ALIGNMENT, h as Recoil_index_4 } from './paths-113500b3.js';
-import { g as getData } from './getData-d291c717.js';
-import { i as importWebFontForTogoMedium } from './stanza-4b95c663.js';
-import { s as stringToArray } from './string-59b68535.js';
+import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-311696ff.js';
+import { f as COLOR_WHITE, S as SIZE1, w as SIZE4, t as SIZE3, j as jsx, b as jsxs, v as COLOR_GRAY700, C as COLOR_PRIMARY, L as COLOR_GRAY, g as FONT_EN, F as Fragment, r as COLOR_GRAY_LINE, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53d8142c.js';
+import { c as css, j as jsx$1, r as reactExports } from './index-8d82cef7.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-14beaca9.js';
+import { b as IconCompact, c as IconExpand, I as IconBlank } from './icons-8fd98eed.js';
+import { d as decodeHTMLEntities, s as stringToArray } from './string-77fa4d93.js';
+import { c as clone } from './clone-e8609f76.js';
+import { b as PATH_COMPONENT, P as PATH_MEDIUM, a as PATH_TAXON } from './consts-234f4433.js';
+import { T as Tooltip, e as API_MEDIA_ALIGNMENT } from './paths-58236b46.js';
+import { g as getData } from './getData-9618d463.js';
+import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
+import './createSvgIcon-87040e42.js';
+import './Grow-d939d7fb.js';
+import './variables-37194d58.js';
 
 const WIDTH_EXPANDED = "200px";
 const WIDTH_COMPACT = "150px";
@@ -66,8 +73,8 @@ const useComponentTreeMutators = () => {
 const FooterCell = ({ label, level, hasChildren, isOpen, id }) => {
     const { toggleComponent } = useComponentTreeMutators();
     const onClickFooterItem = (id) => toggleComponent(id);
-    const Icon = hasChildren ? (isOpen ? (jsx(IconCompact, { css: icon$1, onClick: () => onClickFooterItem(id) }, void 0)) : (jsx(IconExpand, { css: icon$1, onClick: () => onClickFooterItem(id) }, void 0))) : (jsx(IconBlank, { css: icon$1 }, void 0));
-    return (jsxs("div", Object.assign({ css: wrapper$a }, { children: [new Array(level).fill(null).map((r, index) => (jsx("span", { className: "spacer" }, index))), Icon, jsx("span", Object.assign({ className: "text" }, { children: label }), void 0)] }), void 0));
+    const Icon = hasChildren ? (isOpen ? (jsx(IconCompact, { css: icon$1, onClick: () => onClickFooterItem(id) })) : (jsx(IconExpand, { css: icon$1, onClick: () => onClickFooterItem(id) }))) : (jsx(IconBlank, { css: icon$1 }));
+    return (jsxs("div", Object.assign({ css: wrapper$a }, { children: [new Array(level).fill(null).map((r, index) => (jsx("span", { className: "spacer" }, index))), Icon, jsx("span", Object.assign({ className: "text" }, { children: decodeHTMLEntities(label) }))] })));
 };
 const wrapper$a = css `
   box-sizing: border-box;
@@ -121,7 +128,7 @@ const useIsOrganismsExpandedMutators = () => {
 const FooterRow = ({ components }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
-    return (jsxs("div", Object.assign({ css: wrapper$9 }, { children: [jsx("div", { css: infoSpacer, className: isMediaExpanded ? "expand" : "compact" }, void 0), jsx("div", { css: infoSpacer, className: isOrganismsExpanded ? "expand" : "compact" }, void 0), components.map((component) => (jsx$1(FooterCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: componentSpacer }, void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$9 }, { children: [jsx("div", { css: infoSpacer, className: isMediaExpanded ? "expand" : "compact" }), jsx("div", { css: infoSpacer, className: isOrganismsExpanded ? "expand" : "compact" }), components.map((component) => (jsx$1(FooterCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: componentSpacer })] })));
 };
 const wrapper$9 = css `
   display: flex;
@@ -147,7 +154,7 @@ const componentSpacer = css `
 `;
 
 const HeaderCell = ({ label, onClickIcon, isExpanded }) => {
-    return (jsxs("div", Object.assign({ css: wrapper$8, className: isExpanded ? "expanded" : "compact" }, { children: [jsx("span", { children: label }, void 0), isExpanded ? (jsx(IconCompact, { css: icon, onClick: onClickIcon }, void 0)) : (jsx(IconExpand, { css: icon, onClick: onClickIcon }, void 0))] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$8, className: isExpanded ? "expanded" : "compact" }, { children: [jsx("span", { children: label }), isExpanded ? (jsx(IconCompact, { css: icon, onClick: onClickIcon })) : (jsx(IconExpand, { css: icon, onClick: onClickIcon }))] })));
 };
 const wrapper$8 = css `
   display: flex;
@@ -182,7 +189,7 @@ const HeaderRow = ({ css, className }) => {
     const onClickOrganismExpandIcon = () => {
         setIsOrganismsExpanded(!isOrganismsExpanded);
     };
-    return (jsxs("div", Object.assign({ css: [wrapper$7, css], className: className }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }, void 0), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }, void 0), jsx("div", Object.assign({ css: components }, { children: "Components" }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: [wrapper$7, css], className: className }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }), jsx("div", Object.assign({ css: components }, { children: "Components" }))] })));
 };
 const wrapper$7 = css `
   display: flex;
@@ -202,7 +209,7 @@ const components = css `
 `;
 
 const AlignmentCell = ({ state, label, id }) => {
-    return (jsx("div", Object.assign({ css: wrapper$6 }, { children: jsx(Tooltip, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${PATH_COMPONENT}${id}`, target: "_blank", className: `icon-${state} icon`, rel: "noreferrer" }, { children: jsx("span", {}, void 0) }), void 0) }), void 0) }), void 0));
+    return (jsx("div", Object.assign({ css: wrapper$6 }, { children: jsx(Tooltip, Object.assign({ title: label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${PATH_COMPONENT}${id}`, target: "_blank", className: `icon-${state} icon`, rel: "noreferrer" }, { children: jsx("span", {}) })) })) })));
 };
 const wrapper$6 = css `
   box-sizing: border-box;
@@ -244,7 +251,7 @@ const wrapper$6 = css `
 `;
 
 const InfoCell = ({ info, linkBase, expanded, priority = [] }) => {
-    return expanded ? (jsx(Expanded, Object.assign({}, { info: sortInfo(info, priority), linkBase, priority }), void 0)) : (jsx(Compact, Object.assign({}, { info: sortInfo(info, priority), linkBase, priority }), void 0));
+    return expanded ? (jsx(Expanded, Object.assign({}, { info: sortInfo(info, priority), linkBase, priority }))) : (jsx(Compact, Object.assign({}, { info: sortInfo(info, priority), linkBase, priority })));
 };
 const sortInfo = (info, priority) => {
     return [
@@ -253,9 +260,9 @@ const sortInfo = (info, priority) => {
     ];
 };
 const Compact = ({ info, linkBase, priority = [] }) => {
-    const [items, setItems] = react.exports.useState([]);
-    const [restText, setRestText] = react.exports.useState("");
-    react.exports.useEffect(() => {
+    const [items, setItems] = reactExports.useState([]);
+    const [restText, setRestText] = reactExports.useState("");
+    reactExports.useEffect(() => {
         const myPriorityItems = info
             .map((item) => item.id)
             .filter((str) => priority.includes(str));
@@ -271,13 +278,13 @@ const Compact = ({ info, linkBase, priority = [] }) => {
                 setRestText(` + ${remain} organisms`);
         }
     }, [info]);
-    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: jsxs("div", Object.assign({ className: "text" }, { children: [items.map((item, index) => (jsxs("span", { children: [jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0) }), void 0), index < items.length - 1 ? ", " : ""] }, index))), jsx("span", Object.assign({ style: { whiteSpace: "nowrap" } }, { children: restText }), void 0)] }), void 0) }), void 0) }), void 0));
+    return (jsx("div", Object.assign({ css: wrapper$5, className: "compact" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: jsxs("div", Object.assign({ className: "text" }, { children: [items.map((item, index) => (jsxs("span", { children: [item.id ? (jsx(Tooltip, Object.assign({ title: item.label, placement: "top", PopperProps: { disablePortal: true }, arrow: true }, { children: jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id })) }))) : (jsx(Fragment, { children: item.label })), index < items.length - 1 ? ", " : ""] }, index))), jsx("span", Object.assign({ style: { whiteSpace: "nowrap" } }, { children: restText }))] })) })) })));
 };
 const Expanded = ({ info, linkBase, priority = [] }) => {
     return (jsx("div", Object.assign({ css: wrapper$5, className: "expanded" }, { children: jsx("div", Object.assign({ className: "inner" }, { children: [
                 ...info.filter((item) => priority.includes(item.id)),
                 ...info.filter((item) => !priority.includes(item.id)),
-            ].map((item) => (jsxs("div", Object.assign({ className: "text" }, { children: [jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id }), void 0), jsx("span", { children: item.label }, void 0)] }), item.id))) }), void 0) }), void 0));
+            ].map((item) => (jsxs("div", Object.assign({ className: "text" }, { children: [jsx("a", Object.assign({ href: `${linkBase}${item.id}`, target: "_blank", rel: "noreferrer" }, { children: item.id })), jsx("span", { children: item.label })] }), item.id))) })) })));
 };
 const wrapper$5 = css `
   font-family: ${FONT_EN};
@@ -321,7 +328,7 @@ const wrapper$5 = css `
 const MediaRow = ({ medium, organisms, components, prioritizedOrganism = [], }) => {
     const isMediaExpanded = useIsMediaExpendedState();
     const isOrganismsExpanded = useIsOrganismsExpendedState();
-    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }, void 0), jsx(InfoCell, { info: organisms, expanded: isOrganismsExpanded, linkBase: PATH_ORGANISM, priority: prioritizedOrganism }, void 0), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 }, void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$4 }, { children: [jsx(InfoCell, { info: [medium], expanded: isMediaExpanded, linkBase: PATH_MEDIUM }), jsx(InfoCell, { info: organisms.length ? organisms : [{ id: "", label: "No organisms found" }], expanded: isOrganismsExpanded, linkBase: PATH_TAXON, priority: prioritizedOrganism }), components.map((component) => (jsx$1(AlignmentCell, Object.assign({}, component, { key: component.id })))), jsx("div", { css: spacer$1 })] })));
 };
 const wrapper$4 = css `
   display: flex;
@@ -432,19 +439,19 @@ const addToCollection = (data, collection) => {
 };
 
 const AlignmentTable = ({ data, prioritizedOrganism }) => {
-    const [rowProps, setRowProps] = react.exports.useState([]);
+    const [rowProps, setRowProps] = reactExports.useState([]);
     const componentTree = useComponentTreeState();
     const { setComponentTree } = useComponentTreeMutators();
-    const [footerProps, setFooterProps] = react.exports.useState({ components: [] });
-    react.exports.useEffect(() => {
+    const [footerProps, setFooterProps] = reactExports.useState({ components: [] });
+    reactExports.useEffect(() => {
         setComponentTree(makeComponentTree(data.components));
     }, [data]);
-    react.exports.useEffect(() => {
+    reactExports.useEffect(() => {
         const components = makeFooterComponents(componentTree);
         setFooterProps({ components });
         setRowProps(makeAlignmentData(data, components));
     }, [componentTree]);
-    return (jsxs("div", Object.assign({ css: wrapper$3 }, { children: [jsx(HeaderRow, {}, void 0), rowProps.map((props) => (jsx$1(MediaRow, Object.assign({}, props, { key: props.medium.id, prioritizedOrganism: prioritizedOrganism })))), jsx(FooterRow, Object.assign({}, footerProps), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$3 }, { children: [jsx(HeaderRow, {}), rowProps.map((props) => (jsx$1(MediaRow, Object.assign({}, props, { key: props.medium.id, prioritizedOrganism: prioritizedOrganism })))), jsx(FooterRow, Object.assign({}, footerProps))] })));
 };
 const wrapper$3 = css `
   display: flex;
@@ -465,7 +472,7 @@ const InfoColumns = ({ data, css, className, prioritizedOrganism = [] }) => {
     const onClickOrganismExpandIcon = () => {
         setIsOrganismsExpanded(!isOrganismsExpanded);
     };
-    return (jsxs("div", Object.assign({ css: [wrapper$2, css], className: className }, { children: [jsxs("div", Object.assign({ css: header$1 }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }, void 0), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon }, void 0)] }), void 0), data.media.map((m) => {
+    return (jsxs("div", Object.assign({ css: [wrapper$2, css], className: className }, { children: [jsxs("div", Object.assign({ css: header$1 }, { children: [jsx(HeaderCell, { label: "Media", isExpanded: isMediaExpanded, onClickIcon: onClickMediaExpandIcon }), jsx(HeaderCell, { label: "Organisms", isExpanded: isOrganismsExpanded, onClickIcon: onClickOrganismExpandIcon })] })), data.media.map((m) => {
                 const organisms = m.organisms.map((taxid) => {
                     const organism = data.organisms.find((o) => o.tax_id === taxid);
                     const id = organism ? organism.tax_id : "";
@@ -473,7 +480,7 @@ const InfoColumns = ({ data, css, className, prioritizedOrganism = [] }) => {
                     return { id, label };
                 });
                 return (jsx(MediaRow, { medium: { id: m.gm_id, label: m.name }, organisms: organisms, components: [], prioritizedOrganism: prioritizedOrganism }, m.gm_id));
-            }), jsxs("div", Object.assign({ css: spacerRow }, { children: [jsx("span", { css: spacer, className: isMediaExpanded ? "expanded" : "compact" }, void 0), jsx("span", { css: spacer, className: isOrganismsExpanded ? "expanded" : "compact" }, void 0)] }), void 0)] }), void 0));
+            }), jsxs("div", Object.assign({ css: spacerRow }, { children: [jsx("span", { css: spacer, className: isMediaExpanded ? "expanded" : "compact" }), jsx("span", { css: spacer, className: isOrganismsExpanded ? "expanded" : "compact" })] }))] })));
 };
 const wrapper$2 = css `
   display: flex;
@@ -507,7 +514,7 @@ const spacer = css `
 `;
 
 const ScrollableTable = ({ data, prioritizedOrganism = [] }) => {
-    return (jsxs("div", Object.assign({ css: wrapper$1 }, { children: [jsx(HeaderRow, { css: header }, void 0), jsx(InfoColumns, { data: data, prioritizedOrganism: prioritizedOrganism, css: infoColumns }, void 0), jsx("div", Object.assign({ className: "inner" }, { children: jsx(AlignmentTable, { data: data, prioritizedOrganism: prioritizedOrganism }, void 0) }), void 0)] }), void 0));
+    return (jsxs("div", Object.assign({ css: wrapper$1 }, { children: [jsx(HeaderRow, { css: header }), jsx(InfoColumns, { data: data, prioritizedOrganism: prioritizedOrganism, css: infoColumns }), jsx("div", Object.assign({ className: "inner" }, { children: jsx(AlignmentTable, { data: data, prioritizedOrganism: prioritizedOrganism }) }))] })));
 };
 const wrapper$1 = css `
   position: relative;
@@ -532,8 +539,8 @@ const infoColumns = css `
 `;
 
 const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }) => {
-    const [data, setData] = react.exports.useState();
-    const [isLoading, setIsLoading] = react.exports.useState(true);
+    const [data, setData] = reactExports.useState();
+    const [isLoading, setIsLoading] = reactExports.useState(true);
     const dispatchLoadData = (detail) => {
         if (!stanzaElement)
             return;
@@ -544,7 +551,7 @@ const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }) => {
             return;
         stanzaElement.dispatchEvent(new CustomEvent("STANZA_ON_QUERY_DATA", { bubbles: true, composed: true, detail }));
     };
-    react.exports.useEffect(() => {
+    reactExports.useEffect(() => {
         setData(undefined);
         setIsLoading(true);
         (() => __awaiter(void 0, void 0, void 0, function* () {
@@ -555,7 +562,7 @@ const App = ({ gm_ids, stanzaElement, prioritizedOrganism = [] }) => {
             dispatchLoadData(response.body);
         }))();
     }, [gm_ids]);
-    return (jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(ScrollableTable, { data: data, prioritizedOrganism: prioritizedOrganism }, void 0) }), void 0));
+    return (jsx("div", Object.assign({ css: wrapper }, { children: data && jsx(ScrollableTable, { data: data, prioritizedOrganism: prioritizedOrganism }) })));
 };
 const wrapper = css `
   min-height: 100px;
@@ -563,7 +570,6 @@ const wrapper = css `
   border-radius: 5px;
   padding: ${SIZE1};
 `;
-css ``;
 
 class HelloReact extends Stanza {
     render() {
@@ -581,7 +587,7 @@ class HelloReact extends Stanza {
         const prioritizedOrganism = this.params.prioritized_tax_ids
             ? stringToArray(this.params.prioritized_tax_ids)
             : [];
-        ReactDOM.render(jsx(react.exports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, { gm_ids, stanzaElement: this.root, prioritizedOrganism }), void 0) }, void 0) }, void 0) }, void 0), main);
+        ReactDOM.render(jsx(reactExports.StrictMode, { children: jsx(Recoil_index_4, { children: jsx(EmotionCacheProvider, { children: jsx(App, Object.assign({}, { gm_ids, stanzaElement: this.root, prioritizedOrganism })) }) }) }), main);
     }
 }
 
