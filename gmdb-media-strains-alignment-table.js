@@ -327,7 +327,7 @@ const TaxonCell = (props) => {
         const size = props.isFolded ? 1 : props.size;
         wrapperRef.current.style.height = makeCellHeight(size) + "px";
     }, [props.size, props.isFolded]);
-    return reactExports.useMemo(() => jsx(ToMemoize, Object.assign({}, props, { wrapperRef: wrapperRef })), []);
+    return reactExports.useMemo(() => jsx(ToMemoize, Object.assign({}, props, { wrapperRef: wrapperRef })), [props.id]);
 };
 const ToMemoize = ({ wrapperRef, label, id, rank, css, className }) => {
     const filterId = useFilterTaxonState();
