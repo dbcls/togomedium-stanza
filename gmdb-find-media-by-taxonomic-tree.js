@@ -1,17 +1,17 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { f as COLOR_WHITE, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, a as COLOR_GRAY300, v as COLOR_GRAY700, K as COLOR_GRAY400, b as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
+import { e as COLOR_WHITE, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, g as COLOR_GRAY300, v as COLOR_GRAY700, K as COLOR_GRAY400, a as jsxs, j as jsx, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53481fde.js';
 import { c as css, e as dist, r as reactExports } from './index-56cafe6b.js';
-import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-b0ceac4c.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-4aba2f6b.js';
-import { T as Tooltip, d as API_TAXONOMY_CHILDREN, c as API_MEDIA_BY_TAXON } from './paths-66dbaf1f.js';
-import { d as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-8a75fa29.js';
+import { a as Recoil_index_6, b as Recoil_index_18, c as Recoil_index_22, R as Recoil_index_4 } from './recoil-97451223.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-960c2073.js';
+import { T as Tooltip, d as API_TAXONOMY_CHILDREN, c as API_MEDIA_BY_TAXON } from './paths-42e2b9e7.js';
+import { d as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-cbbd7614.js';
 import { g as getData } from './getData-b32e78c1.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-65edef4a.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import './createSvgIcon-74eb21f1.js';
-import './Grow-1eacc08f.js';
-import './variables-0b8fac13.js';
-import './useFormControl-a1db82cb.js';
+import './createSvgIcon-87a2419a.js';
+import './Grow-2909679f.js';
+import './variables-37194d58.js';
+import './useFormControl-f098ccdc.js';
 import './consts-234f4433.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {

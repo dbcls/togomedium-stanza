@@ -1,7 +1,7 @@
 import { S as Stanza, _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
-import { U as URL_API } from './variables-0b8fac13.js';
+import { U as URL_API } from './variables-37194d58.js';
 import './index-56cafe6b.js';
 
 class GmdbMediumByGmid extends Stanza {

@@ -1,13 +1,14 @@
 import { _ as __awaiter, S as Stanza, d as defineStanzaElement } from './stanza-bd712360.js';
-import { n as newStyled, C as COLOR_PRIMARY, j as jsx, b as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-3b758372.js';
+import { n as newStyled, C as COLOR_PRIMARY, j as jsx, a as jsxs, F as Fragment, R as ReactDOM, E as EmotionCacheProvider } from './EmotionCacheProvider-53481fde.js';
 import { c as css, r as reactExports } from './index-56cafe6b.js';
-import { R as Recoil_index_4 } from './recoil-b0ceac4c.js';
-import { L as LineageList, p as parseLineage } from './LineageList-66985c0f.js';
-import { s as stanzaWrapper, c as ColWrapper, I as InfoId, C as ColorButton, a as InfoTitle, S as StandardParagraph, b as SubHeading } from './common-b9bd53c8.js';
+import { R as Recoil_index_4 } from './recoil-97451223.js';
+import { L as LineageList, p as parseLineage } from './LineageList-10b3f04c.js';
+import { s as stanzaWrapper, I as InfoId, C as ColorButton, a as InfoTitle, S as StandardParagraph, b as SubHeading, c as ColWrapper } from './common-9892c1ef.js';
+import { W as WikipediaView, f as fetchWikipediaData } from './WikipediaView-11b566e5.js';
 import { g as getData } from './getData-b32e78c1.js';
 import { u as unescapeJsonString } from './string-e923d624.js';
-import { U as URL_API } from './variables-0b8fac13.js';
-import { T as ThemeProvider, m as muiTheme } from './muiTheme-c6ca75b5.js';
+import { U as URL_API } from './variables-37194d58.js';
+import { T as ThemeProvider, m as muiTheme } from './muiTheme-65edef4a.js';
 import { i as importWebFontForTogoMedium } from './stanza-2d29c499.js';
 import './types-3f4e9278.js';
 
@@ -29,8 +30,8 @@ const CapsuleListWrapper = newStyled.ul `
 
 const linkNCBI = "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=";
 const linkTogoGenome = "http://togogenome.org/organism/";
-const StanzaView = ({ css, className, taxid, scientificName, authorityName, lineage, typeMaterials, otherTypeMaterials, }) => {
-    return (jsx("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Taxonomy ID: " }), jsx("span", { children: taxid }), jsxs("div", Object.assign({ className: "tag-list" }, { children: [jsx(ColorButton, Object.assign({ target: "_blank", href: `${linkNCBI}${taxid}`, rel: "noreferrer" }, { children: "NCBI" })), jsx(ColorButton, Object.assign({ target: "_blank", href: `${linkTogoGenome}${taxid}`, rel: "noreferrer" }, { children: "TogoGenome" }))] }))] }), jsx(InfoTitle, { children: scientificName }), authorityName && (jsxs(StandardParagraph, { children: ["Authority name:", jsx("br", {}), authorityName] })), jsxs("div", { children: [jsx(SubHeading, { children: "Lineage" }), jsx(LineageList, { lineage: lineage })] }), !!typeMaterials.length && (jsxs("div", { children: [jsx(SubHeading, { children: "Type strains" }), jsx(CapsuleList, { labels: typeMaterials })] })), !!otherTypeMaterials.length && (jsx("div", { children: otherTypeMaterials.map((mat, index) => (jsxs("div", { children: [jsxs(SubHeading, { children: ["Heterotypic synonyms: ", mat.key, " "] }), jsx(CapsuleList, { labels: mat.labels })] }, index))) }))] }) }) })));
+const StanzaView = ({ css, className, taxid, scientificName, authorityName, lineage, typeMaterials, otherTypeMaterials, wikipediaData, }) => {
+    return (jsx("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: jsxs(ColWrapper, { children: [jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Taxonomy ID: " }), jsx("span", { children: taxid }), jsxs("div", Object.assign({ className: "tag-list" }, { children: [jsx(ColorButton, Object.assign({ target: "_blank", href: `${linkNCBI}${taxid}`, rel: "noreferrer" }, { children: "NCBI" })), jsx(ColorButton, Object.assign({ target: "_blank", href: `${linkTogoGenome}${taxid}`, rel: "noreferrer" }, { children: "TogoGenome" }))] }))] }), jsx(InfoTitle, { children: scientificName }), authorityName && (jsxs(StandardParagraph, { children: ["Authority name:", jsx("br", {}), authorityName] })), jsxs("div", { children: [jsx(SubHeading, { children: "Lineage" }), jsx(LineageList, { lineage: lineage })] }), !!typeMaterials.length && (jsxs("div", { children: [jsx(SubHeading, { children: "Type strains" }), jsx(CapsuleList, { labels: typeMaterials })] })), !!otherTypeMaterials.length && (jsx("div", { children: otherTypeMaterials.map((mat, index) => (jsxs("div", { children: [jsxs(SubHeading, { children: ["Heterotypic synonyms: ", mat.key, " "] }), jsx(CapsuleList, { labels: mat.labels })] }, index))) }))] }), wikipediaData && !lineage.species && jsx(WikipediaView, Object.assign({}, wikipediaData))] }) })));
 };
 const stanzaView = css ``;
 
@@ -77,6 +78,8 @@ const App = ({ tax_id }) => {
             if (!result)
                 return;
             setProps(result);
+            const wikipediaData = yield fetchWikipediaData(result.scientificName);
+            setProps(Object.assign(Object.assign({}, result), { wikipediaData }));
         }))();
     }, [tax_id]);
     return props ? jsx(StanzaView, Object.assign({}, props)) : jsx(Fragment, { children: "Loading..." });

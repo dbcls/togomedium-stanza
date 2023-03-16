@@ -1,4 +1,4 @@
-import { n as newStyled, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, j as jsx, b as jsxs } from './EmotionCacheProvider-3b758372.js';
+import { n as newStyled, r as COLOR_GRAY_LINE, C as COLOR_PRIMARY, j as jsx, a as jsxs } from './EmotionCacheProvider-53481fde.js';
 import { l as lineageRanks } from './types-3f4e9278.js';
 import { c as capitalizeFirstLetter, m as makeSpeciesName } from './string-e923d624.js';
 
@@ -45,4 +45,4 @@ const parseLineage = (lineage) => lineage.reduce((accum, current) => {
 }, {});
 
 export { LineageList as L, parseLineage as p };
-//# sourceMappingURL=LineageList-66985c0f.js.map
+//# sourceMappingURL=LineageList-10b3f04c.js.map
