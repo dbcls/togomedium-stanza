@@ -1,4 +1,4 @@
-import { o as objectAssign, g as getDefaultExportFromCjs, a as __assign, b as getAugmentedNamespace, c as commonjsGlobal } from './stanza-bd712360.js';
+import { o as objectAssign, g as getDefaultExportFromCjs, a as __assign, b as getAugmentedNamespace, c as commonjsGlobal, _ as __awaiter } from './stanza-bd712360.js';
 
 function _mergeNamespaces(n, m) {
   m.forEach(function (e) {
@@ -3037,5 +3037,38 @@ Emotion.Transition = {
 	
 } (dist));
 
-export { CacheProvider as C, Emotion$1 as E, Global as G, React as R, ThemeContext as T, _extends as _, createEmotionProps as a, registerStyles as b, css as c, createCache as d, dist as e, React$1 as f, getRegisteredStyles as g, hasOwnProperty as h, insertStyles as i, jsx as j, keyframes as k, memoize as m, reactExports as r, serializeStyles as s, useInsertionEffectAlwaysWithSyncFallback as u, withEmotionCache as w };
-//# sourceMappingURL=index-56cafe6b.js.map
+const getData = (url, params, abortController) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch(url, makeOptions(params, abortController ? abortController.signal : null));
+    if (response.status !== 200) {
+        return {
+            status: response.status,
+            message: response.statusText,
+            body: undefined,
+        };
+    }
+    const body = yield response.json();
+    return {
+        status: 200,
+        body,
+    };
+});
+const makeFormBody = (params) => {
+    const formBody = Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(dist.isArray(value) ? value.join(",") : value)}`);
+    return formBody.join("&");
+};
+const makeOptions = (params, signal = null) => {
+    const body = makeFormBody(params);
+    return {
+        method: "POST",
+        mode: "cors",
+        body,
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        signal,
+    };
+};
+
+export { CacheProvider as C, Emotion$1 as E, Global as G, React as R, ThemeContext as T, _extends as _, createEmotionProps as a, getRegisteredStyles as b, css as c, registerStyles as d, createCache as e, React$1 as f, getData as g, hasOwnProperty as h, insertStyles as i, jsx as j, keyframes as k, dist as l, memoize as m, makeFormBody as n, reactExports as r, serializeStyles as s, useInsertionEffectAlwaysWithSyncFallback as u, withEmotionCache as w };
+//# sourceMappingURL=getData-c69eb59a.js.map

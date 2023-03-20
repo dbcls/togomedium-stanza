@@ -1,6 +1,6 @@
-import { r as reactExports, _ as _extends } from './index-56cafe6b.js';
-import { o as ownerDocument, a as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, i as clsx, k as composeClasses } from './Grow-2909679f.js';
-import { i as capitalize, _ as _objectWithoutPropertiesLoose, b as jsxRuntimeExports } from './EmotionCacheProvider-53481fde.js';
+import { r as reactExports, _ as _extends } from './getData-c69eb59a.js';
+import { o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses } from './paths-b6edcbba.js';
+import { g as capitalize, _ as _objectWithoutPropertiesLoose, k as jsxRuntimeExports } from './StanzaReactProvider-719976b7.js';
 
 /**
  * Safe chained function.
@@ -162,5 +162,9 @@ function createSvgIcon(path, displayName) {
   return /*#__PURE__*/reactExports.memo( /*#__PURE__*/reactExports.forwardRef(Component));
 }
 
-export { createChainedFunction as a, createSvgIcon as c, debounce as d, isMuiElement as i, ownerWindow as o };
-//# sourceMappingURL=createSvgIcon-87a2419a.js.map
+const PATH_MEDIUM = `/medium/`;
+const PATH_TAXON = `/taxon/`;
+const PATH_COMPONENT = `/component/`;
+
+export { PATH_MEDIUM as P, createChainedFunction as a, PATH_TAXON as b, createSvgIcon as c, debounce as d, PATH_COMPONENT as e, isMuiElement as i, ownerWindow as o };
+//# sourceMappingURL=consts-bcbace22.js.map
