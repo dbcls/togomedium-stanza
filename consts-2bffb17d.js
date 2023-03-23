@@ -1,5 +1,5 @@
 import { r as reactExports, _ as _extends } from './getData-c69eb59a.js';
-import { o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses } from './paths-94507f25.js';
+import { o as ownerDocument, b as generateUtilityClass, g as generateUtilityClasses, s as styled, u as useThemeProps, c as clsx, h as composeClasses } from './paths-9e07efcb.js';
 import { g as capitalize, _ as _objectWithoutPropertiesLoose, k as jsxRuntimeExports } from './StanzaReactProvider-719976b7.js';
 
 /**
@@ -167,4 +167,4 @@ const PATH_TAXON = `/taxon/`;
 const PATH_COMPONENT = `/component/`;
 
 export { PATH_MEDIUM as P, createChainedFunction as a, PATH_TAXON as b, createSvgIcon as c, debounce as d, PATH_COMPONENT as e, isMuiElement as i, ownerWindow as o };
-//# sourceMappingURL=consts-b211c407.js.map
+//# sourceMappingURL=consts-2bffb17d.js.map
