@@ -3,7 +3,7 @@ import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from '
 import { c as css, g as getData, r as reactExports } from './getData-c69eb59a.js';
 import { L as LineageList } from './LineageList-27d4b35c.js';
 import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-f12b37a6.js';
-import { U as URL_API } from './variables-ebb089d7.js';
+import { U as URL_API } from './variables-68281131.js';
 import './types-3f4e9278.js';
 import './string-e923d624.js';
 

@@ -1,11 +1,11 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
 import { c as COLOR_WHITE, x as COLOR_GRAY_LINE, C as COLOR_PRIMARY, b as COLOR_GRAY300, A as COLOR_GRAY700, K as COLOR_GRAY400, a as jsxs, j as jsx, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
 import { c as css, g as getData, l as dist, r as reactExports } from './getData-c69eb59a.js';
-import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-afddbcc8.js';
-import { m as Tooltip, F as API_TAXONOMY_CHILDREN, E as API_MEDIA_BY_TAXON } from './paths-3a0ce840.js';
-import { f as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-d7e679a2.js';
-import './consts-67cc1256.js';
-import './variables-ebb089d7.js';
+import { I as IconBlank, a as IconNoChildren, b as IconCompact, c as IconExpand } from './icons-09568e4a.js';
+import { m as Tooltip, F as API_TAXONOMY_CHILDREN, E as API_MEDIA_BY_TAXON } from './paths-94507f25.js';
+import { f as Checkbox, a as useQueryDataMutators, u as useFoundMediaMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper$1, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-72646b13.js';
+import './consts-b211c407.js';
+import './variables-68281131.js';
 
 const TreeBranchView = ({ label, linkString, linkURL, id, check, tag, hasChildren, isOpen, isLoading, onClickCheck, onToggleChildren, children, className, css, toolTipLabel = "", }) => {
     return (jsxs("li", Object.assign({ css: [wrapper, css], className: className }, { children: [jsxs("div", Object.assign({ css: inner }, { children: [jsxs("div", Object.assign({ css: left }, { children: [jsx("span", Object.assign({ onClick: () => onToggleChildren(id) }, { children: jsx(ToggleIcon, Object.assign({}, { hasChildren, isOpen, isLoading })) })), jsx(Tooltip, Object.assign({ title: toolTipLabel, PopperProps: { disablePortal: true }, arrow: true, placement: "top-start" }, { children: jsx("span", { children: label }) })), tag && jsx("span", Object.assign({ css: tagTip }, { children: tag })), linkString && linkURL && (jsxs("a", Object.assign({ href: linkURL, target: "_blank", rel: "noreferrer" }, { children: ["[", linkString, "]"] })))] })), jsx(Checkbox, { checked: check === "checked" || check === "grouped", indeterminate: check === "indeterminate", onClick: () => onClickCheck(id) })] })), isOpen && !!children && jsx("ul", Object.assign({ css: childrenWrapper }, { children: children }))] })));
