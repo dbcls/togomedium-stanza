@@ -1,14 +1,16 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
-import { c as css, g as getData, r as reactExports } from './getData-c69eb59a.js';
-import { L as LineageList } from './LineageList-27d4b35c.js';
-import { s as stanzaWrapper, c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './common-f12b37a6.js';
-import { U as URL_API } from './variables-fde23d74.js';
-import './types-3f4e9278.js';
-import './string-e923d624.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
+import { j as jsx, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { c as css, g as getData, r as reactExports } from './getData-e69d262f.js';
+import { L as LineageList } from './LineageList-8a4c9fdc.js';
+import { c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './styles-d9cd01f8.js';
+import { s as stanzaWrapper } from './common-1d90404b.js';
+import { U as URL_API } from './variables-42acbc42.js';
+import './emotion-styled.browser.esm-90764b6a.js';
+import './types-8994330c.js';
+import './string-878ee74c.js';
 
 const StanzaView = ({ css, className, strainId, strainName, infoSources, taxonomy, }) => {
-    return (jsx("div", Object.assign({ css: [stanzaView, css, stanzaWrapper], className: className }, { children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Strain Id: " }), jsx("span", { children: strainId })] }), jsx(InfoTitle, { children: strainName }), jsx(SubHeading, { children: "Source strains" }), jsx(TagList, { children: infoSources.map((source, index) => (jsx(ColorButton, Object.assign({ href: source.url, target: "_blank", rel: "noreferrer" }, { children: source.label }), index))) }), taxonomy && (jsxs("div", { children: [jsx(SubHeading, { children: "Taxonomic Lineage" }), jsx(LineageList, { lineage: taxonomy.lineage })] }))] }) }) })));
+    return (jsx("div", { css: [stanzaView, css, stanzaWrapper], className: className, children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Strain Id: " }), jsx("span", { children: strainId })] }), jsx(InfoTitle, { children: strainName }), jsx(SubHeading, { children: "Source strains" }), jsx(TagList, { children: infoSources.map((source, index) => (jsx(ColorButton, { href: source.url, target: "_blank", rel: "noreferrer", children: source.label }, index))) }), taxonomy && (jsxs("div", { children: [jsx(SubHeading, { children: "Taxonomic Lineage" }), jsx(LineageList, { lineage: taxonomy.lineage })] }))] }) }) }));
 };
 const stanzaView = css ``;
 

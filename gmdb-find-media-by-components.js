@@ -1,12 +1,13 @@
-import { _ as __awaiter, d as defineStanzaElement } from './stanza-bd712360.js';
-import { j as jsx, a as jsxs, F as Fragment, R as Recoil_index_6, e as Recoil_index_18, f as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-719976b7.js';
-import { r as reactExports, j as jsx$1, g as getData } from './getData-c69eb59a.js';
-import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-39100072.js';
-import { d as decodeHTMLEntities } from './string-e923d624.js';
-import { T as TextField, C as Chip, A as Autocomplete } from './TextField-9a80c463.js';
-import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-110a0fc7.js';
-import './variables-fde23d74.js';
-import './consts-cf6526c1.js';
+import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
+import { j as jsx, a as jsxs, F as Fragment, R as Recoil_index_6, f as Recoil_index_18, g as Recoil_index_22, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { r as reactExports, j as jsx$1, g as getData } from './getData-e69d262f.js';
+import { A as API_COMPONENTS_WITH_COMPONENTS, a as API_MEDIA_BY_ATTRIBUTES } from './paths-ee59fa78.js';
+import { d as decodeHTMLEntities } from './string-878ee74c.js';
+import { T as TextField, C as Chip, A as Autocomplete } from './TextField-65e31080.js';
+import { C as CircularProgress, u as useFoundMediaMutators, a as useQueryDataMutators, b as useMediaLoadAbortMutators, n as nullResponse, w as wrapper, q as queryPane, s as subPane, M as MediaPane, c as useFoundMediaState } from './MediaPane-f235d087.js';
+import './emotion-styled.browser.esm-90764b6a.js';
+import './variables-42acbc42.js';
+import './consts-c8281bfe.js';
 
 const ComponentSelect = ({ onChangeSelection }) => {
     const [loading, setLoading] = reactExports.useState(false);
@@ -92,7 +93,7 @@ const AttributesSection = () => {
 
 const AppContainer = ({ dispatchEvent }) => {
     const { next, prev } = useMediaPagination();
-    return (jsxs("div", Object.assign({ css: wrapper }, { children: [jsx("div", Object.assign({ css: queryPane }, { children: jsx(AttributesSection, {}) })), jsx("div", Object.assign({ css: subPane }, { children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) }))] })));
+    return (jsxs("div", { css: wrapper, children: [jsx("div", { css: queryPane, children: jsx(AttributesSection, {}) }), jsx("div", { css: subPane, children: jsx(MediaPane, { dispatchEvent: dispatchEvent, next: next, prev: prev }) })] }));
 };
 const useMediaPagination = () => {
     const selectedAttributes = useSelectedAttributesState();
