@@ -1,9 +1,9 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { j as jsx, c as COLOR_PRIMARY_DARK, x as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-13f58d86.js';
+import { j as jsx, c as COLOR_PRIMARY_DARK, s as COLOR_GRAY_LINE, a as jsxs, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { c as css, r as reactExports } from './getData-e69d262f.js';
-import { d as decodeHTMLEntities } from './string-878ee74c.js';
-import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-d9cd01f8.js';
-import { s as stanzaWrapper } from './common-1d90404b.js';
+import { d as decodeHTMLEntities } from './string-4de5f4fa.js';
+import { I as InfoId, a as InfoTitle, b as SubHeading } from './styles-5c02f157.js';
+import { s as stanzaWrapper } from './common-cd178d45.js';
 import { g as getMedia } from './api-66a29d3d.js';
 import './emotion-styled.browser.esm-90764b6a.js';
 import './index-1640bb89.js';
@@ -84,7 +84,7 @@ const tableStyle = css `
 `;
 
 const StanzaView = ({ css, className, id, originalId, srcUrl, srcLabel, name, ph, components, extraComponents, }) => {
-    return (jsxs("div", { css: [stanzaView, css, stanzaWrapper], className: className, children: [jsxs(InfoId, { children: [jsx("span", { children: "Growth Medium ID:\u00A0" }), jsx("span", { children: id })] }), srcUrl && (jsxs(InfoId, { children: [jsx("span", { children: "Information source:\u00A0" }), jsx("a", { href: srcUrl, target: "_blank", rel: "noreferrer", children: originalId || srcLabel || id })] })), jsxs(InfoTitle, { children: [name && decodeHTMLEntities(name), ph && jsxs("small", { children: ["(pH", ph, ")"] })] }), components.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Components" }), components.map((component, index) => {
+    return (jsxs("div", { css: [stanzaView, css, stanzaWrapper], className: className, children: [jsxs(InfoId, { children: [jsx("span", { children: "Growth Medium ID:\u00A0" }), jsx("span", { children: id })] }), srcUrl && (jsxs(InfoId, { children: [jsx("span", { children: "Information source:\u00A0" }), jsx("a", { href: srcUrl, target: "_blank", rel: "noreferrer", children: originalId || srcLabel || id })] })), jsxs(InfoTitle, { children: ["[", id, "] ", name && name !== "(Unnamed medium)" && decodeHTMLEntities(name), ph && jsxs("small", { children: ["(pH", ph, ")"] })] }), components.length && (jsxs(Fragment, { children: [jsx(SubHeading, { children: "Components" }), components.map((component, index) => {
                         if ("comment" in component) {
                             return jsx(RecipeComment, Object.assign({}, component), index);
                         }
