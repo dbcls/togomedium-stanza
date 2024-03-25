@@ -398,7 +398,7 @@ const useTableData = (apiUrl, initialLimit) => {
         setIsLoading(true);
         setErrorMessage("");
         const handler = window.setTimeout(() => {
-            fetchData(apiUrl, offset, typeof limit === "number" ? limit : 100).then((response) => {
+            fetchData(apiUrl, typeof offset === "number" ? offset : 0, typeof limit === "number" ? limit : 100).then((response) => {
                 if (response.body) {
                     setData(response.body);
                 }
@@ -430,9 +430,9 @@ const App = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFon
         title,
         showColumnNames,
         columnSizes,
-        offset,
+        offset: typeof offset === "number" ? offset : 0,
         setOffset,
-        limit: typeof limit === "number" ? limit : data.total,
+        limit: typeof limit === "number" && !isNaN(limit) ? limit : data.total,
         setLimit,
         isLoading,
         errorMessage }));
