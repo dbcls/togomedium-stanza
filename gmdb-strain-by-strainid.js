@@ -10,7 +10,7 @@ import './types-8994330c.js';
 import './string-4de5f4fa.js';
 
 const StanzaView = ({ css, className, strainId, strainName, infoSources, taxonomy, }) => {
-    return (jsx("div", { css: [stanzaView, css, stanzaWrapper], className: className, children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Strain Id: " }), jsx("span", { children: strainId })] }), jsx(InfoTitle, { children: strainName }), jsx(SubHeading, { children: "Source strains" }), jsx(TagList, { children: infoSources.map((source, index) => (jsx(ColorButton, { href: source.url, target: "_blank", rel: "noreferrer", children: source.label }, index))) }), taxonomy && (jsxs("div", { children: [jsx(SubHeading, { children: "Taxonomic Lineage" }), jsx(LineageList, { lineage: taxonomy.lineage })] }))] }) }) }));
+    return (jsx("div", { css: [stanzaView, css, stanzaWrapper], className: className, children: jsx(ColWrapper, { children: jsxs("div", { children: [jsxs(InfoId, { children: [jsx("span", { children: "Strain Id: " }), jsx("span", { children: strainId })] }), jsx(InfoTitle, { children: strainName }), jsx(SubHeading, { children: infoSources.length === 1 ? "Source strain" : "Source strains" }), jsx(TagList, { children: infoSources.map((source, index) => (jsx(ColorButton, { href: source.url, target: "_blank", rel: "noreferrer", children: source.label }, index))) }), taxonomy && (jsxs("div", { children: [jsx(SubHeading, { children: "Taxonomic Lineage" }), jsx(LineageList, { lineage: taxonomy.lineage })] }))] }) }) }));
 };
 const stanzaView = css ``;
 

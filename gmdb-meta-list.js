@@ -1,5 +1,5 @@
 import { _ as __awaiter, d as defineStanzaElement } from './stanza-be82c2ee.js';
-import { j as jsx, P as COLOR_GRAY500, C as COLOR_PRIMARY, d as COLOR_WHITE, a as jsxs, c as COLOR_PRIMARY_DARK, e as COLOR_TEXT, F as Fragment, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
+import { j as jsx, P as COLOR_GRAY500, C as COLOR_PRIMARY, d as COLOR_WHITE, a as jsxs, c as COLOR_PRIMARY_DARK, F as Fragment, e as COLOR_TEXT, T as TogoMediumReactStanza } from './StanzaReactProvider-87464745.js';
 import { c as css, r as reactExports, n as makeFormBody } from './getData-e69d262f.js';
 import { n as newStyled } from './emotion-styled.browser.esm-90764b6a.js';
 import { S as Slider } from './Slider-bc45a1fe.js';
@@ -173,11 +173,20 @@ const ListTable = ({ css, className, data, columnSizes, showColumnNames, limit, 
                             const key = column.key;
                             const item = row[key];
                             const noWrap = !!column.nowrap;
-                            return (jsx("td", { style: noWrap ? { whiteSpace: "nowrap" } : {}, children: typeof item === "string" ? (decodeHTMLEntities(item)) : (jsx("a", { href: item.href, target: "_blank", rel: "noreferrer", children: decodeHTMLEntities(item.label) })) }, key));
+                            return (jsx("td", { style: noWrap ? { whiteSpace: "nowrap" } : {}, children: jsx(CellContent, { item: item }) }, key));
                         }) }, i))), extraRows.map((rowId) => (jsx("tr", { children: data.columns.map((column) => {
                             const key = column.key;
                             return jsx("td", { children: "-" }, key);
                         }) }, rowId)))] })] }));
+};
+const CellContent = ({ item }) => {
+    if (typeof item === "string") {
+        return jsx(Fragment, { children: decodeHTMLEntities(item) });
+    }
+    if (typeof item === "number") {
+        return jsx(Fragment, { children: item });
+    }
+    return (jsx("a", { href: item.href, target: "_blank", rel: "noreferrer", children: decodeHTMLEntities(item.label) }));
 };
 const listTable = css `
   border: 1px solid #ccc;
@@ -384,9 +393,12 @@ const useTableData = (apiUrl, initialLimit) => {
     const [data, setData] = reactExports.useState();
     const [errorMessage, setErrorMessage] = reactExports.useState("");
     reactExports.useEffect(() => {
+        if (!apiUrl)
+            return;
         setIsLoading(true);
         setErrorMessage("");
         const handler = window.setTimeout(() => {
+            console.log("fetching data", apiUrl, offset, limit);
             fetchData(apiUrl, offset, limit).then((response) => {
                 if (response.body) {
                     setData(response.body);
