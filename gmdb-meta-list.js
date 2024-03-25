@@ -398,8 +398,7 @@ const useTableData = (apiUrl, initialLimit) => {
         setIsLoading(true);
         setErrorMessage("");
         const handler = window.setTimeout(() => {
-            console.log("fetching data", apiUrl, offset, limit);
-            fetchData(apiUrl, offset, limit).then((response) => {
+            fetchData(apiUrl, offset, typeof limit === "number" ? limit : 100).then((response) => {
                 if (response.body) {
                     setData(response.body);
                 }
@@ -416,7 +415,7 @@ const useTableData = (apiUrl, initialLimit) => {
     reactExports.useEffect(() => {
         if (!data)
             return;
-        if (data.total < limit) {
+        if (data.total < (typeof limit === "number" ? limit : 1000)) {
             setLimit(data.total);
         }
     }, [limit, setLimit, data]);
@@ -433,7 +432,7 @@ const App = ({ apiUrl, initialLimit, title, showColumnNames, columnSizes, webFon
         columnSizes,
         offset,
         setOffset,
-        limit,
+        limit: typeof limit === "number" ? limit : data.total,
         setLimit,
         isLoading,
         errorMessage }));
