@@ -4,7 +4,7 @@ import { c as css, g as getData, r as reactExports } from './getData-e69d262f.js
 import { L as LineageList } from './LineageList-8226be1b.js';
 import { c as ColWrapper, I as InfoId, a as InfoTitle, b as SubHeading, T as TagList, C as ColorButton } from './styles-5c02f157.js';
 import { s as stanzaWrapper } from './common-cd178d45.js';
-import { U as URL_API } from './variables-42acbc42.js';
+import { U as URL_API } from './variables-58f3d1be.js';
 import './emotion-styled.browser.esm-90764b6a.js';
 import './types-8994330c.js';
 import './string-4de5f4fa.js';

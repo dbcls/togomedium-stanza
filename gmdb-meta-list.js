@@ -477,7 +477,7 @@ var metadata = {
 	"stanza:parameter": [
 	{
 		"stanza:key": "api_url",
-		"stanza:example": "http://togomedium.org/sparqlist/api/list_media",
+		"stanza:example": "https://togomedium.org/sparqlist/api/list_media",
 		"stanza:description": "URL of the SPARQList API with queries",
 		"stanza:required": true
 	},
