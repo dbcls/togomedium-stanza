@@ -788,7 +788,7 @@ const PhenotypeSearchArea = ({ css, className }) => {
                 ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }), jsx(SelectBox, { label: "Salinity", queryKey: "MPO_03006", items: [
                     ["MPO_03007", "Halophile"],
                     ["MPO_03008", "Halotolerant"],
-                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange })] }));
+                ], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange }), jsx(SelectBox, { label: "Energy metabolism", queryKey: "MPO_04053", items: [["MPO_04153", "Carbon fixation"]], handleEnabledChange: handleEnabledChange, handleValueChange: handleValueChange })] }));
 };
 const phenotypeSearchArea = css `
   background-color: ${COLOR_WHITE};
