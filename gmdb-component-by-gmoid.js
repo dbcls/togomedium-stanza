@@ -37,7 +37,7 @@ const getLinkLabel = (link) => {
         case /SNOMEDCT/.test(link):
             return "SNOMED-CT";
         case /dsmz/.test(link):
-            return "DSMZ";
+            return "MediaDive";
         default:
             return null;
     }
